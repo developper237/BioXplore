@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BioXplore | Rare Life Forms</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{--green:#1f3d2b;--neutral:#f4f4f2;--accent:#6fbf73;--green-light:#7edc88}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Inter",sans-serif;background:var(--neutral);color:#222;line-height:1.6;padding-bottom:70px}
+
+/* =================== HEADER =================== */
+.header-main{background:#f3faf6;padding:1.4rem 3rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:998;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.header-left{display:flex;align-items:center;gap:.8rem}
+.header-left img{width:44px}
+.header-left span{font-family:"Playfair Display",serif;font-size:1.9rem;color:var(--green);font-weight:600}
+
+.header-nav{display:flex;align-items:center;gap:2.2rem}
+.header-nav a{text-decoration:none;color:#2d3a3f;font-size:.95rem;font-weight:500;transition:all .2s ease}
+.header-nav a:hover{color:#2e7d4f;transform:translateY(-1px)}
+.header-nav a.active{color:#2e7d4f;font-weight:600;position:relative}
+.header-nav a.active::after{content:'';position:absolute;bottom:-5px;left:0;width:100%;height:2px;background:#2e7d4f;border-radius:2px}
+.marketplace-btn{background:#2e6f43;color:#fff!important;padding:.75rem 1.6rem;border-radius:12px;font-size:.95rem;font-weight:600;text-decoration:none}
+.marketplace-btn:hover{background:#245a36!important}
+
+/* User Account */
+.user-account-section{display:flex;align-items:center;gap:1.5rem;margin-left:2rem}
+.user-account{position:relative;display:flex;align-items:center;gap:.8rem;cursor:pointer}
+.user-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#2e7d4f,#5fbf6a);display:flex;align-items:center;justify-content:center;color:white;font-size:1.2rem;font-weight:600;transition:transform .3s ease;border:2px solid #4a9e5f}
+.user-avatar:hover{transform:scale(1.05)}
+.user-info{display:flex;flex-direction:column}
+.user-name{font-weight:600;color:#1f3d2b;font-size:.9rem}
+.user-role{font-size:.8rem;color:#6b7f86}
+
+/* Dropdown */
+.user-dropdown{position:absolute;top:120%;right:0;background:white;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.15);min-width:200px;display:none;z-index:1000;overflow:hidden}
+.user-dropdown.active{display:block;animation:fadeInDrop .3s ease}
+@keyframes fadeInDrop{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+.dropdown-header{padding:1.2rem;background:#f3faf6;border-bottom:1px solid #e8f4ec}
+.dropdown-header .user-name{font-size:1rem;margin-bottom:.2rem}
+.dropdown-header .user-email{font-size:.8rem;color:#6b7f86}
+.dropdown-menu{padding:.5rem 0}
+.dropdown-item{display:flex;align-items:center;gap:.8rem;padding:.8rem 1.2rem;text-decoration:none;color:#2d3a3f;font-size:.9rem;transition:background .2s ease}
+.dropdown-item:hover{background:#f8fcf9}
+.dropdown-item i{color:#4a9e5f;width:18px;text-align:center}
+.dropdown-divider{height:1px;background:#e8f4ec;margin:.5rem 0}
+
+/* Hamburger */
+.hamburger{display:flex;flex-direction:column;gap:6px;cursor:pointer;z-index:1002;background:none;border:none;padding:.5rem}
+.hamburger span{width:26px;height:3px;background:var(--green);border-radius:3px;transition:.3s}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(7px,7px);background:#fff}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(6px,-6px);background:#fff}
+
+/* =================== MOBILE MENU =================== */
+.mobile-menu-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(15,31,23,.98);z-index:1001;display:none;backdrop-filter:blur(5px)}
+.mobile-menu-overlay.active{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+.mobile-nav-container{position:absolute;top:0;left:0;width:100%;height:100%;padding:2rem;display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+.mobile-menu-header{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 0;border-bottom:1px solid rgba(255,255,255,.1);margin-top:1rem;flex-shrink:0}
+.mobile-logo{display:flex;align-items:center;gap:.8rem}
+.mobile-logo img{width:36px;filter:brightness(0) invert(1)}
+.mobile-logo span{font-family:"Playfair Display",serif;font-size:1.6rem;color:#fff}
+.close-menu{background:rgba(255,255,255,.1);border:none;color:#fff;font-size:1.8rem;cursor:pointer;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%}
+.mobile-nav-menu{flex:0 1 auto;display:flex;flex-direction:column;padding:2rem 0;gap:.5rem}
+.mobile-nav-item{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 0;text-decoration:none;color:#fff;font-size:1.2rem;border-bottom:1px solid rgba(255,255,255,.1);transition:all .3s ease}
+.mobile-nav-item:hover{color:var(--green-light);padding-left:1rem}
+.mobile-nav-item.active{color:var(--green-light);font-weight:600}
+.mobile-user-section{margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.1);flex-shrink:0}
+.mobile-user-info{display:flex;align-items:center;gap:1rem;padding-bottom:1.5rem}
+.mobile-user-avatar{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,#2e7d4f,#5fbf6a);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.3rem}
+.mobile-user-details h4{color:#fff;font-size:1.1rem}
+.mobile-user-details p{color:#ccc;font-size:.9rem}
+.mobile-auth-buttons{display:flex;gap:1rem}
+.mobile-auth-btn{flex:1;padding:.9rem;text-align:center;border-radius:10px;text-decoration:none;font-weight:500;font-size:1rem}
+.mobile-btn-login{background:transparent;color:#fff;border:2px solid #4a9e5f}
+.mobile-btn-signup{background:#4a9e5f;color:#fff;border:2px solid #4a9e5f}
+
+/* =================== BOTTOM NAV =================== */
+.mobile-bottom-nav{position:fixed;bottom:0;left:0;width:100%;background:var(--green);display:flex;justify-content:space-around;padding:.8rem 0;z-index:997;border-top:1px solid rgba(255,255,255,.1)}
+.mobile-nav-icon{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:#ccc;font-size:.8rem;transition:color .3s ease;flex:1;padding:.5rem}
+.mobile-nav-icon i{font-size:1.2rem;margin-bottom:.3rem}
+.mobile-nav-icon.active,.mobile-nav-icon:hover{color:var(--green-light)}
+
+/* =================== HERO =================== */
+.hero-exact{position:relative;min-height:100vh;background:url("https://images.unsplash.com/photo-1501004318641-b39e6451bec6") center/cover no-repeat;padding:6rem 4rem;color:#fff}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(10,40,30,.95),rgba(10,40,30,.65),rgba(10,40,30,.4))}
+.hero-container{position:relative;max-width:1300px;margin:auto;display:grid;grid-template-columns:1.2fr 1fr;gap:4rem;align-items:center;z-index:2}
+.badge{display:inline-block;background:#5fbf6a;color:#0e2b1e;padding:.5rem 1.2rem;border-radius:50px;font-size:.75rem;font-weight:600;margin-bottom:1.5rem}
+.hero-left h1{font-family:"Playfair Display",serif;font-size:3.6rem;line-height:1.15;margin-bottom:1.5rem}
+.hero-left h1 span{color:#7edc88}
+.hero-left p{max-width:520px;margin-bottom:2.5rem;font-size:1.05rem;line-height:1.7}
+.hero-buttons{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{background:#2e7d4f;color:#fff;border:none;padding:.9rem 1.8rem;border-radius:10px;cursor:pointer;font-size:1rem;font-weight:600;transition:all .3s}
+.btn-primary:hover{background:#256b41;transform:translateY(-2px)}
+.btn-secondary{background:#eaf4ee;color:#1f3d2b;border:none;padding:.9rem 1.8rem;border-radius:10px;cursor:pointer;font-size:1rem;font-weight:600;transition:all .3s}
+.btn-secondary:hover{background:#fff;transform:translateY(-2px)}
+
+/* Stats */
+.hero-stats{background:#f3faf6;padding:2.5rem;border-radius:22px}
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem}
+.stat-card{background:#1f2e33;color:#fff;padding:1.8rem;border-radius:14px;transition:transform .3s}
+.stat-card:hover{transform:translateY(-4px)}
+.stat-card h3{color:#7edc88;font-size:1.8rem;font-family:"Playfair Display",serif;margin-bottom:.3rem}
+.stat-card span{font-size:.9rem;color:#ccc}
+
+/* =================== EDUCATION SECTION =================== */
+.education-section{background:#f3faf6;padding:5rem 2rem;text-align:center}
+.education-section h2{font-family:"Playfair Display",serif;font-size:2.6rem;margin-bottom:1rem;color:#2d3a3f}
+.education-section p.subtitle{max-width:700px;margin:0 auto 3.5rem;color:#6b7f86;font-size:1rem}
+.offer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;max-width:1200px;margin:auto}
+.offer-card{background:#fff;border-radius:18px;padding:2.5rem 2rem;text-align:left;box-shadow:0 10px 30px rgba(0,0,0,.05);transition:transform .3s ease,box-shadow .3s ease}
+.offer-card:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(0,0,0,.12)}
+.offer-icon{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,#2f8f46,#5fbf6a);display:flex;align-items:center;justify-content:center;margin-bottom:1.6rem}
+.offer-icon img{width:28px}
+.offer-card h3{font-family:"Playfair Display",serif;font-size:1.4rem;margin-bottom:.8rem;color:#1f3d2b}
+.offer-card p{color:#5f737a;font-size:.95rem;margin-bottom:1.6rem;line-height:1.6}
+.offer-card a{text-decoration:none;font-weight:600;color:#2f8f46;font-size:.95rem;transition:all .3s}
+.offer-card a:hover{color:#256b41}
+
+/* =================== SPECIES LIBRARY =================== */
+.species-library-exact{background:#fff;padding:6rem 2rem}
+.species-library-container{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.library-image{border-radius:20px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.1);height:500px}
+.library-image img{width:100%;height:100%;object-fit:cover}
+.library-content{padding-left:2rem}
+.library-content .badge{background:#e6f4ec;color:#2e7d4f;font-size:.75rem;padding:.45rem 1.1rem;border-radius:50px;font-weight:600;margin-bottom:1.4rem;display:inline-block}
+.library-content h2{font-family:"Playfair Display",serif;font-size:3rem;line-height:1.2;margin-bottom:1.4rem;color:#1f3d2b}
+.library-content>p{color:#5f737a;max-width:520px;margin-bottom:2.5rem;font-size:1.05rem;line-height:1.7}
+.library-features{display:flex;flex-direction:column;gap:1.4rem;margin-bottom:2.8rem}
+.library-feature{display:flex;gap:1rem;align-items:flex-start}
+.library-feature-icon{width:44px;height:44px;background:#5fbf6a;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.2rem;flex-shrink:0}
+.library-feature h4{margin:0;font-size:1.05rem;color:#1f3d2b}
+.library-feature p{margin:.2rem 0 0;font-size:.95rem;color:#6b7f86}
+.library-btn{background:#2e7d4f;color:#fff;border:none;padding:.95rem 2.2rem;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;transition:all .3s}
+.library-btn:hover{background:#256b41;transform:translateY(-2px)}
+
+/* =================== CONSERVATION =================== */
+.conservation-section{background:linear-gradient(135deg,#1e2f33,#2a3f44);color:#fff;padding:5.5rem 2rem;text-align:center}
+.conservation-section h2{font-family:"Playfair Display",serif;font-size:3rem;margin-bottom:1rem}
+.conservation-section p.subtitle{max-width:700px;margin:0 auto 4rem;color:#d6e3e0;font-size:1.05rem}
+.conservation-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:3rem;max-width:1100px;margin:0 auto 4.5rem}
+.conservation-stat{display:flex;flex-direction:column;align-items:center;gap:.8rem}
+.conservation-icon{width:72px;height:72px;border-radius:50%;background:#4caf50;display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:#fff}
+.conservation-stat h3{color:#8ee09a;font-size:2rem;font-weight:700}
+.conservation-stat span{font-size:.95rem;color:#cfe5dc}
+.conservation-cta{background:#f3faf6;color:#1f3d2b;max-width:1100px;margin:0 auto;padding:3.5rem 2rem;border-radius:20px}
+.conservation-cta h3{font-family:"Playfair Display",serif;font-size:2rem;margin-bottom:1rem}
+.conservation-cta p{max-width:700px;margin:0 auto 2rem;color:#5f737a}
+.conservation-btn{background:#2e7d4f;color:#fff;border:none;padding:.9rem 2.2rem;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;transition:all .3s}
+.conservation-btn:hover{background:#256b41;transform:translateY(-2px)}
+
+/* =================== MARKETPLACE =================== */
+.marketplace-section{background:linear-gradient(135deg,#f3faf6 0%,#e8f4ec 100%);padding:5rem 2rem}
+.marketplace-container{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.marketplace-content{padding-right:2rem}
+.marketplace-section h2{font-family:"Playfair Display",serif;font-size:2.8rem;margin-bottom:1.5rem;color:#1f3d2b}
+.marketplace-description{font-size:1.1rem;color:#5f737a;line-height:1.7;margin-bottom:2.5rem}
+.features-list{display:flex;flex-direction:column;gap:1.2rem;margin-bottom:2.5rem}
+.feature-item{display:flex;align-items:center;gap:1rem;font-size:1.1rem;color:#2d3a3f}
+.feature-checkbox{width:24px;height:24px;border-radius:4px;background:#4a9e5f;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.feature-checkbox::after{content:"✓";color:white;font-weight:bold}
+.marketplace-divider{height:1px;background:#a9e0bf;margin:2.5rem 0;border:none;width:100%}
+.browse-marketplace-btn{background:#2e7d4f;color:#fff;border:none;padding:1rem 2.5rem;border-radius:10px;cursor:pointer;font-size:1.1rem;font-weight:600;transition:all .3s;display:inline-flex;align-items:center;gap:.5rem}
+.browse-marketplace-btn:hover{background:#256b41;transform:translateY(-2px)}
+.marketplace-image{border-radius:20px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.1);height:500px}
+.marketplace-image img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.marketplace-image:hover img{transform:scale(1.05)}
+
+/* =================== READY TO EXPLORE =================== */
+.ready-to-explore{background:linear-gradient(135deg,#0f1f17 0%,#1a3626 100%);color:#fff;padding:5rem 2rem;text-align:center}
+.ready-container{max-width:1000px;margin:0 auto}
+.ready-to-explore h2{font-family:"Playfair Display",serif;font-size:2.8rem;margin-bottom:1.5rem}
+.ready-to-explore>div>p{font-size:1.2rem;color:#ccc;line-height:1.7;max-width:800px;margin:0 auto 3rem}
+.explore-buttons{display:flex;justify-content:center;gap:1.5rem;margin-bottom:4rem;flex-wrap:wrap}
+.explore-btn-primary{background:#2e7d4f;color:#fff;border:none;padding:1rem 2rem;border-radius:10px;cursor:pointer;font-size:1.1rem;font-weight:600;transition:all .3s}
+.explore-btn-primary:hover{background:#256b41;transform:translateY(-2px)}
+.explore-btn-secondary{background:transparent;color:#fff;border:2px solid #4a9e5f;padding:1rem 2rem;border-radius:10px;cursor:pointer;font-size:1.1rem;font-weight:600;transition:all .3s}
+.explore-btn-secondary:hover{background:rgba(74,158,95,.1);transform:translateY(-2px)}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:900px;margin:0 auto;padding-top:3rem;border-top:1px solid rgba(255,255,255,.1)}
+.feature-item-marketplace{text-align:center;display:flex;flex-direction:column;align-items:center}
+.feature-icon-circle{width:60px;height:60px;border-radius:50%;background:rgba(74,158,95,.2);display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;font-size:1.5rem;color:#4a9e5f}
+.feature-item-marketplace h4{font-size:1.2rem;margin-bottom:.5rem;color:#fff}
+.feature-item-marketplace p{font-size:.95rem;color:#b0b0b0;margin:0}
+
+/* =================== FOOTER =================== */
+.footer-exact{background:#0f1f17;color:#fff;padding:3.5rem 2rem 2rem}
+.footer-container{max-width:1200px;margin:0 auto}
+.footer-brand{text-align:center;margin-bottom:2.5rem}
+.footer-brand h2{font-family:"Playfair Display",serif;font-size:2rem;margin-bottom:1rem}
+.footer-tagline{font-size:1.1rem;color:#ccc;line-height:1.6;max-width:800px;margin:0 auto 2rem}
+.social-icons{display:flex;justify-content:center;gap:1.5rem;margin:2rem 0}
+.social-icon{width:44px;height:44px;border:2px solid #4a9e5f;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#4a9e5f;font-size:1.2rem;transition:all .3s;text-decoration:none}
+.social-icon:hover{background:#4a9e5f;color:#0f1f17;transform:translateY(-3px)}
+.divider{height:1px;background:#2a4a3a;margin:2.5rem 0;border:none}
+.footer-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-bottom:2.5rem}
+.footer-column h3{font-family:"Playfair Display",serif;font-size:1.2rem;margin-bottom:1rem}
+.footer-column ul{list-style:none}
+.footer-column ul li{margin-bottom:.5rem}
+.footer-column a{color:#b0b0b0;text-decoration:none;transition:color .3s}
+.footer-column a:hover{color:#fff}
+.footer-bottom{text-align:center;padding-top:2rem;border-top:1px solid #2a4a3a}
+.copyright{font-size:.95rem;color:#ccc;margin-bottom:1rem}
+.policy-links{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap}
+.policy-links a{color:#b0b0b0;text-decoration:none;font-size:.9rem;transition:color .3s}
+.policy-links a:hover{color:#fff}
+
+/* =================== RESPONSIVE =================== */
+@media(max-width:1024px){.user-info{display:none}.user-account-section{margin-left:1rem}}
+@media(max-width:900px){
+  .hero-container,.species-library-container,.marketplace-container{grid-template-columns:1fr}
+  .hero-left h1{font-size:2.4rem;text-align:center}
+  .hero-left p{text-align:center;margin-left:auto;margin-right:auto}
+  .hero-buttons{justify-content:center}
+  .badge{display:block;text-align:center}
+  .library-content,.marketplace-content{padding-left:0;padding-right:0}
+  .library-image,.marketplace-image{height:400px;order:-1}
+  .conservation-stats{grid-template-columns:repeat(2,1fr)}
+  .features-grid{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  .header-nav,.user-account-section{display:none}
+  .header-main{padding:1rem 1.5rem}
+  .hero-exact{padding:4rem 1.5rem;min-height:70vh}
+  .hero-left h1{font-size:2rem}
+  .stats-grid{grid-template-columns:1fr}
+  .conservation-stats{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .hero-buttons{flex-direction:column}
+  .hero-buttons button{width:100%}
+  .library-image,.marketplace-image{height:300px}
+  .browse-marketplace-btn{width:100%;justify-content:center}
+  .explore-buttons{flex-direction:column;align-items:center}
+}
+/* Sur grands écrans, masquer la bottom nav */
+@media(min-width: 769px) {
+  .mobile-bottom-nav { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header-main">
+  <div class="header-left">
+    <img src="https://cdn-icons-png.flaticon.com/512/3069/3069172.png" alt="BioXplore Logo">
+    <span>BioXplore</span>
+  </div>
+
+  <nav class="header-nav">
+    <a href="home.html" class="active">Home</a>
+    <a href="bioeducation.html">Bio Education</a>
+    <a href="species.html">Species Library</a>
+    <a href="ethics.html">Conservation & Ethics</a>
+    <a href="marketplace.html" class="marketplace-btn">Marketplace</a>
+  </nav>
+
+  <div class="user-account-section">
+    <div class="user-account" id="userAccount">
+      <div class="user-avatar"><i class="fas fa-user"></i></div>
+      <div class="user-info">
+        <div class="user-name" id="userName" data-auth="name">—</div>
+        <div class="user-role" data-auth="role">Member</div>
+      </div>
+
+      <!-- Dropdown : utilisateur CONNECTÉ -->
+      <div class="user-dropdown" id="userDropdown">
+        <div class="dropdown-header">
+          <div class="user-avatar"><i class="fas fa-user"></i></div>
+          <div class="user-name" data-auth="name">—</div>
+          <div class="user-email" data-auth="email">—</div>
+        </div>
+        <div class="dropdown-menu">
+          <a href="profile.html"           class="dropdown-item"><i class="fas fa-user-circle"></i><span>My Profile</span></a>
+          <a href="profile.html#orders"    class="dropdown-item" id="ddMyOrders"><i class="fas fa-shopping-bag"></i><span>My Orders</span></a>
+          <a href="profile.html#wishlist"  class="dropdown-item" id="ddWishlist"><i class="fas fa-heart"></i><span>Wishlist</span></a>
+          <a href="profile.html#settings"  class="dropdown-item" id="ddSettings"><i class="fas fa-cog"></i><span>Account Settings</span></a>
+          <div class="dropdown-divider"></div>
+          <a href="logout.html" class="dropdown-item" id="ddLogout"><i class="fas fa-sign-out-alt"></i><span>Log Out</span></a>
+        </div>
+      </div>
+
+      <!-- Dropdown : utilisateur NON connecté -->
+      <div class="user-dropdown" id="userDropdownGuest" style="display:none;">
+        <div class="dropdown-menu" style="padding:.8rem;">
+          <p style="font-size:.85rem;color:#6b7f86;margin-bottom:.8rem;text-align:center;">You are not logged in</p>
+          <a href="login.html" class="dropdown-item" style="background:#2e7d4f;color:white;border-radius:8px;justify-content:center;font-weight:600;">
+            <i class="fas fa-sign-in-alt"></i><span>Log In</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- MOBILE MENU OVERLAY -->
+<div class="mobile-menu-overlay" id="mobileMenuOverlay">
+  <div class="mobile-nav-container">
+    <div class="mobile-menu-header">
+      <div class="mobile-logo">
+        <img src="https://cdn-icons-png.flaticon.com/512/3069/3069172.png" alt="BioXplore Logo">
+        <span>BioXplore</span>
+      </div>
+      <button class="close-menu" id="closeMenu"><i class="fas fa-times"></i></button>
+    </div>
+    <nav class="mobile-nav-menu">
+      <a href="home.html" class="mobile-nav-item active"><span><i class="fas fa-home"></i> Home</span><i class="fas fa-chevron-right"></i></a>
+      <a href="bioeducation.html" class="mobile-nav-item"><span><i class="fas fa-graduation-cap"></i> Bio Education</span><i class="fas fa-chevron-right"></i></a>
+      <a href="species.html" class="mobile-nav-item"><span><i class="fas fa-leaf"></i> Species Library</span><i class="fas fa-chevron-right"></i></a>
+      <a href="ethics.html" class="mobile-nav-item"><span><i class="fas fa-handshake"></i> Conservation & Ethics</span><i class="fas fa-chevron-right"></i></a>
+      <a href="marketplace.html" class="mobile-nav-item"><span><i class="fas fa-store"></i> Marketplace</span><i class="fas fa-chevron-right"></i></a>
+    </nav>
+    <div class="mobile-user-section">
+      <div class="mobile-user-info">
+        <div class="mobile-user-avatar"><i class="fas fa-user"></i></div>
+        <div class="mobile-user-details">
+          <h4 data-auth="name">—</h4>
+          <p data-auth="role">Member</p>
+        </div>
+      </div>
+      <div class="mobile-auth-buttons">
+        <a href="profile.html" class="mobile-auth-btn mobile-btn-login">My Profile</a>
+        <a href="logout.html"  class="mobile-auth-btn mobile-btn-signup">Log Out</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<nav class="mobile-bottom-nav">
+  <a href="home.html" class="mobile-nav-icon active"><i class="fas fa-home"></i><span>Home</span></a>
+  <a href="species.html" class="mobile-nav-icon"><i class="fas fa-leaf"></i><span>Species</span></a>
+  <a href="marketplace.html" class="mobile-nav-icon"><i class="fas fa-store"></i><span>Market</span></a>
+  <a href="bioeducation.html" class="mobile-nav-icon"><i class="fas fa-graduation-cap"></i><span>Learn</span></a>
+  <a href="#" class="mobile-nav-icon" id="mobileMenuBtn"><i class="fas fa-bars"></i><span>Menu</span></a>
+</nav>
+
+<!-- HERO -->
+<section class="hero-exact">
+  <div class="hero-overlay"></div>
+  <div class="hero-container">
+    <div class="hero-left">
+      <span class="badge">ETHICAL SOURCING · SCIENTIFIC EXCELLENCE</span>
+      <h1>Discover, Learn &<br>Preserve <span>Rare Life</span><br><span>Forms</span></h1>
+      <p>Access ethically sourced rare organisms, plants, and insects for researchers, educators, collectors, and nature enthusiasts.</p>
+      <div class="hero-buttons">
+        <button class="btn-primary" onclick="window.location.href='species.html'">Explore Species Library →</button>
+        <button class="btn-secondary" onclick="window.location.href='bioeducation.html'"> Learn Biology</button>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stats-grid">
+        <div class="stat-card"><h3>500+</h3><span>Rare Species</span></div>
+        <div class="stat-card"><h3>1,000+</h3><span>Researchers</span></div>
+        <div class="stat-card"><h3>50+</h3><span>Partners</span></div>
+        <div class="stat-card"><h3>100%</h3><span>Ethical Sourcing</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE OFFER -->
+<section class="education-section">
+  <h2>What We Offer</h2>
+  <p class="subtitle">Bridging scientific excellence with ethical conservation to bring you unparalleled access to rare biological specimens and knowledge.</p>
+  <div class="offer-grid">
+    <div class="offer-card">
+      <div class="offer-icon"><img src="https://cdn-icons-png.flaticon.com/512/2909/2909769.png" alt="Plant Icon"></div>
+      <h3>Rare Plant Species</h3>
+      <p>Ethically sourced seeds, cuttings, and preserved specimens of rare and endangered plant species from around the globe.</p>
+      <a href="species.html">Explore Plants <span>→</span></a>
+    </div>
+    <div class="offer-card">
+      <div class="offer-icon"><img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Insect Icon"></div>
+      <h3>Rare Insects</h3>
+      <p>Professionally preserved specimens and educational kits featuring rare insects with complete taxonomic documentation.</p>
+      <a href="species.html">Explore Insects <span>→</span></a>
+    </div>
+    <div class="offer-card">
+      <div class="offer-icon"><img src="https://cdn-icons-png.flaticon.com/512/2942/2942813.png" alt="Microorganism Icon"></div>
+      <h3>Microorganisms</h3>
+      <p>Cultures and educational materials featuring rare microorganisms for research and educational purposes.</p>
+      <a href="species.html">Explore Microorganisms <span>→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- SPECIES LIBRARY -->
+<section class="species-library-exact">
+  <div class="species-library-container">
+    <div class="library-image">
+      <img src="https://images.unsplash.com/photo-1582719471384-894fbb16e074?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Rare Plant Species">
+    </div>
+    <div class="library-content">
+      <span class="badge">EDUCATION & RESEARCH</span>
+      <h2>Learn About Rare Life Forms</h2>
+      <p>Access comprehensive educational resources including detailed taxonomic information, habitat data, conservation status, and ecological importance for every species in our collection.</p>
+      <div class="library-features">
+        <div class="library-feature">
+          <div class="library-feature-icon"><i class="fas fa-book"></i></div>
+          <div><h4>Scientific Documentation</h4><p>Complete classification, habitat information, and research references</p></div>
+        </div>
+        <div class="library-feature">
+          <div class="library-feature-icon"><i class="fas fa-leaf"></i></div>
+          <div><h4>Conservation Insights</h4><p>Current conservation status and preservation efforts</p></div>
+        </div>
+        <div class="library-feature">
+          <div class="library-feature-icon"><i class="fas fa-graduation-cap"></i></div>
+          <div><h4>Educational Materials</h4><p>Interactive guides and learning resources for all levels</p></div>
+        </div>
+      </div>
+      <button class="library-btn" onclick="window.location.href='bioeducation.html'">Explore Educational Resources →</button>
+    </div>
+  </div>
+</section>
+
+<!-- CONSERVATION -->
+<section class="conservation-section">
+  <h2>Our Commitment to Conservation</h2>
+  <p class="subtitle">Every specimen we offer is ethically sourced with strict adherence to international conservation laws and sustainable practices.</p>
+  <div class="conservation-stats">
+    <div class="conservation-stat"><div class="conservation-icon"><i class="fas fa-shield-alt"></i></div><h3>100%</h3><span>Ethical Sourcing</span></div>
+    <div class="conservation-stat"><div class="conservation-icon"><i class="fas fa-handshake"></i></div><h3>50+</h3><span>Conservation Partners</span></div>
+    <div class="conservation-stat"><div class="conservation-icon"><i class="fas fa-globe"></i></div><h3>25</h3><span>Countries Supported</span></div>
+    <div class="conservation-stat"><div class="conservation-icon"><i class="fas fa-tree"></i></div><h3>$500K+</h3><span>Conservation Funding</span></div>
+  </div>
+  <div class="conservation-cta">
+    <h3>Learn About Our Ethical Practices</h3>
+    <p>Discover how we work with conservation organizations worldwide to protect biodiversity while making rare specimens accessible for education and research.</p>
+    <button class="conservation-btn" onclick="window.location.href='ethics.html'">Read Our Conservation Policy →</button>
+  </div>
+</section>
+
+<!-- MARKETPLACE -->
+<section class="marketplace-section">
+  <div class="marketplace-container">
+    <div class="marketplace-content">
+      <h2>Ethically Sourced Specimens for Your Collection</h2>
+      <p class="marketplace-description">Browse our curated marketplace featuring rare seeds, preserved specimens, educational kits, and research materials. Every item includes complete documentation and ethical sourcing certificates.</p>
+      <div class="features-list">
+        <div class="feature-item"><div class="feature-checkbox"></div><span>Legal compliance with CITES regulations</span></div>
+        <div class="feature-item"><div class="feature-checkbox"></div><span>Complete taxonomic documentation</span></div>
+        <div class="feature-item"><div class="feature-checkbox"></div><span>Secure shipping and handling</span></div>
+      </div>
+      <hr class="marketplace-divider">
+      <button class="browse-marketplace-btn" onclick="window.location.href='marketplace.html'">Browse Marketplace →</button>
+    </div>
+    <div class="marketplace-image">
+      <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Educational laboratory">
+    </div>
+  </div>
+</section>
+
+<!-- READY TO EXPLORE -->
+<section class="ready-to-explore">
+  <div class="ready-container">
+    <h2>Ready to Explore Rare Life Forms?</h2>
+    <p>Join researchers, educators, and collectors worldwide in discovering and preserving Earth's biodiversity.</p>
+    <div class="explore-buttons">
+      <button class="explore-btn-primary" onclick="window.location.href='species.html'">Browse Species Library</button>
+      <button class="explore-btn-secondary" onclick="window.location.href='mailto:info@bioxplore.com'">Contact Us</button>
+    </div>
+    <div class="features-grid">
+      <div class="feature-item-marketplace">
+        <div class="feature-icon-circle"><i class="fas fa-shield-alt"></i></div>
+        <h4>Secure Transactions</h4>
+        <p>Safe and protected payment processing</p>
+      </div>
+      <div class="feature-item-marketplace">
+        <div class="feature-icon-circle"><i class="fas fa-globe-americas"></i></div>
+        <h4>Global Shipping</h4>
+        <p>Worldwide delivery to your doorstep</p>
+      </div>
+      <div class="feature-item-marketplace">
+        <div class="feature-icon-circle"><i class="fas fa-headset"></i></div>
+        <h4>Expert Support</h4>
+        <p>24/7 assistance from our specialists</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer-exact">
+  <div class="footer-container">
+    <div class="footer-brand">
+      <h2>BioXplore</h2>
+      <p class="footer-tagline">Discover, learn, and preserve rare life forms through ethical sourcing and scientific excellence.</p>
+      <div class="social-icons">
+        <a href=" https://www.facebook.com/share/1HhhGYC2Kc/?mibextid=wwXIfr" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/bioxp_lore/ " class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="  https://x.com/bioxplore8xdp?s=11" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="footer-links">
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="bioeducation.html">Bio Education</a></li>
+          <li><a href="marketplace.html">Marketplace</a></li>
+          <li><a href="species.html">Species Library</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="ethics.html">Conservation and Ethics</a></li>
+          <li><a href="#">About BioXplore</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Get In Touch</h3>
+        <ul>
+          <li>info@bioxplore.com</li>
+          <li>+1 (555) 123-4567</li>
+          <li>123 Biology Lane<br>Science City, SC 12345</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="copyright">© 2025 BioXplore. All rights reserved.</p>
+      <div class="policy-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="cookie-policy.html">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Navigation
+const hamburger=document.getElementById('hamburger');
+const mobileMenuOverlay=document.getElementById('mobileMenuOverlay');
+const closeMenu=document.getElementById('closeMenu');
+const mobileMenuBtn=document.getElementById('mobileMenuBtn');
+const mobileNavItems=document.querySelectorAll('.mobile-nav-item');
+const bottomNavIcons=document.querySelectorAll('.mobile-nav-icon');
+
+function openMenu(){mobileMenuOverlay.classList.add('active');hamburger.classList.add('active');document.body.style.overflow='hidden'}
+function closeMenuFunc(){mobileMenuOverlay.classList.remove('active');hamburger.classList.remove('active');document.body.style.overflow=''}
+
+hamburger.addEventListener('click',e=>{e.stopPropagation();mobileMenuOverlay.classList.contains('active')?closeMenuFunc():openMenu()});
+closeMenu.addEventListener('click',closeMenuFunc);
+mobileMenuBtn.addEventListener('click',e=>{e.preventDefault();openMenu()});
+mobileMenuOverlay.addEventListener('click',e=>{if(e.target===mobileMenuOverlay)closeMenuFunc()});
+mobileNavItems.forEach(item=>{item.addEventListener('click',()=>setTimeout(closeMenuFunc,300))});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenuFunc()});
+
+bottomNavIcons.forEach(icon=>{
+  icon.addEventListener('click',e=>{
+    if(icon.id==='mobileMenuBtn')return;
+    bottomNavIcons.forEach(i=>i.classList.remove('active'));
+    icon.classList.add('active');
+  });
+});
+
+// ── User dropdown (auth-aware) ────────────────────────────────
+const userAccount       = document.getElementById('userAccount');
+const userDropdown      = document.getElementById('userDropdown');
+const userDropdownGuest = document.getElementById('userDropdownGuest');
+
+function isLoggedIn() { return !!localStorage.getItem('accessToken'); }
+
+function initDropdown() {
+  const loggedIn = isLoggedIn();
+  // Affiche le bon dropdown selon l'état
+  if (userDropdown)      userDropdown.style.display      = loggedIn ? '' : 'none';
+  if (userDropdownGuest) userDropdownGuest.style.display = loggedIn ? 'none' : '';
+
+  // Affiche/masque le user-info (nom + rôle) à côté de l'avatar
+  const userInfo = document.querySelector('.user-info');
+  if (userInfo) userInfo.style.display = loggedIn ? '' : 'none';
+}
+
+function activeDropdown() {
+  const loggedIn = isLoggedIn();
+  if (loggedIn) {
+    userDropdown?.classList.toggle('active');
+    userDropdownGuest?.classList.remove('active');
+  } else {
+    userDropdownGuest?.classList.toggle('active');
+    userDropdown?.classList.remove('active');
+  }
+}
+
+if (userAccount) {
+  userAccount.addEventListener('click', e => { e.stopPropagation(); activeDropdown(); });
+}
+
+document.addEventListener('click', e => {
+  if (!userAccount?.contains(e.target)) {
+    userDropdown?.classList.remove('active');
+    userDropdownGuest?.classList.remove('active');
+  }
+});
+
+// Ferme au clic sur un lien du dropdown
+document.querySelectorAll('#userDropdown .dropdown-item, #userDropdownGuest .dropdown-item').forEach(link => {
+  link.addEventListener('click', () => {
+    userDropdown?.classList.remove('active');
+    userDropdownGuest?.classList.remove('active');
+  });
+});
+
+// Init au chargement
+document.addEventListener('DOMContentLoaded', initDropdown);
+</script>
+<script src="auth-nav.js"></script>
+</body>
+</html>

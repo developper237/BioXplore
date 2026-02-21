@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Species Library | BioXplore - Discover Rare Life Forms</title>
+<meta name="description" content="Explore rare plants, insects, and microorganisms with detailed scientific data and conservation status.">
+<meta name="keywords" content="biology, rare species, plants, insects, microorganisms, conservation, biodiversity">
+<meta name="author" content="BioXplore">
+<meta property="og:title" content="Species Library | BioXplore">
+<meta property="og:description" content="Discover Earth's most fascinating and rare life forms in our comprehensive species database.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1200&q=80">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{--green:#1f3d2b;--neutral:#f4f4f2;--green-light:#7edc88}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Inter",sans-serif;background:var(--neutral);color:#222;line-height:1.6;padding-bottom:70px}
+.skip-to-content{position:absolute;top:-40px;left:0;background:#2e7d4f;color:white;padding:8px 16px;z-index:1010;text-decoration:none;border-radius:0 0 4px 0;font-weight:600}
+.skip-to-content:focus{top:0}
+/* HEADER */
+.header-main{background:#f3faf6;padding:1.4rem 3rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:998;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.header-left{display:flex;align-items:center;gap:.8rem}
+.header-left img{width:44px}
+.header-left span{font-family:"Playfair Display",serif;font-size:1.9rem;color:var(--green);font-weight:600}
+.header-nav{display:flex;align-items:center;gap:2.2rem}
+.header-nav a{text-decoration:none;color:#2d3a3f;font-size:.95rem;font-weight:500;transition:all .2s}
+.header-nav a:hover{color:#2e7d4f;transform:translateY(-1px)}
+.header-nav a.active{color:#2e7d4f;font-weight:600;position:relative}
+.header-nav a.active::after{content:'';position:absolute;bottom:-5px;left:0;width:100%;height:2px;background:#2e7d4f;border-radius:2px}
+.marketplace-btn{background:#2e6f43;color:#fff!important;padding:.75rem 1.6rem;border-radius:12px;font-weight:600}
+.marketplace-btn:hover{background:#245a36!important;transform:none!important}
+/* HAMBURGER */
+.hamburger{display:flex;flex-direction:column;gap:6px;cursor:pointer;z-index:1002;background:none;border:none;padding:.5rem}
+.hamburger span{width:26px;height:3px;background:var(--green);border-radius:3px;transition:.3s}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(7px,7px);background:#fff}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(6px,-6px);background:#fff}
+/* MOBILE MENU */
+.mobile-menu-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(15,31,23,.98);z-index:1001;display:none;backdrop-filter:blur(5px)}
+.mobile-menu-overlay.active{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.mobile-nav-container{position:absolute;top:0;left:0;width:100%;height:100%;padding:2rem;display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+.mobile-menu-header{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 0;border-bottom:1px solid rgba(255,255,255,.1);margin-top:1rem;flex-shrink:0}
+.mobile-logo{display:flex;align-items:center;gap:.8rem}
+.mobile-logo img{width:36px;filter:brightness(0) invert(1)}
+.mobile-logo span{font-family:"Playfair Display",serif;font-size:1.6rem;color:#fff}
+.close-menu{background:rgba(255,255,255,.1);border:none;color:#fff;font-size:1.8rem;cursor:pointer;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%}
+.mobile-nav-menu{flex:0 1 auto;display:flex;flex-direction:column;padding:2rem 0;gap:.5rem}
+.mobile-nav-item{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 0;text-decoration:none;color:#fff;font-size:1.2rem;border-bottom:1px solid rgba(255,255,255,.1);transition:all .3s}
+.mobile-nav-item:hover,.mobile-nav-item.active{color:var(--green-light)}
+.mobile-nav-item.active{font-weight:600}
+.mobile-user-section{margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.1);flex-shrink:0}
+.mobile-user-info{display:flex;align-items:center;gap:1rem;padding-bottom:1.5rem}
+.mobile-user-avatar{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,#2e7d4f,#5fbf6a);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.3rem}
+.mobile-user-details h4{color:#fff}.mobile-user-details p{color:#ccc;font-size:.9rem}
+.mobile-auth-buttons{display:flex;gap:1rem}
+.mobile-auth-btn{flex:1;padding:.9rem;text-align:center;border-radius:10px;text-decoration:none;font-weight:500;font-size:1rem}
+.mobile-btn-login{background:transparent;color:#fff;border:2px solid #4a9e5f}
+.mobile-btn-signup{background:#4a9e5f;color:#fff;border:2px solid #4a9e5f}
+/* BOTTOM NAV */
+.mobile-bottom-nav{position:fixed;bottom:0;left:0;width:100%;background:var(--green);display:flex;justify-content:space-around;padding:.8rem 0;z-index:997;border-top:1px solid rgba(255,255,255,.1)}
+.mobile-nav-icon{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:#ccc;font-size:.8rem;transition:color .3s;flex:1;padding:.5rem}
+.mobile-nav-icon i{font-size:1.2rem;margin-bottom:.3rem}
+.mobile-nav-icon.active,.mobile-nav-icon:hover{color:var(--green-light)}
+/* HERO */
+.library-hero{position:relative;min-height:60vh;background:linear-gradient(rgba(15,31,23,.9),rgba(15,31,23,.8)),url("https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1920&q=80") center/cover no-repeat;padding:4rem 2rem;color:#fff;display:flex;align-items:center;text-align:center}
+.hero-content{max-width:900px;margin:0 auto;position:relative;z-index:2}
+.badge{display:inline-block;background:#5fbf6a;color:#0e2b1e;padding:.5rem 1.5rem;border-radius:50px;font-size:.8rem;font-weight:600;margin-bottom:1.5rem;text-transform:uppercase;letter-spacing:1px}
+.hero-content h1{font-family:"Playfair Display",serif;font-size:3.5rem;line-height:1.15;margin-bottom:1.5rem}
+.hero-content h1 span{color:var(--green-light)}
+.hero-desc{max-width:700px;margin:0 auto 2.5rem;font-size:1.1rem;color:#e0e0e0}
+.search-container{max-width:700px;margin:0 auto}
+.search-box{display:flex;gap:1rem;margin-bottom:1.5rem}
+.search-input{flex:1;padding:1.2rem 1.5rem;border:none;border-radius:12px;font-size:1rem;background:rgba(255,255,255,.95);font-family:"Inter",sans-serif}
+.search-input:focus{outline:2px solid #5fbf6a;outline-offset:2px}
+.search-button{background:#2e7d4f;color:#fff;border:none;padding:0 2rem;border-radius:12px;cursor:pointer;font-size:1rem;font-weight:600;transition:all .3s;display:flex;align-items:center;gap:.5rem;white-space:nowrap}
+.search-button:hover{background:#256b41;transform:translateY(-2px)}
+.quick-filters{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center}
+.filter-btn{background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.2);padding:.7rem 1.5rem;border-radius:8px;cursor:pointer;font-weight:500;color:white;transition:all .3s;backdrop-filter:blur(10px);font-size:.9rem}
+.filter-btn:hover{background:rgba(255,255,255,.2)}
+.filter-btn.active{background:#2e7d4f;border-color:#2e7d4f}
+/* FILTERS */
+.filter-section{background:#fff;padding:2.5rem 2rem;box-shadow:0 5px 20px rgba(0,0,0,.05)}
+.filter-container{max-width:1300px;margin:0 auto}
+.filter-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;flex-wrap:wrap;gap:1.5rem}
+.filter-row h2{font-family:"Playfair Display",serif;font-size:1.8rem;color:var(--green)}
+.results-count{color:#5f737a;font-weight:500}
+.advanced-filters{display:flex;gap:1.5rem;flex-wrap:wrap}
+.filter-group{flex:1;min-width:200px}
+.filter-group label{display:block;margin-bottom:.5rem;font-weight:500;color:#2d3a3f;font-size:.9rem}
+.filter-select{width:100%;padding:.8rem;border:2px solid #e0e8e3;border-radius:8px;background:white;color:#2d3a3f;font-size:.95rem;font-family:"Inter",sans-serif;cursor:pointer;transition:border-color .3s}
+.filter-select:focus{outline:none;border-color:#5fbf6a}
+/* SPECIES GRID */
+.species-grid-section{padding:4rem 2rem;background:#f9fbf8}
+.species-grid-container{max-width:1300px;margin:0 auto}
+.species-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:2rem;margin-bottom:3rem}
+.species-card{background:white;border-radius:16px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.08);transition:all .3s;cursor:pointer}
+.species-card:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(0,0,0,.12)}
+.species-image{height:220px;overflow:hidden}
+.species-image img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.species-card:hover .species-image img{transform:scale(1.05)}
+.species-content{padding:1.8rem}
+.species-meta{display:flex;justify-content:space-between;margin-bottom:.8rem}
+.species-category{background:#e6f4ec;color:#2e7d4f;padding:.3rem .8rem;border-radius:50px;font-size:.8rem;font-weight:600}
+.species-status{padding:.3rem .8rem;border-radius:50px;font-size:.8rem;font-weight:600}
+.status-endangered{background:#ffeaea;color:#c44545}
+.status-vulnerable{background:#fff3e0;color:#d9822b}
+.status-least-concern{background:#e8f5e9;color:#2e7d4f}
+.status-critical{background:#ffcdd2;color:#b71c1c}
+.species-name{font-family:"Playfair Display",serif;font-size:1.5rem;margin-bottom:.4rem;color:var(--green)}
+.species-scientific{color:#5f737a;font-style:italic;margin-bottom:.8rem;font-size:.95rem}
+.species-description{color:#6b7f86;margin-bottom:1.5rem;font-size:.95rem;line-height:1.6}
+.species-features{display:flex;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.feature{display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:#5f737a}
+.feature i{color:#4a9e5f}
+.species-btn{width:100%;background:#2e7d4f;color:white;border:none;padding:.9rem;border-radius:10px;font-weight:600;cursor:pointer;transition:all .3s;font-size:.95rem;display:flex;align-items:center;justify-content:center;gap:.5rem;font-family:"Inter",sans-serif}
+.species-btn:hover{background:#256b41;transform:translateY(-2px)}
+.no-results{text-align:center;padding:4rem 2rem;color:#5f737a;grid-column:1/-1;display:none}
+.no-results i{font-size:3rem;color:#ccc;margin-bottom:1rem;display:block}
+.no-results h3{font-family:"Playfair Display",serif;font-size:1.6rem;margin-bottom:.8rem;color:var(--green)}
+/* PAGINATION */
+.pagination{display:flex;justify-content:center;gap:.5rem;margin-top:3rem;flex-wrap:wrap}
+.pagination-btn{padding:.8rem 1.2rem;border:2px solid #e0e8e3;background:white;border-radius:8px;cursor:pointer;color:#2d3a3f;font-weight:500;transition:all .3s;min-width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-family:"Inter",sans-serif}
+.pagination-btn:hover{background:#f3faf6;border-color:#5fbf6a}
+.pagination-btn.active{background:#2e7d4f;color:white;border-color:#2e7d4f}
+/* FEATURED */
+.featured-section{padding:5rem 2rem;background:linear-gradient(135deg,#f3faf6 0%,#e8f4ec 100%);text-align:center}
+.featured-container{max-width:1200px;margin:0 auto}
+.featured-section h2{font-family:"Playfair Display",serif;font-size:2.5rem;margin-bottom:1rem;color:var(--green)}
+.featured-intro{max-width:700px;margin:0 auto 3rem;color:#5f737a;font-size:1.05rem}
+.featured-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem}
+.featured-card{background:white;border-radius:16px;padding:2.5rem;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.05);transition:all .3s;cursor:pointer}
+.featured-card:hover{transform:translateY(-5px);box-shadow:0 20px 40px rgba(0,0,0,.1)}
+.featured-icon{width:70px;height:70px;background:linear-gradient(135deg,#2f8f46,#5fbf6a);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;color:white;font-size:1.8rem}
+.featured-card h3{font-family:"Playfair Display",serif;font-size:1.4rem;margin-bottom:1rem;color:var(--green)}
+.featured-card p{color:#5f737a;font-size:.95rem;margin:0}
+/* MODAL */
+.modal-backdrop{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);z-index:9999;backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;padding:1rem}
+.modal-backdrop.active{display:flex;animation:fadeIn .3s ease}
+.species-modal{background:white;border-radius:20px;max-width:700px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3);animation:slideUp .3s ease;position:relative}
+@keyframes slideUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-image{height:280px;overflow:hidden;border-radius:20px 20px 0 0}
+.modal-image img{width:100%;height:100%;object-fit:cover}
+.modal-close{position:absolute;top:1rem;right:1rem;background:rgba(0,0,0,.4);border:none;color:white;width:38px;height:38px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;transition:all .3s;z-index:2}
+.modal-close:hover{background:rgba(0,0,0,.7)}
+.modal-body{padding:2rem}
+.modal-meta{display:flex;gap:.8rem;margin-bottom:.8rem;flex-wrap:wrap}
+.modal-name{font-family:"Playfair Display",serif;font-size:2rem;color:var(--green);margin-bottom:.3rem}
+.modal-scientific{font-style:italic;color:#5f737a;margin-bottom:1.2rem}
+.modal-desc-text{color:#2d3a3f;line-height:1.8;margin-bottom:1.5rem}
+.modal-facts{background:#f3faf6;border-radius:12px;padding:1.5rem;margin-bottom:1.5rem}
+.modal-facts h4{font-family:"Playfair Display",serif;font-size:1.1rem;color:var(--green);margin-bottom:1rem}
+.modal-fact{display:flex;gap:.8rem;align-items:center;margin-bottom:.7rem;font-size:.95rem;color:#2d3a3f}
+.modal-fact i{color:#4a9e5f;width:18px;flex-shrink:0}
+.modal-actions{display:flex;gap:1rem}
+.modal-btn-primary{flex:1;background:#2e7d4f;color:white;border:none;padding:1rem;border-radius:10px;font-weight:600;cursor:pointer;transition:all .3s;font-size:1rem;display:flex;align-items:center;justify-content:center;gap:.5rem;font-family:"Inter",sans-serif}
+.modal-btn-primary:hover{background:#256b41;transform:translateY(-2px)}
+.modal-btn-secondary{flex:1;background:transparent;color:var(--green);border:2px solid #2e7d4f;padding:1rem;border-radius:10px;font-weight:600;cursor:pointer;transition:all .3s;font-size:1rem;display:flex;align-items:center;justify-content:center;gap:.5rem;font-family:"Inter",sans-serif}
+.modal-btn-secondary:hover{background:#f3faf6}
+/* TOAST */
+.toast{position:fixed;top:100px;right:20px;background:#2e7d4f;color:white;padding:1.2rem 1.8rem;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.2);z-index:10001;max-width:360px;animation:toastIn .3s ease;display:flex;align-items:start;gap:1rem}
+@keyframes toastIn{from{transform:translateX(400px);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes toastOut{from{transform:translateX(0);opacity:1}to{transform:translateX(400px);opacity:0}}
+.toast i{font-size:1.3rem;margin-top:.1rem;flex-shrink:0}
+.toast-title{font-weight:700;margin-bottom:.3rem}
+.toast-msg{font-size:.9rem;opacity:.95}
+/* FOOTER */
+.footer-exact{background:#0f1f17;color:#fff;padding:3.5rem 2rem 2rem}
+.footer-container{max-width:1200px;margin:0 auto}
+.footer-brand{text-align:center;margin-bottom:2.5rem}
+.footer-brand h2{font-family:"Playfair Display",serif;font-size:2rem;margin-bottom:1rem}
+.footer-tagline{font-size:1.1rem;color:#ccc;line-height:1.6;max-width:800px;margin:0 auto 2rem}
+.social-icons{display:flex;justify-content:center;gap:1.5rem;margin:2rem 0}
+.social-icon{width:44px;height:44px;border:2px solid #4a9e5f;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#4a9e5f;font-size:1.2rem;transition:all .3s;text-decoration:none}
+.social-icon:hover{background:#4a9e5f;color:#0f1f17;transform:translateY(-3px)}
+.divider{height:1px;background:#2a4a3a;margin:2.5rem 0;border:none}
+.quick-links-table{width:100%;margin-bottom:2.5rem;border-collapse:collapse}
+.quick-links-table th{text-align:left;font-family:"Playfair Display",serif;font-size:1.4rem;padding-bottom:1.5rem;color:#fff;font-weight:600}
+.quick-links-table td{padding:.5rem 0;color:#b0b0b0;font-size:1rem;vertical-align:top}
+.quick-links-table td a{color:#b0b0b0;text-decoration:none;transition:color .2s}
+.quick-links-table td a:hover{color:#fff}
+.contact-info p{margin:.3rem 0;line-height:1.5}
+.footer-bottom{text-align:center;padding-top:2rem;border-top:1px solid #2a4a3a}
+.copyright{font-size:.95rem;color:#ccc;margin-bottom:1rem}
+.policy-links{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap}
+.policy-links a{color:#b0b0b0;text-decoration:none;font-size:.9rem;transition:color .3s}
+.policy-links a:hover{color:#fff}
+/* RESPONSIVE */
+@media(max-width:768px){
+  .header-nav{display:none}
+  .header-main{padding:1rem 1.5rem}
+  .library-hero{min-height:50vh;padding:3rem 1.5rem}
+  .hero-content h1{font-size:2.4rem}
+  .search-box{flex-direction:column}
+  .search-button{padding:1rem;justify-content:center}
+  .filter-row{flex-direction:column;align-items:flex-start}
+  .species-grid{grid-template-columns:1fr}
+  .featured-grid{grid-template-columns:1fr}
+  .advanced-filters{flex-direction:column}
+  .filter-group{min-width:100%}
+  .modal-actions{flex-direction:column}
+  .quick-links-table{display:block}
+  .quick-links-table thead,.quick-links-table tbody,.quick-links-table th,.quick-links-table td,.quick-links-table tr{display:block}
+  .quick-links-table tr{margin-bottom:2rem}
+  .quick-links-table th{text-align:center;padding-bottom:.5rem}
+}
+@media(max-width:600px){
+  .hero-content h1{font-size:2rem}
+  .species-features{flex-direction:column;gap:.5rem}
+  .library-hero,.species-grid-section,.featured-section{padding:3rem 1rem}
+}
+@keyframes cardIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.species-card{animation:cardIn .5s ease forwards}
+/* Sur grands écrans, masquer la bottom nav */
+@media(min-width: 769px) {
+  .mobile-bottom-nav { display: none; }
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+<header class="header-main">
+  <div class="header-left">
+    <img src="https://cdn-icons-png.flaticon.com/512/3069/3069172.png" alt="BioXplore Logo">
+    <span>BioXplore</span>
+  </div>
+  <nav class="header-nav">
+    <a href="home.html">Home</a>
+    <a href="bioeducation.html">Bio Education</a>
+    <a href="species.html" class="active">Species Library</a>
+    <a href="ethics.html">Conservation &amp; Ethics</a>
+    <a href="marketplace.html" class="marketplace-btn">Marketplace</a>
+  </nav>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<div class="mobile-menu-overlay" id="mobileMenuOverlay">
+  <div class="mobile-nav-container">
+    <div class="mobile-menu-header">
+      <div class="mobile-logo">
+        <img src="https://cdn-icons-png.flaticon.com/512/3069/3069172.png" alt="BioXplore">
+        <span>BioXplore</span>
+      </div>
+      <button class="close-menu" id="closeMenu"><i class="fas fa-times"></i></button>
+    </div>
+    <nav class="mobile-nav-menu">
+      <a href="home.html" class="mobile-nav-item"><span><i class="fas fa-home"></i> Home</span><i class="fas fa-chevron-right"></i></a>
+      <a href="bioeducation.html" class="mobile-nav-item"><span><i class="fas fa-graduation-cap"></i> Bio Education</span><i class="fas fa-chevron-right"></i></a>
+      <a href="species.html" class="mobile-nav-item active"><span><i class="fas fa-leaf"></i> Species Library</span><i class="fas fa-chevron-right"></i></a>
+      <a href="ethics.html" class="mobile-nav-item"><span><i class="fas fa-handshake"></i> Conservation &amp; Ethics</span><i class="fas fa-chevron-right"></i></a>
+      <a href="marketplace.html" class="mobile-nav-item"><span><i class="fas fa-store"></i> Marketplace</span><i class="fas fa-chevron-right"></i></a>
+    </nav>
+    <div class="mobile-user-section">
+      <div class="mobile-user-info">
+        <div class="mobile-user-avatar"><i class="fas fa-user"></i></div>
+        <div class="mobile-user-details"><h4 data-auth="name">—</h4><p data-auth="role">Member</p></div>
+      </div>
+      <div class="mobile-auth-buttons">
+        <a href="profile.html" class="mobile-auth-btn mobile-btn-login">My Profile</a>
+        <a href="#" class="mobile-auth-btn mobile-btn-signup">Log Out</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="mobile-bottom-nav">
+  <a href="home.html" class="mobile-nav-icon"><i class="fas fa-home"></i><span>Home</span></a>
+  <a href="species.html" class="mobile-nav-icon active"><i class="fas fa-leaf"></i><span>Species</span></a>
+  <a href="marketplace.html" class="mobile-nav-icon"><i class="fas fa-store"></i><span>Market</span></a>
+  <a href="bioeducation.html" class="mobile-nav-icon"><i class="fas fa-graduation-cap"></i><span>Learn</span></a>
+  <a href="#" class="mobile-nav-icon" id="mobileMenuBtn"><i class="fas fa-bars"></i><span>Menu</span></a>
+</nav>
+
+<main id="main-content">
+<section class="library-hero">
+  <div class="hero-content">
+    <span class="badge">Explore Our Collection</span>
+    <h1>Species <span>Library</span></h1>
+    <p class="hero-desc">Discover Earth's most fascinating and rare life forms. Our comprehensive database features detailed information about species from around the world, complete with conservation status, habitat data, and scientific documentation.</p>
+    <div class="search-container">
+      <div class="search-box">
+        <input type="text" class="search-input" id="searchInput" placeholder="Search species by name, habitat, or characteristics..." aria-label="Search species">
+        <button class="search-button" id="searchButton"><i class="fas fa-search" aria-hidden="true"></i> Search</button>
+      </div>
+      <div class="quick-filters" role="group" aria-label="Quick filters">
+        <button class="filter-btn active" data-filter="all">All Species</button>
+        <button class="filter-btn" data-filter="Plants">Plants</button>
+        <button class="filter-btn" data-filter="Insects">Insects</button>
+        <button class="filter-btn" data-filter="Microorganisms">Microorganisms</button>
+        <button class="filter-btn" data-filter="Marine Life">Marine</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="filter-section">
+  <div class="filter-container">
+    <div class="filter-row">
+      <h2>Browse Species</h2>
+      <div class="results-count" id="resultsCount">Showing 6 of 6 species</div>
+    </div>
+    <div class="advanced-filters">
+      <div class="filter-group">
+        <label for="categoryFilter">Category</label>
+        <select id="categoryFilter" class="filter-select">
+          <option value="all">All Categories</option>
+          <option value="Plants">Plants</option>
+          <option value="Insects">Insects</option>
+          <option value="Microorganisms">Microorganisms</option>
+          <option value="Marine Life">Marine Life</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="regionFilter">Geographic Region</label>
+        <select id="regionFilter" class="filter-select">
+          <option value="all">All Regions</option>
+          <option value="Asia">Asia</option>
+          <option value="Americas">Americas</option>
+          <option value="Worldwide">Worldwide</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="statusFilter">Conservation Status</label>
+        <select id="statusFilter" class="filter-select">
+          <option value="all">All Statuses</option>
+          <option value="Critically Endangered">Critically Endangered</option>
+          <option value="Endangered">Endangered</option>
+          <option value="Vulnerable">Vulnerable</option>
+          <option value="Least Concern">Least Concern</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="sortFilter">Sort By</label>
+        <select id="sortFilter" class="filter-select">
+          <option value="default">Default</option>
+          <option value="name-asc">Name (A&ndash;Z)</option>
+          <option value="name-desc">Name (Z&ndash;A)</option>
+          <option value="endangered">Most Endangered</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="species-grid-section">
+  <div class="species-grid-container">
+    <div class="species-grid" id="speciesGrid"></div>
+    <div class="no-results" id="noResults">
+      <i class="fas fa-search"></i>
+      <h3>No species found</h3>
+      <p>Try adjusting your search or filters to find what you're looking for.</p>
+    </div>
+    <div class="pagination" id="pagination" role="navigation" aria-label="Pagination"></div>
+  </div>
+</section>
+
+<section class="featured-section">
+  <div class="featured-container">
+    <h2>Explore Our Collections</h2>
+    <p class="featured-intro">Browse curated collections of species based on habitat, conservation status, or scientific interest. Click a collection to filter the library.</p>
+    <div class="featured-grid">
+      <article class="featured-card" data-collection="Plants">
+        <div class="featured-icon"><i class="fas fa-leaf" aria-hidden="true"></i></div>
+        <h3>Rare Plants</h3>
+        <p>Discover endangered and exotic plant species from rainforests, deserts, and unique ecosystems worldwide.</p>
+      </article>
+      <article class="featured-card" data-collection="Insects">
+        <div class="featured-icon"><i class="fas fa-bug" aria-hidden="true"></i></div>
+        <h3>Unique Insects</h3>
+        <p>Explore fascinating insect species with specialized adaptations, from camouflage to complex social structures.</p>
+      </article>
+      <article class="featured-card" data-collection="Microorganisms">
+        <div class="featured-icon"><i class="fas fa-microscope" aria-hidden="true"></i></div>
+        <h3>Microorganisms</h3>
+        <p>Study microscopic life forms with extraordinary abilities, from extremophiles to symbiotic relationships.</p>
+      </article>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- SPECIES DETAIL MODAL -->
+<div class="modal-backdrop" id="speciesModal" role="dialog" aria-modal="true" aria-labelledby="modalSpeciesName">
+  <div class="species-modal">
+    <div class="modal-image"><img id="modalImg" src="" alt=""></div>
+    <button class="modal-close" id="modalClose" aria-label="Close"><i class="fas fa-times"></i></button>
+    <div class="modal-body">
+      <div class="modal-meta" id="modalMeta"></div>
+      <h2 class="modal-name" id="modalSpeciesName"></h2>
+      <p class="modal-scientific" id="modalScientific"></p>
+      <p class="modal-desc-text" id="modalDesc"></p>
+      <div class="modal-facts"><h4><i class="fas fa-info-circle"></i> Key Facts</h4><div id="modalFacts"></div></div>
+      <div class="modal-actions">
+        <button class="modal-btn-primary" id="modalAddCart"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+        <button class="modal-btn-secondary" id="modalWishlist"><i class="fas fa-heart"></i> Save to Wishlist</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer-exact">
+  <div class="footer-container">
+    <div class="footer-brand">
+      <h2>BioXplore</h2>
+      <p class="footer-tagline">Discover, learn, and preserve rare life forms through ethical sourcing and scientific excellence.</p>
+      <div class="social-icons">
+        <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+    <hr class="divider">
+    <table class="quick-links-table">
+      <thead><tr><th>Quick Links</th><th>Resources</th><th>Get In Touch</th></tr></thead>
+      <tbody>
+        <tr><td><a href="home.html">Home</a></td><td><a href="ethics.html">Conservation &amp; Ethics</a></td><td class="contact-info"><p>info@bioxplore.com</p></td></tr>
+        <tr><td><a href="bioeducation.html">Bio Education</a></td><td><a href="#">About BioXplore</a></td><td class="contact-info"><p>+1 (555) 123-4567</p></td></tr>
+        <tr><td><a href="marketplace.html">Marketplace</a></td><td><a href="#">Contact</a></td><td class="contact-info"><p>123 Biology Lane<br>Science City, SC 12345</p></td></tr>
+        <tr><td><a href="species.html">Species Library</a></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+    <div class="footer-bottom">
+      <p class="copyright">&copy; 2025 BioXplore. All rights reserved.</p>
+      <div class="policy-links">
+        <a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const SPECIES = [
+  {id:1,name:"Ghost Orchid",scientific:"Dendrophylax lindenii",category:"Plants",status:"Endangered",statusClass:"status-endangered",region:"Americas",
+  description:"A rare leafless epiphyte found in Florida and Cuba. Known for its beautiful white flowers that appear to float in air. This orchid is extremely rare and challenging to cultivate, making it one of the most sought-after specimens in botanical collections.",
+  image:"https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=800&q=80",alt:"Ghost Orchid flower",
+  features:[{i:"fas fa-globe-americas",t:"Florida, Cuba"},{i:"fas fa-leaf",t:"Epiphyte"},{i:"fas fa-ruler-vertical",t:"10–15 cm"}],
+  facts:[{i:"fas fa-globe",l:"Habitat",v:"Subtropical swamps & forests"},{i:"fas fa-calendar",l:"Bloom season",v:"June – August"},{i:"fas fa-shield-alt",l:"Threats",v:"Habitat loss, illegal collection"},{i:"fas fa-users",l:"Est. population",v:"< 2,000 plants"}]},
+  {id:2,name:"Atlas Moth",scientific:"Attacus atlas",category:"Insects",status:"Least Concern",statusClass:"status-least-concern",region:"Asia",
+  description:"One of the largest moths in the world with a wingspan up to 30 cm. Found in tropical and subtropical forests of Southeast Asia. Adults have no mouth and live entirely off fat reserves stored as caterpillars.",
+  image:"https://images.unsplash.com/photo-1581089781782-3bda4e89320f?auto=format&fit=crop&w=800&q=80",alt:"Atlas Moth with large patterned wings",
+  features:[{i:"fas fa-globe-asia",t:"Southeast Asia"},{i:"fas fa-expand-alt",t:"25–30 cm wingspan"},{i:"fas fa-tree",t:"Forest canopy"}],
+  facts:[{i:"fas fa-globe",l:"Habitat",v:"Tropical & subtropical forests"},{i:"fas fa-clock",l:"Adult lifespan",v:"1–2 weeks"},{i:"fas fa-expand",l:"Wingspan",v:"Up to 30 cm"},{i:"fas fa-thermometer",l:"Climate",v:"Warm & humid"}]},
+  {id:3,name:"Water Bear",scientific:"Tardigrada",category:"Microorganisms",status:"Least Concern",statusClass:"status-least-concern",region:"Worldwide",
+  description:"Microscopic extremophiles capable of surviving in space, extreme temperatures, and high radiation. They can enter cryptobiosis and survive almost any environmental condition — even the vacuum of outer space.",
+  image:"https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=800&q=80",alt:"Tardigrade microscopic organism",
+  features:[{i:"fas fa-microscope",t:"Microscopic"},{i:"fas fa-snowflake",t:"Extremophile"},{i:"fas fa-globe",t:"Worldwide"}],
+  facts:[{i:"fas fa-globe",l:"Habitat",v:"Every ecosystem on Earth"},{i:"fas fa-ruler",l:"Size",v:"0.1–1.5 mm"},{i:"fas fa-fire",l:"Survival temp",v:"−200°C to +150°C"},{i:"fas fa-rocket",l:"Notable",v:"Survived in outer space"}]},
+  {id:4,name:"Corpse Flower",scientific:"Amorphophallus titanum",category:"Plants",status:"Vulnerable",statusClass:"status-vulnerable",region:"Asia",
+  description:"The world's largest unbranched inflorescence, known for its foul odor resembling rotting flesh to attract pollinators. It may take 7–10 years before its first bloom, which lasts only 24–48 hours.",
+  image:"https://images.unsplash.com/photo-1558092885-6a4c08b78a34?auto=format&fit=crop&w=800&q=80",alt:"Corpse Flower large bloom",
+  features:[{i:"fas fa-globe-asia",t:"Sumatra"},{i:"fas fa-ruler-vertical",t:"Up to 3 meters"},{i:"fas fa-seedling",t:"Rare bloomer"}],
+  facts:[{i:"fas fa-globe",l:"Habitat",v:"Rainforest understory"},{i:"fas fa-clock",l:"Bloom frequency",v:"Every 7–10 years"},{i:"fas fa-ruler-vertical",l:"Max height",v:"3+ meters"},{i:"fas fa-thermometer-half",l:"Heat during bloom",v:"Up to 36°C"}]},
+  {id:5,name:"Blue Dragon",scientific:"Glaucus atlanticus",category:"Marine Life",status:"Least Concern",statusClass:"status-least-concern",region:"Worldwide",
+  description:"A small sea slug that floats upside down on the ocean surface, feeding on venomous siphonophores and storing their stinging cells for its own defense. Its blue coloration provides camouflage both above and below.",
+  image:"https://images.unsplash.com/photo-1543946602-59c20a6b0c86?auto=format&fit=crop&w=800&q=80",alt:"Blue Glaucus sea slug",
+  features:[{i:"fas fa-water",t:"Ocean surface"},{i:"fas fa-ruler-horizontal",t:"3–4 cm"},{i:"fas fa-bolt",t:"Venomous"}],
+  facts:[{i:"fas fa-globe",l:"Habitat",v:"Open ocean (pelagic zone)"},{i:"fas fa-ruler",l:"Size",v:"3–4 cm"},{i:"fas fa-skull-crossbones",l:"Defense",v:"Stores prey's venom cells"},{i:"fas fa-compass",l:"Distribution",v:"Atlantic, Pacific, Indian Oceans"}]},
+  {id:6,name:"Venus Flytrap",scientific:"Dionaea muscipula",category:"Plants",status:"Vulnerable",statusClass:"status-vulnerable",region:"Americas",
+  description:"A carnivorous plant native to subtropical wetlands of North Carolina that captures insects using modified leaves. The trap snaps shut in under 0.1 seconds when trigger hairs are stimulated twice within 20 seconds.",
+  image:"https://images.unsplash.com/photo-1519266394140-58e8c4b8b4e2?auto=format&fit=crop&w=800&q=80",alt:"Venus Flytrap with open trap",
+  features:[{i:"fas fa-globe-americas",t:"North Carolina"},{i:"fas fa-bug",t:"Carnivorous"},{i:"fas fa-leaf",t:"Wetlands"}],
+  facts:[{i:"fas fa-globe",l:"Habitat",v:"Subtropical wetlands"},{i:"fas fa-clock",l:"Trap speed",v:"< 0.1 seconds"},{i:"fas fa-leaf",l:"Diet",v:"Insects & arachnids"},{i:"fas fa-water",l:"Needs",v:"Distilled water only"}]}
+];
+
+const STATUS_ORDER={"Critically Endangered":0,"Endangered":1,"Vulnerable":2,"Least Concern":3};
+const PER_PAGE=6;
+let filtered=[...SPECIES],currentPage=1,activeFilter='all',currentSpecies=null;
+
+// NAV
+const hamburger=document.getElementById('hamburger'),overlay=document.getElementById('mobileMenuOverlay'),closeBtn=document.getElementById('closeMenu'),menuBtn=document.getElementById('mobileMenuBtn');
+const openMenu=()=>{overlay.classList.add('active');hamburger.classList.add('active');document.body.style.overflow='hidden'};
+const closeMenu=()=>{overlay.classList.remove('active');hamburger.classList.remove('active');document.body.style.overflow=''};
+hamburger.addEventListener('click',e=>{e.stopPropagation();overlay.classList.contains('active')?closeMenu():openMenu()});
+closeBtn.addEventListener('click',closeMenu);
+menuBtn.addEventListener('click',e=>{e.preventDefault();openMenu()});
+overlay.addEventListener('click',e=>{if(e.target===overlay)closeMenu()});
+document.querySelectorAll('.mobile-nav-item').forEach(i=>i.addEventListener('click',()=>setTimeout(closeMenu,300)));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeMenu();closeModal()}});
+document.querySelectorAll('.mobile-nav-icon').forEach(ic=>ic.addEventListener('click',()=>{if(ic.id==='mobileMenuBtn')return;document.querySelectorAll('.mobile-nav-icon').forEach(i=>i.classList.remove('active'));ic.classList.add('active')}));
+document.querySelector('.skip-to-content').addEventListener('click',e=>{e.preventDefault();document.getElementById('main-content').focus()});
+
+// TOAST
+function toast(title,msg,color){
+  color=color||'#2e7d4f';
+  const t=document.createElement('div');t.className='toast';t.style.background=color;
+  t.innerHTML=`<i class="fas fa-check-circle"></i><div><div class="toast-title">${title}</div><div class="toast-msg">${msg}</div></div>`;
+  document.body.appendChild(t);
+  setTimeout(()=>{t.style.animation='toastOut .3s ease';setTimeout(()=>t.remove(),300)},4000);
+}
+
+// RENDER
+function render(){
+  const grid=document.getElementById('speciesGrid'),noRes=document.getElementById('noResults');
+  grid.innerHTML='';
+  if(!filtered.length){noRes.style.display='block';document.getElementById('resultsCount').textContent='No species found';renderPagination(0);return}
+  noRes.style.display='none';
+  const start=(currentPage-1)*PER_PAGE,page=filtered.slice(start,start+PER_PAGE);
+  document.getElementById('resultsCount').textContent=`Showing ${start+page.length} of ${filtered.length} species`;
+  page.forEach((sp,i)=>{
+    const card=document.createElement('article');
+    card.className='species-card';card.tabIndex=0;
+    card.style.animationDelay=`${i*0.08}s`;
+    card.innerHTML=`<div class="species-image"><img src="${sp.image}" alt="${sp.alt}" loading="lazy"></div>
+    <div class="species-content">
+      <div class="species-meta"><span class="species-category">${sp.category}</span><span class="species-status ${sp.statusClass}">${sp.status}</span></div>
+      <h3 class="species-name">${sp.name}</h3>
+      <p class="species-scientific">${sp.scientific}</p>
+      <p class="species-description">${sp.description.substring(0,120)}...</p>
+      <div class="species-features">${sp.features.map(f=>`<div class="feature"><i class="${f.i}" aria-hidden="true"></i><span>${f.t}</span></div>`).join('')}</div>
+      <button class="species-btn" aria-label="View details for ${sp.name}">View Details <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+    </div>`;
+    card.querySelector('.species-btn').addEventListener('click',e=>{e.stopPropagation();openModal(sp)});
+    card.addEventListener('click',()=>openModal(sp));
+    card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openModal(sp)}});
+    grid.appendChild(card);
+  });
+  renderPagination(filtered.length);
+}
+
+function renderPagination(total){
+  const c=document.getElementById('pagination');c.innerHTML='';
+  const pages=Math.ceil(total/PER_PAGE);if(pages<=1)return;
+  for(let i=1;i<=pages;i++){
+    const b=document.createElement('button');b.className='pagination-btn'+(i===currentPage?' active':'');b.textContent=i;
+    b.setAttribute('aria-label',`Page ${i}`);if(i===currentPage)b.setAttribute('aria-current','page');
+    b.addEventListener('click',()=>{currentPage=i;render();window.scrollTo({top:document.querySelector('.species-grid-section').offsetTop-80,behavior:'smooth'})});
+    c.appendChild(b);
+  }
+  if(currentPage<pages){const n=document.createElement('button');n.className='pagination-btn';n.setAttribute('aria-label','Next page');n.innerHTML='<i class="fas fa-chevron-right"></i>';n.addEventListener('click',()=>{currentPage++;render();window.scrollTo({top:document.querySelector('.species-grid-section').offsetTop-80,behavior:'smooth'})});c.appendChild(n)}
+}
+
+function applyFilters(){
+  let data=[...SPECIES];
+  const q=document.getElementById('searchInput').value.toLowerCase().trim();
+  const cat=document.getElementById('categoryFilter').value;
+  const reg=document.getElementById('regionFilter').value;
+  const stat=document.getElementById('statusFilter').value;
+  const sort=document.getElementById('sortFilter').value;
+  if(q)data=data.filter(s=>s.name.toLowerCase().includes(q)||s.scientific.toLowerCase().includes(q)||s.description.toLowerCase().includes(q));
+  if(cat!=='all')data=data.filter(s=>s.category===cat);
+  if(reg!=='all')data=data.filter(s=>s.region===reg||s.region.includes(reg));
+  if(stat!=='all')data=data.filter(s=>s.status===stat);
+  if(activeFilter!=='all')data=data.filter(s=>s.category===activeFilter);
+  if(sort==='name-asc')data.sort((a,b)=>a.name.localeCompare(b.name));
+  else if(sort==='name-desc')data.sort((a,b)=>b.name.localeCompare(a.name));
+  else if(sort==='endangered')data.sort((a,b)=>(STATUS_ORDER[a.status]??9)-(STATUS_ORDER[b.status]??9));
+  filtered=data;currentPage=1;render();
+}
+
+// Quick filters
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');activeFilter=btn.dataset.filter;
+    document.getElementById('categoryFilter').value=activeFilter==='all'?'all':activeFilter;
+    applyFilters();
+  });
+});
+['categoryFilter','regionFilter','statusFilter','sortFilter'].forEach(id=>document.getElementById(id).addEventListener('change',applyFilters));
+
+// Search
+const sb=document.getElementById('searchButton'),si=document.getElementById('searchInput');
+function doSearch(){sb.innerHTML='<i class="fas fa-spinner fa-spin"></i> Searching';sb.disabled=true;setTimeout(()=>{applyFilters();sb.innerHTML='<i class="fas fa-search"></i> Search';sb.disabled=false},600)}
+sb.addEventListener('click',doSearch);
+si.addEventListener('keydown',e=>{if(e.key==='Enter')doSearch()});
+si.addEventListener('input',()=>{if(!si.value)applyFilters()});
+
+// Modal
+function openModal(sp){
+  currentSpecies=sp;
+  document.getElementById('modalImg').src=sp.image;document.getElementById('modalImg').alt=sp.alt;
+  document.getElementById('modalSpeciesName').textContent=sp.name;
+  document.getElementById('modalScientific').textContent=sp.scientific;
+  document.getElementById('modalDesc').textContent=sp.description;
+  document.getElementById('modalMeta').innerHTML=`<span class="species-category">${sp.category}</span><span class="species-status ${sp.statusClass}">${sp.status}</span>`;
+  document.getElementById('modalFacts').innerHTML=sp.facts.map(f=>`<div class="modal-fact"><i class="${f.i}" aria-hidden="true"></i><strong>${f.l}:</strong>&nbsp;${f.v}</div>`).join('');
+  document.getElementById('speciesModal').classList.add('active');document.body.style.overflow='hidden';
+}
+function closeModal(){document.getElementById('speciesModal').classList.remove('active');document.body.style.overflow='';currentSpecies=null;}
+document.getElementById('modalClose').addEventListener('click',closeModal);
+document.getElementById('speciesModal').addEventListener('click',e=>{if(e.target===document.getElementById('speciesModal'))closeModal()});
+document.getElementById('modalAddCart').addEventListener('click',()=>{if(currentSpecies)toast('Added to Cart!',`<strong>${currentSpecies.name}</strong> has been added to your cart.`);closeModal()});
+document.getElementById('modalWishlist').addEventListener('click',()=>{if(currentSpecies)toast('Saved to Wishlist!',`<strong>${currentSpecies.name}</strong> has been saved to your wishlist.`,'#1f3d2b');closeModal()});
+
+// Featured collections
+document.querySelectorAll('.featured-card').forEach(card=>{
+  card.addEventListener('click',()=>{
+    const col=card.dataset.collection;activeFilter=col;
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active',b.dataset.filter===col));
+    document.getElementById('categoryFilter').value=col;
+    applyFilters();
+    window.scrollTo({top:document.querySelector('.species-grid-section').offsetTop-80,behavior:'smooth'});
+  });
+});
+
+render();
+</script>
+<script src="auth-nav.js"></script>
+</body>
+</html>

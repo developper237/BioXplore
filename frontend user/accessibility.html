@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accessibility | BioXplore</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{--green:#1f3d2b;--green-mid:#2e7d4f;--green-light:#7edc88;--neutral:#f4f4f2;--dark:#0f1f17}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Inter",sans-serif;background:var(--neutral);color:#222;line-height:1.7;padding-bottom:70px}
+.header-main{background:#f3faf6;padding:1.4rem 3rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:998;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.header-left{display:flex;align-items:center;gap:.8rem;text-decoration:none}
+.header-left img{width:44px}
+.header-left span{font-family:"Playfair Display",serif;font-size:1.9rem;color:var(--green);font-weight:600}
+.header-nav{display:flex;align-items:center;gap:2rem}
+.header-nav a{text-decoration:none;color:#2d3a3f;font-size:.95rem;font-weight:500;transition:color .2s}
+.header-nav a:hover{color:var(--green-mid)}
+.marketplace-btn{background:#2e6f43;color:#fff!important;padding:.75rem 1.6rem;border-radius:12px;font-weight:600}
+
+/* HERO */
+.policy-hero{background:linear-gradient(135deg,#0f1f17 0%,#1a3d2b 55%,#2e7d4f 100%);padding:5rem 2rem 4rem;text-align:center;color:white;position:relative;overflow:hidden}
+.policy-hero::before{content:'';position:absolute;inset:0;opacity:.04;background-image:radial-gradient(circle,#fff 1px,transparent 1px);background-size:28px 28px}
+.policy-hero-badge{display:inline-block;background:rgba(111,191,115,.15);border:1px solid rgba(111,191,115,.35);color:#7edc88;padding:.4rem 1.2rem;border-radius:50px;font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.5rem}
+.policy-hero h1{font-family:"Playfair Display",serif;font-size:3rem;margin-bottom:1rem}
+.policy-hero p{font-size:1.05rem;color:#b8d4c0;max-width:580px;margin:0 auto 1.2rem}
+.policy-hero .last-updated{font-size:.82rem;color:rgba(126,220,136,.7)}
+
+/* WCAG SCORE BANNER */
+.wcag-banner{background:white;border-radius:18px;padding:2rem 2.5rem;margin:0 0 3rem;box-shadow:0 4px 20px rgba(0,0,0,.07);display:flex;align-items:center;gap:2rem;flex-wrap:wrap}
+.wcag-score{text-align:center;flex-shrink:0}
+.wcag-badge{width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,#2e7d4f,#5fbf6a);display:flex;flex-direction:column;align-items:center;justify-content:center;color:white;margin:0 auto .5rem}
+.wcag-badge .level{font-size:1.6rem;font-weight:700;line-height:1}
+.wcag-badge .sub{font-size:.65rem;font-weight:600;opacity:.9;letter-spacing:.05em}
+.wcag-score p{font-size:.78rem;color:#666;font-weight:600}
+.wcag-desc h3{font-family:"Playfair Display",serif;color:var(--green);font-size:1.2rem;margin-bottom:.5rem}
+.wcag-desc p{font-size:.9rem;color:#555;margin:0}
+
+/* FEATURE GRID */
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin:2rem 0}
+.feature-card{background:white;border-radius:14px;padding:1.6rem;box-shadow:0 2px 12px rgba(0,0,0,.06);display:flex;gap:1rem;align-items:flex-start}
+.feature-icon{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,#2e7d4f,#5fbf6a);display:flex;align-items:center;justify-content:center;color:white;font-size:1.1rem;flex-shrink:0}
+.feature-body h4{font-weight:700;color:var(--green);font-size:.92rem;margin-bottom:.3rem}
+.feature-body p{font-size:.83rem;color:#666;line-height:1.5;margin:0}
+
+/* KEYBOARD SHORTCUT TABLE */
+.kbd-table{width:100%;border-collapse:collapse;background:white;border-radius:14px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06);margin:1.5rem 0}
+.kbd-table th{background:var(--green);color:white;padding:.9rem 1.2rem;text-align:left;font-size:.83rem;font-weight:600}
+.kbd-table td{padding:.8rem 1.2rem;border-bottom:1px solid #f0f0f0;font-size:.88rem;color:#444}
+.kbd-table tr:last-child td{border-bottom:none}
+.kbd-table tr:hover td{background:#f8fcf9}
+kbd{background:#f0f0f0;border:1px solid #ccc;border-radius:5px;padding:.15rem .45rem;font-family:monospace;font-size:.82rem;color:#333;box-shadow:0 1px 2px rgba(0,0,0,.15)}
+
+/* CONFORMANCE TABLE */
+.conform-table{width:100%;border-collapse:collapse;background:white;border-radius:14px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06);margin:1.5rem 0}
+.conform-table th{background:var(--green);color:white;padding:.9rem 1.2rem;text-align:left;font-size:.83rem;font-weight:600}
+.conform-table td{padding:.8rem 1.2rem;border-bottom:1px solid #f0f0f0;font-size:.88rem;color:#444;vertical-align:top}
+.conform-table tr:last-child td{border-bottom:none}
+.status-pass{color:#2e7d4f;font-weight:700}
+.status-partial{color:#e6a817;font-weight:700}
+.status-progress{color:#3b82f6;font-weight:700}
+
+/* FONT SIZE CONTROL */
+.font-controls{display:flex;align-items:center;gap:.8rem;background:white;border-radius:12px;padding:1rem 1.4rem;margin:1.5rem 0;box-shadow:0 2px 12px rgba(0,0,0,.06);flex-wrap:wrap}
+.font-controls span{font-size:.9rem;color:#555;font-weight:500;margin-right:.5rem}
+.font-btn{width:38px;height:38px;border:2px solid #e0e0e0;border-radius:8px;background:white;cursor:pointer;font-weight:700;color:var(--green);font-size:1rem;transition:all .2s;display:flex;align-items:center;justify-content:center}
+.font-btn:hover{border-color:var(--green-mid);background:#f0f9f2}
+.font-btn.active{border-color:var(--green-mid);background:var(--green-mid);color:white}
+
+.policy-content{max-width:820px;margin:0 auto;padding:4rem 2rem}
+.policy-toc{background:white;border-radius:16px;padding:1.8rem 2rem;margin-bottom:3rem;box-shadow:0 2px 16px rgba(0,0,0,.05);border-left:4px solid var(--green-mid)}
+.policy-toc h4{font-family:"Playfair Display",serif;color:var(--green);margin-bottom:1rem;font-size:1.1rem}
+.policy-toc ol{padding-left:1.2rem}
+.policy-toc li{margin-bottom:.4rem}
+.policy-toc a{color:var(--green-mid);text-decoration:none;font-size:.9rem;font-weight:500}
+.policy-toc a:hover{text-decoration:underline}
+.policy-section{margin-bottom:3rem;scroll-margin-top:100px}
+.policy-section h2{font-family:"Playfair Display",serif;font-size:1.6rem;color:var(--green);margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:2px solid #e8f5ee;display:flex;align-items:center;gap:.7rem}
+.policy-section h2 i{font-size:1.1rem;color:var(--green-mid)}
+.policy-section p{color:#444;margin-bottom:1rem;font-size:.97rem}
+.policy-section ul{padding-left:1.5rem;margin-bottom:1rem}
+.policy-section li{color:#444;margin-bottom:.5rem;font-size:.97rem}
+.info-box{background:#f0f9f2;border:1px solid #c8e8d4;border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0;display:flex;gap:1rem;align-items:flex-start}
+.info-box i{color:var(--green-mid);font-size:1.1rem;margin-top:.15rem;flex-shrink:0}
+.info-box p{margin:0;font-size:.92rem;color:#2d4a38}
+.contact-card{background:linear-gradient(135deg,var(--dark),#1a3d2b);color:white;border-radius:18px;padding:2.5rem;text-align:center;margin-top:3rem}
+.contact-card h3{font-family:"Playfair Display",serif;font-size:1.5rem;margin-bottom:.8rem}
+.contact-card p{color:#b8d4c0;margin-bottom:1.5rem;font-size:.95rem}
+.contact-card a{display:inline-block;background:var(--green-mid);color:white;padding:.8rem 2rem;border-radius:10px;text-decoration:none;font-weight:600;transition:background .2s;margin:.3rem}
+.contact-card a:hover{background:#256b41}
+.contact-card a.outline{background:transparent;border:2px solid rgba(255,255,255,.3)}
+.contact-card a.outline:hover{background:rgba(255,255,255,.1)}
+
+/* FOOTER */
+.footer-exact{background:var(--dark);color:#fff;padding:3.5rem 2rem 2rem}
+.footer-container{max-width:1200px;margin:0 auto}
+.footer-brand{text-align:center;margin-bottom:2.5rem}
+.footer-brand h2{font-family:"Playfair Display",serif;font-size:2rem;margin-bottom:.8rem}
+.footer-tagline{font-size:1rem;color:#ccc;max-width:700px;margin:0 auto 1.5rem}
+.footer-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:2rem;margin-bottom:2.5rem}
+.footer-column h3{font-family:"Playfair Display",serif;font-size:1.1rem;margin-bottom:1rem}
+.footer-column ul{list-style:none}
+.footer-column ul li{margin-bottom:.5rem;color:#888;font-size:.88rem}
+.footer-column a{color:#b0b0b0;text-decoration:none;font-size:.88rem;transition:color .3s}
+.footer-column a:hover{color:#fff}
+.footer-bottom{text-align:center;padding-top:2rem;border-top:1px solid #2a4a3a}
+.copyright{color:#666;margin-bottom:1rem;font-size:.82rem}
+.policy-links{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap}
+.policy-links a{color:#b0b0b0;text-decoration:none;font-size:.85rem;transition:color .3s}
+.policy-links a:hover{color:#fff}
+.mobile-bottom-nav{display:none}
+
+/* Skip link */
+.skip-link{position:absolute;top:-100px;left:1rem;background:var(--green-mid);color:white;padding:.6rem 1rem;border-radius:0 0 8px 8px;font-weight:600;text-decoration:none;transition:top .2s;z-index:9999}
+.skip-link:focus{top:0}
+
+@media(max-width:768px){
+  .header-main{padding:1rem 1.5rem}.header-nav{display:none}
+  .policy-hero h1{font-size:2rem}.policy-content{padding:2.5rem 1.2rem}
+  .wcag-banner{flex-direction:column;text-align:center}
+  .feature-grid{grid-template-columns:1fr}
+  .mobile-bottom-nav{display:flex;position:fixed;bottom:0;left:0;width:100%;background:var(--green);justify-content:space-around;padding:.8rem 0;z-index:997;border-top:1px solid rgba(255,255,255,.1)}
+  .mobile-nav-icon{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:#ccc;font-size:.75rem;flex:1;padding:.4rem}
+  .mobile-nav-icon i{font-size:1.1rem;margin-bottom:.2rem}
+  .mobile-nav-icon:hover{color:#7edc88}
+}
+</style>
+</head>
+<body>
+
+<!-- Skip navigation for screen readers -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header class="header-main">
+  <a href="home.html" class="header-left">
+    <img src="https://cdn-icons-png.flaticon.com/512/3069/3069172.png" alt="BioXplore Logo">
+    <span>BioXplore</span>
+  </a>
+  <nav class="header-nav" aria-label="Main navigation">
+    <a href="home.html">Home</a>
+    <a href="bioeducation.html">Bio Education</a>
+    <a href="species.html">Species Library</a>
+    <a href="ethics.html">Conservation & Ethics</a>
+    <a href="marketplace.html" class="marketplace-btn">Marketplace</a>
+  </nav>
+</header>
+
+<section class="policy-hero">
+  <div class="policy-hero-badge"><i class="fas fa-universal-access"></i> &nbsp;Accessibility</div>
+  <h1>Accessibility Statement</h1>
+  <p>BioXplore is committed to making our platform accessible and usable by everyone, regardless of ability or technology.</p>
+  <div class="last-updated">Last updated: February 2025</div>
+</section>
+
+<main id="main-content">
+<div class="policy-content">
+
+  <!-- WCAG Banner -->
+  <div class="wcag-banner">
+    <div class="wcag-score">
+      <div class="wcag-badge">
+        <span class="level">AA</span>
+        <span class="sub">WCAG 2.1</span>
+      </div>
+      <p>Target Level</p>
+    </div>
+    <div class="wcag-desc">
+      <h3>Our Accessibility Commitment</h3>
+      <p>We aim to conform to the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA. These guidelines explain how to make web content more accessible to people with disabilities. We regularly audit our platform and actively work to address any gaps we identify.</p>
+    </div>
+  </div>
+
+  <div class="policy-toc">
+    <h4><i class="fas fa-list" style="margin-right:.5rem;color:var(--green-mid)"></i>Table of Contents</h4>
+    <ol>
+      <li><a href="#a1">Accessibility Features</a></li>
+      <li><a href="#a2">Keyboard Navigation</a></li>
+      <li><a href="#a3">Text Size Controls</a></li>
+      <li><a href="#a4">Screen Reader Support</a></li>
+      <li><a href="#a5">Conformance Status</a></li>
+      <li><a href="#a6">Known Limitations</a></li>
+      <li><a href="#a7">Assistive Technology Compatibility</a></li>
+      <li><a href="#a8">Feedback & Contact</a></li>
+    </ol>
+  </div>
+
+  <!-- Section 1 -->
+  <div class="policy-section" id="a1">
+    <h2><i class="fas fa-star"></i> 1. Accessibility Features</h2>
+    <p>BioXplore includes the following built-in accessibility features:</p>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-keyboard"></i></div>
+        <div class="feature-body">
+          <h4>Full Keyboard Navigation</h4>
+          <p>Every interactive element can be reached and activated using only a keyboard.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-eye"></i></div>
+        <div class="feature-body">
+          <h4>High Contrast Colours</h4>
+          <p>Text and UI elements meet WCAG AA contrast ratio requirements (4.5:1 minimum).</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-image"></i></div>
+        <div class="feature-body">
+          <h4>Alternative Text</h4>
+          <p>All meaningful images include descriptive alt text for screen reader users.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-text-height"></i></div>
+        <div class="feature-body">
+          <h4>Resizable Text</h4>
+          <p>Text can be resized up to 200% without loss of content or functionality.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-hand-pointer"></i></div>
+        <div class="feature-body">
+          <h4>Large Click Targets</h4>
+          <p>Buttons and links meet the minimum 44×44 px touch target size recommendation.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-language"></i></div>
+        <div class="feature-body">
+          <h4>Semantic HTML</h4>
+          <p>Pages use proper heading hierarchy, landmark regions, and ARIA labels.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-forward"></i></div>
+        <div class="feature-body">
+          <h4>Skip Navigation</h4>
+          <p>A "Skip to main content" link is available at the top of every page.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-film"></i></div>
+        <div class="feature-body">
+          <h4>No Seizure Triggers</h4>
+          <p>We avoid flashing content and rapid animations that could trigger photosensitive seizures.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="policy-section" id="a2">
+    <h2><i class="fas fa-keyboard"></i> 2. Keyboard Navigation</h2>
+    <p>BioXplore can be navigated entirely without a mouse. Here are the standard keyboard shortcuts that work across the site:</p>
+    <table class="kbd-table" aria-label="Keyboard navigation shortcuts">
+      <thead>
+        <tr>
+          <th>Key / Combination</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><kbd>Tab</kbd></td><td>Move focus to the next interactive element</td></tr>
+        <tr><td><kbd>Shift</kbd> + <kbd>Tab</kbd></td><td>Move focus to the previous interactive element</td></tr>
+        <tr><td><kbd>Enter</kbd> or <kbd>Space</kbd></td><td>Activate a focused button or link</td></tr>
+        <tr><td><kbd>Esc</kbd></td><td>Close a modal, dropdown, or overlay</td></tr>
+        <tr><td><kbd>↑</kbd> <kbd>↓</kbd></td><td>Navigate within dropdown menus or lists</td></tr>
+        <tr><td><kbd>Home</kbd> / <kbd>End</kbd></td><td>Jump to start or end of a list</td></tr>
+        <tr><td><kbd>Alt</kbd> + <kbd>←</kbd></td><td>Go back to the previous page (browser)</td></tr>
+      </tbody>
+    </table>
+    <div class="info-box">
+      <i class="fas fa-lightbulb"></i>
+      <p>Focus indicators (the visible outline around a focused element) are intentionally prominent on BioXplore. If you see an outline disappear or become hard to see on any element, please let us know.</p>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="policy-section" id="a3">
+    <h2><i class="fas fa-text-height"></i> 3. Text Size Controls</h2>
+    <p>You can adjust the base text size for this page using the controls below, or use your browser's built-in zoom (usually <kbd>Ctrl</kbd> + <kbd>+</kbd> / <kbd>-</kbd> on Windows, <kbd>⌘</kbd> + <kbd>+</kbd> / <kbd>-</kbd> on Mac).</p>
+
+    <div class="font-controls" role="group" aria-label="Text size controls">
+      <span>Text size:</span>
+      <button class="font-btn" id="fsSmall"  onclick="setFontSize(90)"  aria-label="Small text">A</button>
+      <button class="font-btn active" id="fsMed" onclick="setFontSize(100)" aria-label="Medium text (default)" style="font-size:1.1rem">A</button>
+      <button class="font-btn" id="fsLarge" onclick="setFontSize(115)" aria-label="Large text" style="font-size:1.3rem">A</button>
+      <button class="font-btn" id="fsXL"    onclick="setFontSize(130)" aria-label="Extra-large text" style="font-size:1.5rem">A</button>
+    </div>
+
+    <p>All layout, spacing, and functionality is preserved when text is scaled up to 200%. Content never overflows or gets cut off.</p>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="policy-section" id="a4">
+    <h2><i class="fas fa-assistive-listening-systems"></i> 4. Screen Reader Support</h2>
+    <p>BioXplore is built with screen readers in mind. Our implementation includes:</p>
+    <ul>
+      <li><strong>ARIA landmarks</strong> — <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;footer&gt;</code> for easy region navigation</li>
+      <li><strong>ARIA labels</strong> on icon-only buttons (e.g. close, hamburger menu)</li>
+      <li><strong>Live regions</strong> (<code>aria-live</code>) for toast notifications and dynamic status updates</li>
+      <li><strong>Form labels</strong> explicitly associated with every input field</li>
+      <li><strong>Table headers</strong> properly marked with <code>&lt;th scope&gt;</code> for data tables</li>
+      <li><strong>Link purpose</strong> — link text is descriptive and meaningful out of context</li>
+    </ul>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="policy-section" id="a5">
+    <h2><i class="fas fa-clipboard-check"></i> 5. Conformance Status</h2>
+    <p>BioXplore partially conforms to WCAG 2.1 Level AA. Here is our current status by principle:</p>
+    <table class="conform-table" aria-label="WCAG conformance status">
+      <thead>
+        <tr>
+          <th>WCAG Principle</th>
+          <th>Status</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Perceivable</strong> — Information is presentable to all users</td>
+          <td><span class="status-pass">✓ Pass</span></td>
+          <td>Alt text, captions, colour contrast all meet AA</td>
+        </tr>
+        <tr>
+          <td><strong>Operable</strong> — UI components are keyboard accessible</td>
+          <td><span class="status-pass">✓ Pass</span></td>
+          <td>Full keyboard navigation, no keyboard traps</td>
+        </tr>
+        <tr>
+          <td><strong>Understandable</strong> — Content is readable and predictable</td>
+          <td><span class="status-partial">~ Partial</span></td>
+          <td>Error suggestions on forms in progress</td>
+        </tr>
+        <tr>
+          <td><strong>Robust</strong> — Compatible with assistive technologies</td>
+          <td><span class="status-progress">↗ In Progress</span></td>
+          <td>ARIA implementation ongoing for dynamic content</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="policy-section" id="a6">
+    <h2><i class="fas fa-exclamation-circle"></i> 6. Known Limitations</h2>
+    <p>We are aware of the following areas that need improvement and are actively working on them:</p>
+    <ul>
+      <li><strong>Product image carousels</strong> — some auto-playing elements may not announce state changes to screen readers. Fix planned for Q2 2025.</li>
+      <li><strong>Checkout WhatsApp flow</strong> — the handoff to an external app may break screen reader flow. We are investigating an in-app alternative.</li>
+      <li><strong>PDF content</strong> — our Conservation Policy PDF may not be fully accessible. A structured HTML version is in development.</li>
+      <li><strong>Complex data tables</strong> — on mobile, some table layouts reflow in a way that may lose column context. We are working on responsive table patterns.</li>
+    </ul>
+    <p>If you encounter an issue not listed here, please <a href="mailto:accessibility@bioxplore.com" style="color:var(--green-mid);font-weight:600;">tell us about it</a>.</p>
+  </div>
+
+  <!-- Section 7 -->
+  <div class="policy-section" id="a7">
+    <h2><i class="fas fa-laptop"></i> 7. Assistive Technology Compatibility</h2>
+    <p>BioXplore has been tested with the following combinations of assistive technologies and browsers:</p>
+    <ul>
+      <li><strong>NVDA + Chrome</strong> (Windows) — primary testing environment</li>
+      <li><strong>JAWS + Chrome / Edge</strong> (Windows)</li>
+      <li><strong>VoiceOver + Safari</strong> (macOS and iOS)</li>
+      <li><strong>TalkBack + Chrome</strong> (Android)</li>
+    </ul>
+    <p>We recommend using an up-to-date version of your preferred browser and assistive technology for the best experience.</p>
+    <div class="info-box">
+      <i class="fas fa-info-circle"></i>
+      <p>If BioXplore does not work well with your particular assistive technology setup, please contact us and we will do our best to accommodate your needs or provide content in an alternative format.</p>
+    </div>
+  </div>
+
+  <!-- Section 8 -->
+  <div class="policy-section" id="a8">
+    <h2><i class="fas fa-comments"></i> 8. Feedback & Contact</h2>
+    <p>Accessibility is an ongoing effort, not a one-time checklist. We welcome all feedback. If you experience any barriers, find something that doesn't work as expected, or would like content in an alternative format, please reach out:</p>
+    <ul>
+      <li><strong>Email:</strong> <a href="mailto:accessibility@bioxplore.com" style="color:var(--green-mid);">accessibility@bioxplore.com</a></li>
+      <li><strong>Response time:</strong> We aim to respond within 2 business days</li>
+      <li><strong>Alternative formats:</strong> Content is available in large print or plain text on request</li>
+    </ul>
+    <p>If you are not satisfied with our response, you have the right to escalate your complaint to the relevant national disability authority or digital accessibility body in your country.</p>
+  </div>
+
+  <div class="contact-card">
+    <h3>Found a barrier?</h3>
+    <p>Tell us what's not working and we'll fix it. Your feedback directly improves BioXplore for everyone.</p>
+    <a href="mailto:accessibility@bioxplore.com"><i class="fas fa-envelope" style="margin-right:.5rem"></i>Report an Issue</a>
+    <a href="privacy-policy.html" class="outline"><i class="fas fa-shield-alt" style="margin-right:.5rem"></i>Privacy Policy</a>
+  </div>
+
+</div>
+</main>
+
+<footer class="footer-exact">
+  <div class="footer-container">
+    <div class="footer-brand">
+      <h2>BioXplore</h2>
+      <p class="footer-tagline">Discover, learn, and preserve rare life forms through ethical sourcing and scientific excellence.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="bioeducation.html">Bio Education</a></li>
+          <li><a href="marketplace.html">Marketplace</a></li>
+          <li><a href="species.html">Species Library</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms-of-service.html">Terms of Service</a></li>
+          <li><a href="shipping-policy.html">Shipping Policy</a></li>
+          <li><a href="returns.html">Returns</a></li>
+          <li><a href="cookie-policy.html">Cookie Policy</a></li>
+          <li><a href="accessibility.html">Accessibility</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Contact</h3>
+        <ul>
+          <li>info@bioxplore.com</li>
+          <li>+1 (555) 123-4567</li>
+          <li>123 Biology Lane, Science City</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="copyright">© 2025 BioXplore. All rights reserved.</p>
+      <div class="policy-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="shipping-policy.html">Shipping Policy</a>
+        <a href="returns.html">Returns</a>
+        <a href="cookie-policy.html">Cookie Policy</a>
+        <a href="accessibility.html">Accessibility</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<nav class="mobile-bottom-nav" aria-label="Mobile navigation">
+  <a href="home.html" class="mobile-nav-icon"><i class="fas fa-home" aria-hidden="true"></i><span>Home</span></a>
+  <a href="species.html" class="mobile-nav-icon"><i class="fas fa-leaf" aria-hidden="true"></i><span>Species</span></a>
+  <a href="marketplace.html" class="mobile-nav-icon"><i class="fas fa-store" aria-hidden="true"></i><span>Market</span></a>
+  <a href="bioeducation.html" class="mobile-nav-icon"><i class="fas fa-graduation-cap" aria-hidden="true"></i><span>Learn</span></a>
+</nav>
+
+<script>
+// Font size control
+function setFontSize(pct) {
+  document.body.style.fontSize = pct + '%';
+  ['fsSmall','fsMed','fsLarge','fsXL'].forEach(id => {
+    document.getElementById(id)?.classList.remove('active');
+  });
+  const map = { 90:'fsSmall', 100:'fsMed', 115:'fsLarge', 130:'fsXL' };
+  document.getElementById(map[pct])?.classList.add('active');
+  localStorage.setItem('bx_font_size', pct);
+}
+
+// Restore saved font size on load
+document.addEventListener('DOMContentLoaded', () => {
+  const saved = parseInt(localStorage.getItem('bx_font_size') || '100');
+  if (saved !== 100) setFontSize(saved);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign Up | BioXplore</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root {
+  --green: #1f3d2b;
+  --neutral: #f4f4f2;
+  --accent: #6fbf73;
+  --green-light: #7edc88;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: linear-gradient(135deg, #f3faf6 0%, #e8f4ec 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.signup-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 1100px;
+  width: 100%;
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+}
+
+/* Left Side - Form */
+.signup-form-container {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+.signup-header {
+  margin-bottom: 1.5rem;
+}
+
+.signup-header h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  color: var(--green);
+  margin-bottom: 0.5rem;
+}
+
+.signup-header p {
+  color: #6b7f86;
+}
+
+.social-signup {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0rem;
+}
+
+.social-btn {
+  flex: 1;
+  padding: 0.9rem;
+  border-radius: 10px;
+  border: 2px solid #e0e0e0;
+  background: white;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s;
+}
+
+.social-btn:hover {
+  border-color: var(--green);
+  background: #f3faf6;
+}
+
+.social-btn i {
+  font-size: 1.2rem;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  color: #999;
+  font-size: 0.9rem;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #e0e0e0;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--green);
+  font-size: 0.9rem;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.9rem 1rem 0.9rem 3rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: "Inter", sans-serif;
+  transition: all 0.3s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #2e7d4f;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+.password-strength {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.strength-bar {
+  height: 4px;
+  background: #e0e0e0;
+  border-radius: 2px;
+  margin-top: 0.3rem;
+  overflow: hidden;
+}
+
+.strength-fill {
+  height: 100%;
+  width: 0%;
+  transition: all 0.3s;
+  border-radius: 2px;
+}
+
+.strength-weak   { width: 33%; background: #d32f2f; }
+.strength-medium { width: 66%; background: #f57c00; }
+.strength-strong { width: 100%; background: #2e7d4f; }
+
+.terms-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.terms-checkbox input {
+  margin-top: 0.2rem;
+  cursor: pointer;
+}
+
+.terms-checkbox a {
+  color: #2e7d4f;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.terms-checkbox a:hover {
+  text-decoration: underline;
+}
+
+.signup-btn {
+  width: 100%;
+  padding: 1rem;
+  background: #2e7d4f;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.signup-btn:hover {
+  background: #256b41;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(46, 125, 79, 0.3);
+}
+
+.signup-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #6b7f86;
+}
+
+.login-link a {
+  color: #2e7d4f;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.login-link a:hover {
+  color: #256b41;
+}
+
+.error-message {
+  background: #ffebee;
+  color: #c62828;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.error-message.show {
+  display: flex;
+  animation: shake 0.3s ease;
+}
+
+.success-message {
+  background: #e8f5e9;
+  color: #2e7d4f;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.success-message.show {
+  display: flex;
+}
+
+/* Right Side - Image */
+.signup-image {
+  background: linear-gradient(135deg, rgba(46, 125, 79, 0.95), rgba(95, 191, 106, 0.95)),
+    url("https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80") center/cover;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+}
+
+.logo img {
+  width: 50px;
+  filter: brightness(0) invert(1);
+}
+
+.logo span {
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.welcome-text h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.welcome-text p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  opacity: 0.95;
+}
+
+.benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.95rem;
+}
+
+.benefit-item i {
+  width: 30px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+@media (max-width: 768px) {
+  .signup-container {
+    grid-template-columns: 1fr;
+  }
+  .signup-image {
+    display: none;
+  }
+  .signup-form-container {
+    padding: 2rem;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="signup-container">
+  <!-- Left Side - Form -->
+  <div class="signup-form-container">
+    <div class="signup-header">
+      <h2>Create Account</h2>
+      <p>Join BioXplore to access rare biological specimens</p>
+    </div>
+
+    <!-- Social Signup -->
+    <div class="social-signup">
+      <button class="social-btn" onclick="socialSignup('google')">
+        <i class="fab fa-google"></i>
+        <span>Google</span>
+      </button>
+      <button class="social-btn" onclick="socialSignup('facebook')">
+        <i class="fab fa-facebook-f"></i>
+        <span>Facebook</span>
+      </button>
+    </div>
+
+    <div class="divider">Or sign up with email</div>
+
+    <!-- Error Message -->
+    <div class="error-message" id="errorMessage">
+      <i class="fas fa-exclamation-circle"></i>
+      <span id="errorText">Please fix the errors below</span>
+    </div>
+
+    <!-- Success Message -->
+    <div class="success-message" id="successMessage">
+      <i class="fas fa-check-circle"></i>
+      <span>Account created successfully! Redirecting...</span>
+    </div>
+
+    <!-- Signup Form -->
+    <form id="signupForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <div class="input-wrapper">
+            <i class="fas fa-user input-icon"></i>
+            <input type="text" id="firstName" placeholder="John" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <div class="input-wrapper">
+            <i class="fas fa-user input-icon"></i>
+            <input type="text" id="lastName" placeholder="Doe" required>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <div class="input-wrapper">
+          <i class="fas fa-envelope input-icon"></i>
+          <input type="email" id="email" placeholder="your.email@example.com" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <div class="input-wrapper">
+          <i class="fas fa-phone input-icon"></i>
+          <input type="tel" id="phone" placeholder="+237 690 123 456">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="input-wrapper">
+          <i class="fas fa-lock input-icon"></i>
+          <input 
+            type="password" 
+            id="password" 
+            placeholder="Create a strong password"
+            required
+            oninput="checkPasswordStrength()"
+          >
+          <button type="button" class="password-toggle" onclick="togglePassword('password', 'toggleIcon1')">
+            <i class="fas fa-eye" id="toggleIcon1"></i>
+          </button>
+        </div>
+        <div class="password-strength">
+          <div class="strength-bar">
+            <div class="strength-fill" id="strengthFill"></div>
+          </div>
+          <span id="strengthText" style="font-size: 0.8rem; color: #999;"></span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <div class="input-wrapper">
+          <i class="fas fa-lock input-icon"></i>
+          <input 
+            type="password" 
+            id="confirmPassword" 
+            placeholder="Re-enter your password"
+            required
+          >
+          <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword', 'toggleIcon2')">
+            <i class="fas fa-eye" id="toggleIcon2"></i>
+          </button>
+        </div>
+      </div>
+
+      <label class="terms-checkbox">
+        <input type="checkbox" id="agreeTerms" required>
+        <span>I agree to the <a href="#" onclick="showTerms(event)">Terms of Service</a> and <a href="#" onclick="showPrivacy(event)">Privacy Policy</a></span>
+      </label>
+
+      <button type="button" class="signup-btn" id="signupBtn" onclick="handleSignup()">
+        <span>Create Account</span>
+        <i class="fas fa-arrow-right"></i>
+      </button>
+    </form>
+
+    <div class="login-link">
+      Already have an account? <a href="login.html">Sign In</a>
+    </div>
+  </div>
+
+  <!-- Right Side - Image -->
+  <div class="signup-image">
+    <div>
+      <div class="logo">
+        <img src="https://cdn-icons-png.flaticon.com/512/3069/3069172.png" alt="BioXplore Logo">
+        <span>BioXplore</span>
+      </div>
+      
+      <div class="welcome-text">
+        <h1>Join the BioXplore Community</h1>
+        <p>Get access to ethically sourced rare biological specimens and comprehensive educational resources.</p>
+      </div>
+      
+      <div class="benefits">
+        <div class="benefit-item">
+          <i class="fas fa-check-circle"></i>
+          <span>Exclusive access to 500+ rare species</span>
+        </div>
+        <div class="benefit-item">
+          <i class="fas fa-check-circle"></i>
+          <span>Educational resources & courses</span>
+        </div>
+        <div class="benefit-item">
+          <i class="fas fa-check-circle"></i>
+          <span>100% ethical sourcing guarantee</span>
+        </div>
+        <div class="benefit-item">
+          <i class="fas fa-check-circle"></i>
+          <span>Priority customer support</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const API_URL = 'http://localhost:5000';
+
+  // Toggle Password Visibility
+  function togglePassword(fieldId, iconId) {
+    const input = document.getElementById(fieldId);
+    const icon = document.getElementById(iconId);
+    if (input.type === 'password') {
+      input.type = 'text';
+      icon.classList.replace('fa-eye', 'fa-eye-slash');
+    } else {
+      input.type = 'password';
+      icon.classList.replace('fa-eye-slash', 'fa-eye');
+    }
+  }
+
+  // Check Password Strength
+  function checkPasswordStrength() {
+    const password = document.getElementById('password').value;
+    const strengthFill = document.getElementById('strengthFill');
+    const strengthText = document.getElementById('strengthText');
+
+    let strength = 0;
+    if (password.length >= 8) strength++;
+    if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
+    if (password.match(/[0-9]/)) strength++;
+    if (password.match(/[^a-zA-Z0-9]/)) strength++;
+
+    strengthFill.className = 'strength-fill';
+
+    if (password.length === 0) {
+      strengthText.textContent = '';
+    } else if (strength <= 1) {
+      strengthFill.classList.add('strength-weak');
+      strengthText.textContent = 'Weak password';
+      strengthText.style.color = '#d32f2f';
+    } else if (strength <= 3) {
+      strengthFill.classList.add('strength-medium');
+      strengthText.textContent = 'Medium strength';
+      strengthText.style.color = '#f57c00';
+    } else {
+      strengthFill.classList.add('strength-strong');
+      strengthText.textContent = 'Strong password';
+      strengthText.style.color = '#2e7d4f';
+    }
+  }
+
+  // Show Error
+  function showError(message) {
+    const errorDiv = document.getElementById('errorMessage');
+    const errorText = document.getElementById('errorText');
+    const successDiv = document.getElementById('successMessage');
+
+    successDiv.classList.remove('show');
+    errorText.textContent = message;
+    errorDiv.classList.add('show');
+
+    setTimeout(() => errorDiv.classList.remove('show'), 5000);
+  }
+
+  // Show Success
+  function showSuccess() {
+    const errorDiv = document.getElementById('errorMessage');
+    const successDiv = document.getElementById('successMessage');
+    errorDiv.classList.remove('show');
+    successDiv.classList.add('show');
+  }
+
+  // Handle Signup — connecté au vrai backend
+  async function handleSignup() {
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName = document.getElementById('lastName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    const agreeTerms = document.getElementById('agreeTerms').checked;
+    const signupBtn = document.getElementById('signupBtn');
+
+    // Validations frontend
+    if (!firstName || !lastName) {
+      showError('Please enter your first and last name.');
+      return;
+    }
+
+    if (!email) {
+      showError('Please enter a valid email address.');
+      return;
+    }
+
+    if (password.length < 8) {
+      showError('Password must be at least 8 characters long.');
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      showError('Passwords do not match!');
+      return;
+    }
+
+    if (!agreeTerms) {
+      showError('Please agree to the Terms of Service and Privacy Policy.');
+      return;
+    }
+
+    // Désactiver le bouton
+    signupBtn.disabled = true;
+    signupBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating account...';
+
+    try {
+      const response = await fetch(`${API_URL}/api/auth/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ firstName, lastName, email, phone, password })
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Stocker les tokens JWT
+        localStorage.setItem('accessToken', data.data.accessToken);
+        localStorage.setItem('refreshToken', data.data.refreshToken);
+        localStorage.setItem('user', JSON.stringify(data.data.user));
+
+        showSuccess();
+
+        setTimeout(() => {
+          window.location.href = 'profile.html';
+        }, 1500);
+
+      } else {
+        showError(data.message || 'Registration failed. Please try again.');
+        signupBtn.disabled = false;
+        signupBtn.innerHTML = '<span>Create Account</span><i class="fas fa-arrow-right"></i>';
+      }
+
+    } catch (error) {
+      showError('Cannot connect to server. Make sure the backend is running on port 5000.');
+      signupBtn.disabled = false;
+      signupBtn.innerHTML = '<span>Create Account</span><i class="fas fa-arrow-right"></i>';
+    }
+  }
+
+  // Social Signup
+  function socialSignup(provider) {
+    alert('Social signup with ' + provider + ' coming soon!');
+  }
+
+  // Show Terms
+  function showTerms(event) {
+    event.preventDefault();
+    alert('Terms of Service:\n\n1. You must be 18 or older\n2. Ethical use of specimens required\n3. Comply with all local regulations\n4. No resale of endangered species');
+  }
+
+  // Show Privacy
+  function showPrivacy(event) {
+    event.preventDefault();
+    alert('Privacy Policy:\n\nWe protect your data and never share it with third parties without your consent.');
+  }
+
+  // Si déjà connecté, rediriger
+  window.addEventListener('DOMContentLoaded', () => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) {
+      window.location.href = 'profile.html';
+    }
+  });
+</script>
+
+</body>
+</html>

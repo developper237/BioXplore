@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conservation & Ethics | BioXplore</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root {
+  --green: #1f3d2b;
+  --neutral: #f4f4f2;
+  --accent: #6fbf73;
+  --green-light: #7edc88;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: var(--neutral);
+  color: #222;
+  line-height: 1.6;
+  padding-bottom: 70px;
+}
+
+/* =================== HEADER =================== */
+.header-main {
+  background: #f3faf6;
+  padding: 1.4rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 998;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.header-left img {
+  width: 44px;
+}
+
+.header-left span {
+  font-family: "Playfair Display", serif;
+  font-size: 1.9rem;
+  color: var(--green);
+  font-weight: 600;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  z-index: 1002;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+}
+
+.hamburger span {
+  width: 26px;
+  height: 3px;
+  background: var(--green);
+  border-radius: 3px;
+  transition: 0.3s;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(7px, 7px);
+  background: white;
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+  background: white;
+}
+
+/* =================== MENU OVERLAY =================== */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 31, 23, 0.98);
+  z-index: 1001;
+  display: none;
+  backdrop-filter: blur(5px);
+}
+
+.mobile-menu-overlay.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+.mobile-nav-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 1rem;
+  flex-shrink: 0;
+}
+
+.mobile-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.mobile-logo img {
+  width: 36px;
+  filter: brightness(0) invert(1);
+}
+
+.mobile-logo span {
+  font-family: "Playfair Display", serif;
+  font-size: 1.6rem;
+  color: white;
+}
+
+.close-menu {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.mobile-nav-menu {
+  flex: 0 1 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 0;
+  gap: 0.5rem;
+}
+
+.mobile-nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 0;
+  text-decoration: none;
+  color: white;
+  font-size: 1.2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.mobile-nav-item:hover {
+  color: var(--green-light);
+  padding-left: 1rem;
+}
+
+.mobile-nav-item.active {
+  color: var(--green-light);
+  font-weight: 600;
+}
+
+.mobile-user-section {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+.mobile-user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+}
+
+.mobile-user-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2e7d4f, #5fbf6a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.3rem;
+}
+
+.mobile-user-details h4 {
+  color: white;
+  font-size: 1.1rem;
+}
+
+.mobile-user-details p {
+  color: #cccccc;
+  font-size: 0.9rem;
+}
+
+.mobile-auth-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.mobile-auth-btn {
+  flex: 1;
+  padding: 0.9rem;
+  text-align: center;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.mobile-btn-login {
+  background: transparent;
+  color: white;
+  border: 2px solid #4a9e5f;
+}
+
+.mobile-btn-signup {
+  background: #4a9e5f;
+  color: white;
+  border: 2px solid #4a9e5f;
+}
+
+/* =================== BOTTOM NAV =================== */
+.mobile-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: var(--green);
+  display: flex;
+  justify-content: space-around;
+  padding: 0.8rem 0;
+  z-index: 997;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-nav-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #cccccc;
+  font-size: 0.8rem;
+  transition: color 0.3s ease;
+  flex: 1;
+  padding: 0.5rem;
+}
+
+.mobile-nav-icon i {
+  font-size: 1.2rem;
+  margin-bottom: 0.3rem;
+}
+
+.mobile-nav-icon:hover,
+.mobile-nav-icon.active {
+  color: var(--green-light);
+}
+
+/* =================== HERO =================== */
+.ethics-hero {
+  position: relative;
+  min-height: 70vh;
+  background: linear-gradient(rgba(15, 31, 23, 0.88), rgba(15, 31, 23, 0.82)),
+    url("https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80") center/cover no-repeat;
+  padding: 6rem 2rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.badge {
+  display: inline-block;
+  background: #5fbf6a;
+  color: #0e2b1e;
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.ethics-hero h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 3.2rem;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.ethics-hero h1 span {
+  color: var(--green-light);
+}
+
+.ethics-hero p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* =================== PRINCIPLES SECTION =================== */
+.principles-section {
+  padding: 5rem 2rem;
+  background: white;
+}
+
+.principles-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-header h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.6rem;
+  margin-bottom: 1rem;
+  color: var(--green);
+}
+
+.section-header p {
+  color: #6b7f86;
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 1.05rem;
+}
+
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+}
+
+.principle-card {
+  background: #f3faf6;
+  border-radius: 18px;
+  padding: 2.5rem;
+  transition: all 0.3s;
+}
+
+.principle-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+}
+
+.principle-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2f8f46, #5fbf6a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  color: white;
+}
+
+.principle-card h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--green);
+}
+
+.principle-card p {
+  color: #5f737a;
+  line-height: 1.7;
+  margin-bottom: 1.2rem;
+}
+
+.principle-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.principle-card ul li {
+  color: #5f737a;
+  padding: 0.5rem 0;
+  padding-left: 1.8rem;
+  position: relative;
+}
+
+.principle-card ul li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #2e7d4f;
+  font-weight: bold;
+}
+
+/* =================== IMPACT SECTION =================== */
+.impact-section {
+  padding: 5rem 2rem;
+  background: linear-gradient(135deg, #1e2f33, #2a3f44);
+  color: white;
+}
+
+.impact-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.impact-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 3rem;
+  margin-bottom: 4rem;
+}
+
+.impact-stat {
+  text-align: center;
+}
+
+.impact-stat-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #4caf50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-size: 2rem;
+}
+
+.impact-stat-number {
+  font-family: "Playfair Display", serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #8ee09a;
+  margin-bottom: 0.5rem;
+}
+
+.impact-stat-label {
+  color: #cfe5dc;
+  font-size: 1.05rem;
+}
+
+/* =================== PARTNERS SECTION =================== */
+.partners-section {
+  padding: 5rem 2rem;
+  background: white;
+}
+
+.partners-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.partner-card {
+  background: #f3faf6;
+  border-radius: 18px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.partner-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.partner-logo {
+  width: 80px;
+  height: 80px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-size: 2rem;
+  color: #2e7d4f;
+}
+
+.partner-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+  color: var(--green);
+}
+
+.partner-card p {
+  color: #6b7f86;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* =================== CTA SECTION =================== */
+.cta-section {
+  padding: 5rem 2rem;
+  background: linear-gradient(135deg, #f3faf6, #e8f4ec);
+  text-align: center;
+}
+
+.cta-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.cta-container h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.6rem;
+  margin-bottom: 1.5rem;
+  color: var(--green);
+}
+
+.cta-container p {
+  font-size: 1.1rem;
+  color: #5f737a;
+  margin-bottom: 2.5rem;
+  line-height: 1.7;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cta-btn {
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cta-btn-primary {
+  background: #2e7d4f;
+  color: white;
+}
+
+.cta-btn-primary:hover {
+  background: #256b41;
+  transform: translateY(-2px);
+}
+
+.cta-btn-secondary {
+  background: white;
+  color: var(--green);
+  border: 2px solid var(--green);
+}
+
+.cta-btn-secondary:hover {
+  background: var(--green);
+  color: white;
+}
+
+/* =================== FOOTER =================== */
+.footer {
+  background: #0f1f17;
+  color: white;
+  padding: 3.5rem 2rem 2rem;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-brand {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.footer-brand h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.footer-tagline {
+  font-size: 1.1rem;
+  color: #cccccc;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto 2rem;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.social-icon {
+  width: 44px;
+  height: 44px;
+  border: 2px solid #4a9e5f;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4a9e5f;
+  font-size: 1.2rem;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+
+.social-icon:hover {
+  background: #4a9e5f;
+  color: #0f1f17;
+  transform: translateY(-3px);
+}
+
+.divider {
+  height: 1px;
+  background: #2a4a3a;
+  margin: 2.5rem 0;
+  border: none;
+}
+
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.footer-column h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.footer-column ul {
+  list-style: none;
+}
+
+.footer-column ul li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-column a {
+  color: #b0b0b0;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-column a:hover {
+  color: white;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid #2a4a3a;
+}
+
+.copyright {
+  font-size: 0.95rem;
+  color: #cccccc;
+  margin-bottom: 1rem;
+}
+
+.policy-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.policy-links a {
+  color: #b0b0b0;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s;
+}
+
+.policy-links a:hover {
+  color: white;
+}
+
+/* =================== ANIMATIONS =================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =================== RESPONSIVE =================== */
+@media (max-width: 600px) {
+  .header-main {
+    padding: 1rem 1.5rem;
+  }
+  
+  .ethics-hero {
+    padding: 4rem 1.5rem;
+  }
+  
+  .ethics-hero h1 {
+    font-size: 2rem;
+  }
+  
+  .principles-section,
+  .impact-section,
+  .partners-section,
+  .cta-section {
+    padding: 3rem 1.5rem;
+  }
+  
+  .impact-stats {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+/* =================== DONATION MODAL =================== */
+.donation-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  z-index: 10000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.donation-modal.active {
+  display: flex;
+  animation: fadeIn 0.3s ease;
+}
+
+.donation-modal-content {
+  background: white;
+  border-radius: 20px;
+  max-width: 500px;
+  width: 100%;
+  padding: 2.5rem;
+  position: relative;
+  animation: slideUp 0.3s ease;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.donation-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #f0f0f0;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.donation-modal-close:hover {
+  background: #e0e0e0;
+  transform: scale(1.1);
+}
+
+.donation-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.donation-icon {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #2e7d4f, #5fbf6a);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-size: 2rem;
+  color: white;
+}
+
+.donation-header h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.8rem;
+  color: var(--green);
+  margin-bottom: 0.5rem;
+}
+
+.donation-header p {
+  color: #6b7f86;
+  font-size: 1rem;
+}
+
+.donation-amounts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.amount-btn {
+  padding: 1rem;
+  border: 2px solid #e0e0e0;
+  background: white;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.amount-btn:hover {
+  border-color: #2e7d4f;
+  background: #f3faf6;
+}
+
+.amount-btn.active {
+  border-color: #2e7d4f;
+  background: #2e7d4f;
+  color: white;
+}
+
+.custom-amount {
+  margin-bottom: 2rem;
+}
+
+.custom-amount label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--green);
+}
+
+.amount-input-wrapper {
+  position: relative;
+}
+
+.currency {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 600;
+  color: #6b7f86;
+}
+
+#customAmount {
+  width: 100%;
+  padding: 0.9rem 1rem 0.9rem 2.5rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: "Inter", sans-serif;
+}
+
+#customAmount:focus {
+  outline: none;
+  border-color: #2e7d4f;
+}
+
+.donation-impact {
+  background: #f3faf6;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+
+.donation-impact h4 {
+  font-family: "Playfair Display", serif;
+  color: var(--green);
+  margin-bottom: 1rem;
+}
+
+.donation-impact ul {
+  list-style: none;
+  padding: 0;
+}
+
+.donation-impact li {
+  padding: 0.5rem 0;
+  color: #5f737a;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.donation-impact li i {
+  color: #2e7d4f;
+}
+
+.donate-btn {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #2e7d4f, #5fbf6a);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.donate-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(46, 125, 79, 0.3);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .donation-amounts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+/* Sur grands écrans, masquer la bottom nav */
+@media(min-width: 769px) {
+  .mobile-bottom-nav { display: none; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =================== HEADER =================== -->
+<header class="header-main">
+  <div class="header-left">
+    <img src="https://cdn-icons-png.flaticon.com/512/3069/3069172.png" alt="BioXplore Logo">
+    <span>BioXplore</span>
+  </div>
+
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- =================== MOBILE MENU OVERLAY =================== -->
+<div class="mobile-menu-overlay" id="mobileMenuOverlay">
+  <div class="mobile-nav-container">
+    <div class="mobile-menu-header">
+      <div class="mobile-logo">
+        <img src="https://cdn-icons-png.flaticon.com/512/3069/3069172.png" alt="BioXplore Logo">
+        <span>BioXplore</span>
+      </div>
+      <button class="close-menu" id="closeMenu" aria-label="Close menu">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    
+    <nav class="mobile-nav-menu">
+      <a href="home.html" class="mobile-nav-item">
+        <span><i class="fas fa-home"></i> Home</span>
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      <a href="bioeducation.html" class="mobile-nav-item">
+        <span><i class="fas fa-graduation-cap"></i> Bio Education</span>
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      <a href="species.html" class="mobile-nav-item">
+        <span><i class="fas fa-leaf"></i> Species Library</span>
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      <a href="ethics.html" class="mobile-nav-item active">
+        <span><i class="fas fa-handshake"></i> Conservation & Ethics</span>
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      <a href="marketplace.html" class="mobile-nav-item">
+        <span><i class="fas fa-store"></i> Marketplace</span>
+        <i class="fas fa-chevron-right"></i>
+      </a>
+    </nav>
+    
+    <div class="mobile-user-section">
+      <div class="mobile-user-info">
+        <div class="mobile-user-avatar">
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="mobile-user-details">
+          <h4 data-auth="name">—</h4>
+          <p data-auth="role">Member</p>
+        </div>
+      </div>
+      
+      <div class="mobile-auth-buttons">
+        <a href="profile.html" class="mobile-auth-btn mobile-btn-login">My Profile</a>
+        <a href="logout.html" class="mobile-auth-btn mobile-btn-signup">Log Out</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =================== MOBILE BOTTOM NAV =================== -->
+<nav class="mobile-bottom-nav">
+  <a href="home.html" class="mobile-nav-icon">
+    <i class="fas fa-home"></i>
+    <span>Home</span>
+  </a>
+  <a href="species.html" class="mobile-nav-icon">
+    <i class="fas fa-leaf"></i>
+    <span>Species</span>
+  </a>
+  <a href="marketplace.html" class="mobile-nav-icon">
+    <i class="fas fa-store"></i>
+    <span>Market</span>
+  </a>
+  <a href="bioeducation.html" class="mobile-nav-icon">
+    <i class="fas fa-graduation-cap"></i>
+    <span>Learn</span>
+  </a>
+  <a href="#" class="mobile-nav-icon" id="mobileMenuBtn">
+    <i class="fas fa-bars"></i>
+    <span>Menu</span>
+  </a>
+</nav>
+
+<!-- =================== HERO SECTION =================== -->
+<section class="ethics-hero">
+  <div class="hero-content">
+    <span class="badge">Our Commitment • Our Responsibility</span>
+    <h1>Conservation & <span>Ethics</span></h1>
+    <p>Every specimen we offer is ethically sourced with strict adherence to international conservation laws and sustainable practices. Learn about our commitment to protecting biodiversity.</p>
+  </div>
+</section>
+
+<!-- =================== PRINCIPLES SECTION =================== -->
+<section class="principles-section">
+  <div class="principles-container">
+    <div class="section-header">
+      <h2>Our Ethical Principles</h2>
+      <p>We operate under strict ethical guidelines to ensure every specimen is sourced responsibly and sustainably.</p>
+    </div>
+
+    <div class="principles-grid">
+      <div class="principle-card">
+        <div class="principle-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <h3>100% Ethical Sourcing</h3>
+        <p>All specimens are obtained through legal, ethical channels with full documentation and compliance with international regulations.</p>
+        <ul>
+          <li>CITES compliance verification</li>
+          <li>Legal import/export documentation</li>
+          <li>Chain of custody tracking</li>
+          <li>Third-party audits</li>
+        </ul>
+      </div>
+
+      <div class="principle-card">
+        <div class="principle-icon">
+          <i class="fas fa-leaf"></i>
+        </div>
+        <h3>Conservation First</h3>
+        <p>We prioritize conservation in every decision, partnering with organizations worldwide to protect endangered species.</p>
+        <ul>
+          <li>10% of profits to conservation</li>
+          <li>Habitat restoration projects</li>
+          <li>Species monitoring programs</li>
+          <li>Community education initiatives</li>
+        </ul>
+      </div>
+
+      <div class="principle-card">
+        <div class="principle-icon">
+          <i class="fas fa-users"></i>
+        </div>
+        <h3>Community Partnership</h3>
+        <p>We work directly with local communities to ensure fair compensation and sustainable practices.</p>
+        <ul>
+          <li>Fair trade agreements</li>
+          <li>Local employment opportunities</li>
+          <li>Traditional knowledge respect</li>
+          <li>Community benefit programs</li>
+        </ul>
+      </div>
+
+      <div class="principle-card">
+        <div class="principle-icon">
+          <i class="fas fa-microscope"></i>
+        </div>
+        <h3>Scientific Integrity</h3>
+        <p>All our work is guided by scientific research and expert consultation to ensure best practices.</p>
+        <ul>
+          <li>Peer-reviewed methodologies</li>
+          <li>Expert advisory board</li>
+          <li>Continuous research support</li>
+          <li>Data transparency</li>
+        </ul>
+      </div>
+
+      <div class="principle-card">
+        <div class="principle-icon">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <h3>Education & Awareness</h3>
+        <p>We promote biodiversity education and conservation awareness through accessible resources.</p>
+        <ul>
+          <li>Free educational materials</li>
+          <li>School partnership programs</li>
+          <li>Public awareness campaigns</li>
+          <li>Scientific publications</li>
+        </ul>
+      </div>
+
+      <div class="principle-card">
+        <div class="principle-icon">
+          <i class="fas fa-balance-scale"></i>
+        </div>
+        <h3>Transparency & Accountability</h3>
+        <p>We maintain complete transparency in our operations and are accountable to our stakeholders.</p>
+        <ul>
+          <li>Annual impact reports</li>
+          <li>Open supply chain</li>
+          <li>Third-party certifications</li>
+          <li>Stakeholder feedback</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== IMPACT SECTION =================== -->
+<section class="impact-section">
+  <div class="impact-container">
+    <div class="section-header">
+      <h2>Our Conservation Impact</h2>
+      <p>Since our founding, we've contributed significantly to global conservation efforts.</p>
+    </div>
+
+    <div class="impact-stats">
+      <div class="impact-stat">
+        <div class="impact-stat-icon">
+          <i class="fas fa-dollar-sign"></i>
+        </div>
+        <div class="impact-stat-number">$500K+</div>
+        <div class="impact-stat-label">Conservation Funding</div>
+      </div>
+
+      <div class="impact-stat">
+        <div class="impact-stat-icon">
+          <i class="fas fa-handshake"></i>
+        </div>
+        <div class="impact-stat-number">50+</div>
+        <div class="impact-stat-label">Partner Organizations</div>
+      </div>
+
+      <div class="impact-stat">
+        <div class="impact-stat-icon">
+          <i class="fas fa-globe"></i>
+        </div>
+        <div class="impact-stat-number">25</div>
+        <div class="impact-stat-label">Countries Supported</div>
+      </div>
+
+      <div class="impact-stat">
+        <div class="impact-stat-icon">
+          <i class="fas fa-tree"></i>
+        </div>
+        <div class="impact-stat-number">100K+</div>
+        <div class="impact-stat-label">Trees Planted</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== PARTNERS SECTION =================== -->
+<section class="partners-section">
+  <div class="partners-container">
+    <div class="section-header">
+      <h2>Our Conservation Partners</h2>
+      <p>We collaborate with leading conservation organizations worldwide.</p>
+    </div>
+
+    <div class="partners-grid">
+      <div class="partner-card">
+        <div class="partner-logo">
+          <i class="fas fa-paw"></i>
+        </div>
+        <h3>Wildlife Conservation Society</h3>
+        <p>Global wildlife protection and habitat preservation programs.</p>
+      </div>
+
+      <div class="partner-card">
+        <div class="partner-logo">
+          <i class="fas fa-globe-americas"></i>
+        </div>
+        <h3>Rainforest Alliance</h3>
+        <p>Sustainable forestry and biodiversity conservation initiatives.</p>
+      </div>
+
+      <div class="partner-card">
+        <div class="partner-logo">
+          <i class="fas fa-leaf"></i>
+        </div>
+        <h3>Botanical Gardens Conservation</h3>
+        <p>Plant conservation and seed banking programs worldwide.</p>
+      </div>
+
+      <div class="partner-card">
+        <div class="partner-logo">
+          <i class="fas fa-water"></i>
+        </div>
+        <h3>Ocean Conservancy</h3>
+        <p>Marine biodiversity protection and ocean health initiatives.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== CTA SECTION =================== -->
+<section class="cta-section">
+  <div class="cta-container">
+    <h2>Join Our Conservation Efforts</h2>
+    <p>Together we can make a difference in protecting Earth's biodiversity. Learn how you can contribute to our conservation initiatives.</p>
+    
+    <div class="cta-buttons">
+      <a href="#" class="cta-btn cta-btn-primary" onclick="openDonationModal(event)">
+        <i class="fas fa-heart"></i> Support Conservation
+      </a>
+      <a href="BioXplore_Conservation_Policy.pdf" class="cta-btn cta-btn-secondary" onclick="downloadPolicy(event)">
+        <i class="fas fa-file-alt"></i> Download Our Policy
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =================== DONATION MODAL =================== -->
+<div id="donationModal" class="donation-modal">
+  <div class="donation-modal-content">
+    <button class="donation-modal-close" onclick="closeDonationModal()">
+      <i class="fas fa-times"></i>
+    </button>
+    
+    <div class="donation-header">
+      <div class="donation-icon">
+        <i class="fas fa-heart"></i>
+      </div>
+      <h3>Support Conservation</h3>
+      <p>Your donation helps protect rare species and their habitats worldwide.</p>
+    </div>
+    
+    <div class="donation-amounts">
+      <button class="amount-btn" onclick="selectAmount(25)">$25</button>
+      <button class="amount-btn" onclick="selectAmount(50)">$50</button>
+      <button class="amount-btn active" onclick="selectAmount(100)">$100</button>
+      <button class="amount-btn" onclick="selectAmount(250)">$250</button>
+    </div>
+    
+    <div class="custom-amount">
+      <label>Or enter custom amount:</label>
+      <div class="amount-input-wrapper">
+        <span class="currency">$</span>
+        <input type="number" id="customAmount" placeholder="Enter amount" min="1">
+      </div>
+    </div>
+    
+    <div class="donation-impact">
+      <h4>Your Impact</h4>
+      <ul>
+        <li><i class="fas fa-check"></i> Protect endangered habitats</li>
+        <li><i class="fas fa-check"></i> Support conservation research</li>
+        <li><i class="fas fa-check"></i> Fund educational programs</li>
+      </ul>
+    </div>
+    
+    <button class="donate-btn" onclick="processDonation()">
+      <i class="fas fa-heart"></i> Donate $<span id="selectedAmount">100</span>
+    </button>
+  </div>
+</div>
+
+<!-- =================== FOOTER =================== -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-brand">
+      <h2>BioXplore</h2>
+      <p class="footer-tagline">Discover, learn, and preserve rare life forms through ethical sourcing and scientific excellence.</p>
+      
+      <div class="social-icons">
+        <a href=" https://www.facebook.com/share/1HhhGYC2Kc/?mibextid=wwXIfr" class="social-icon" aria-label="Facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.instagram.com/bioxp_lore/ " class="social-icon" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="  https://x.com/bioxplore8xdp?s=11" class="social-icon" aria-label="Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="#" class="social-icon" aria-label="LinkedIn">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </div>
+    </div>
+    
+    <hr class="divider">
+    
+    <div class="footer-links">
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="home_v2.html">Home</a></li>
+          <li><a href="bioeducation.html">Bio Education</a></li>
+          <li><a href="marketplace.html">Marketplace</a></li>
+          <li><a href="species.html">Species Library</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="ethics.html">Conservation and Ethics</a></li>
+          <li><a href="about.html">About BioXplore</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Get In Touch</h3>
+        <ul>
+          <li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0d64636b624d6f6462757d61627f68236e6260">[email&#160;protected]</a></li>
+          <li>+1 (555) 123-4567</li>
+          <li>123 Biology Lane<br>Science City, SC 12345</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p class="copyright">© 2025 BioXplore. All rights reserved.</p>
+      <div class="policy-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="cookie-policy.html">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- =================== JAVASCRIPT =================== -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const hamburger = document.getElementById('hamburger');
+const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+const closeMenu = document.getElementById('closeMenu');
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+
+function openMenu() {
+  mobileMenuOverlay.classList.add('active');
+  hamburger.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMenuFunc() {
+  mobileMenuOverlay.classList.remove('active');
+  hamburger.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+hamburger.addEventListener('click', () => {
+  if (mobileMenuOverlay.classList.contains('active')) {
+    closeMenuFunc();
+  } else {
+    openMenu();
+  }
+});
+
+closeMenu.addEventListener('click', closeMenuFunc);
+mobileMenuBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  openMenu();
+});
+
+mobileMenuOverlay.addEventListener('click', (e) => {
+  if (e.target === mobileMenuOverlay) {
+    closeMenuFunc();
+  }
+});
+
+mobileNavItems.forEach(item => {
+  item.addEventListener('click', () => {
+    setTimeout(closeMenuFunc, 300);
+  });
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeMenuFunc();
+  }
+});
+
+const bottomNavIcons = document.querySelectorAll('.mobile-nav-icon');
+bottomNavIcons.forEach(icon => {
+  icon.addEventListener('click', (e) => {
+    if (icon.id === 'mobileMenuBtn') return;
+    bottomNavIcons.forEach(i => i.classList.remove('active'));
+    icon.classList.add('active');
+  });
+});
+
+// =================== DONATION MODAL ===================
+let selectedDonationAmount = 100;
+
+function openDonationModal(event) {
+  event.preventDefault();
+  const modal = document.getElementById('donationModal');
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDonationModal() {
+  const modal = document.getElementById('donationModal');
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function selectAmount(amount) {
+  selectedDonationAmount = amount;
+  document.getElementById('selectedAmount').textContent = amount;
+  document.getElementById('customAmount').value = '';
+  
+  // Update active button
+  document.querySelectorAll('.amount-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  event.target.classList.add('active');
+}
+
+// Custom amount input
+document.addEventListener('DOMContentLoaded', () => {
+  const customInput = document.getElementById('customAmount');
+  if (customInput) {
+    customInput.addEventListener('input', (e) => {
+      if (e.target.value) {
+        selectedDonationAmount = parseInt(e.target.value) || 0;
+        document.getElementById('selectedAmount').textContent = selectedDonationAmount;
+        document.querySelectorAll('.amount-btn').forEach(btn => {
+          btn.classList.remove('active');
+        });
+      }
+    });
+  }
+});
+
+function processDonation() {
+  if (selectedDonationAmount < 1) {
+    alert('Please select or enter a donation amount.');
+    return;
+  }
+  
+  // Show success message
+  closeDonationModal();
+  
+  const notification = document.createElement('div');
+  notification.style.cssText = 'position:fixed;top:100px;right:20px;background:#2e7d4f;color:white;padding:1.5rem 2rem;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.2);z-index:10001;max-width:400px;animation:slideIn 0.3s ease;';
+  notification.innerHTML = `
+    <div style="display:flex;align-items:start;gap:1rem;">
+      <i class="fas fa-heart" style="font-size:1.5rem;margin-top:0.2rem;"></i>
+      <div>
+        <div style="font-weight:700;font-size:1.1rem;margin-bottom:0.5rem;">Thank You!</div>
+        <div style="opacity:0.95;">Your $${selectedDonationAmount} donation will help protect endangered species. Redirecting to payment...</div>
+      </div>
+    </div>
+  `;
+  
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+    notification.style.animation = 'slideOut 0.3s ease';
+    setTimeout(() => notification.remove(), 300);
+  }, 4000);
+}
+
+// Close modal on overlay click
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('donationModal');
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target.id === 'donationModal') {
+        closeDonationModal();
+      }
+    });
+  }
+});
+
+// =================== DOWNLOAD POLICY ===================
+function downloadPolicy(event) {
+  event.preventDefault();
+  
+  // Show notification
+  const notification = document.createElement('div');
+  notification.style.cssText = 'position:fixed;top:100px;right:20px;background:#2e7d4f;color:white;padding:1.5rem 2rem;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.2);z-index:10001;max-width:400px;animation:slideIn 0.3s ease;';
+  notification.innerHTML = `
+    <div style="display:flex;align-items:start;gap:1rem;">
+      <i class="fas fa-check-circle" style="font-size:1.5rem;margin-top:0.2rem;"></i>
+      <div>
+        <div style="font-weight:700;font-size:1.1rem;margin-bottom:0.5rem;">Download Started</div>
+        <div style="opacity:0.95;">BioXplore_Conservation_Policy.pdf is downloading...</div>
+      </div>
+    </div>
+  `;
+  
+  document.body.appendChild(notification);
+  
+  // Download the real PDF
+  setTimeout(() => {
+    const a = document.createElement('a');
+    a.href = 'BioXplore_Conservation_Policy.pdf';
+    a.download = 'BioXplore_Conservation_Policy.pdf';
+    a.click();
+    
+    notification.style.animation = 'slideOut 0.3s ease';
+    setTimeout(() => notification.remove(), 300);
+  }, 800);
+}
+
+
+// Add slide animations
+const animStyle = document.createElement('style');
+animStyle.textContent = `
+  @keyframes slideIn {
+    from { transform: translateX(400px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes slideOut {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(400px); opacity: 0; }
+  }
+`;
+document.head.appendChild(animStyle);
+</script>
+<script src="auth-nav.js"></script>
+
+</body>
+</html>

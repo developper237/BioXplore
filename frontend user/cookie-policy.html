@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cookie Policy | BioXplore</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{--green:#1f3d2b;--green-mid:#2e7d4f;--green-light:#7edc88;--neutral:#f4f4f2;--dark:#0f1f17}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Inter",sans-serif;background:var(--neutral);color:#222;line-height:1.7;padding-bottom:70px}
+.header-main{background:#f3faf6;padding:1.4rem 3rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:998;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.header-left{display:flex;align-items:center;gap:.8rem;text-decoration:none}
+.header-left img{width:44px}
+.header-left span{font-family:"Playfair Display",serif;font-size:1.9rem;color:var(--green);font-weight:600}
+.header-nav{display:flex;align-items:center;gap:2rem}
+.header-nav a{text-decoration:none;color:#2d3a3f;font-size:.95rem;font-weight:500;transition:color .2s}
+.header-nav a:hover{color:var(--green-mid)}
+.marketplace-btn{background:#2e6f43;color:#fff!important;padding:.75rem 1.6rem;border-radius:12px;font-weight:600}
+
+/* HERO */
+.policy-hero{background:linear-gradient(135deg,#0f1f17 0%,#1a3d2b 55%,#2e7d4f 100%);padding:5rem 2rem 4rem;text-align:center;color:white;position:relative;overflow:hidden}
+.policy-hero::before{content:'';position:absolute;inset:0;opacity:.04;background-image:radial-gradient(circle,#fff 1px,transparent 1px);background-size:28px 28px}
+.policy-hero-badge{display:inline-block;background:rgba(111,191,115,.15);border:1px solid rgba(111,191,115,.35);color:#7edc88;padding:.4rem 1.2rem;border-radius:50px;font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.5rem}
+.policy-hero h1{font-family:"Playfair Display",serif;font-size:3rem;margin-bottom:1rem}
+.policy-hero p{font-size:1.05rem;color:#b8d4c0;max-width:560px;margin:0 auto 1.2rem}
+.policy-hero .last-updated{font-size:.82rem;color:rgba(126,220,136,.7)}
+
+/* COOKIE TYPE CARDS */
+.cookie-types{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;margin:2rem 0}
+.cookie-card{background:white;border-radius:14px;padding:1.5rem;box-shadow:0 2px 12px rgba(0,0,0,.06);border-top:4px solid transparent;transition:transform .2s}
+.cookie-card:hover{transform:translateY(-3px)}
+.cookie-card.essential{border-top-color:#2e7d4f}
+.cookie-card.performance{border-top-color:#3b82f6}
+.cookie-card.preference{border-top-color:#f59e0b}
+.cookie-card.marketing{border-top-color:#e74c3c}
+.cookie-card-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:1.1rem;color:white}
+.cookie-card.essential .cookie-card-icon{background:#2e7d4f}
+.cookie-card.performance .cookie-card-icon{background:#3b82f6}
+.cookie-card.preference .cookie-card-icon{background:#f59e0b}
+.cookie-card.marketing .cookie-card-icon{background:#e74c3c}
+.cookie-card h4{font-weight:700;color:var(--green);margin-bottom:.4rem;font-size:.95rem}
+.cookie-card p{font-size:.83rem;color:#666;line-height:1.5;margin-bottom:.8rem}
+.cookie-badge{display:inline-block;padding:.2rem .7rem;border-radius:20px;font-size:.75rem;font-weight:600}
+.badge-required{background:#e8f5ee;color:#2e7d4f}
+.badge-optional{background:#fff3e0;color:#e6740a}
+
+/* COOKIE TABLE */
+.cookie-table{width:100%;border-collapse:collapse;background:white;border-radius:14px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06);margin:1.5rem 0}
+.cookie-table th{background:var(--green);color:white;padding:.9rem 1rem;text-align:left;font-size:.83rem;font-weight:600}
+.cookie-table td{padding:.8rem 1rem;border-bottom:1px solid #f0f0f0;font-size:.85rem;color:#444;vertical-align:top}
+.cookie-table tr:last-child td{border-bottom:none}
+.cookie-table tr:hover td{background:#f8fcf9}
+.duration-tag{display:inline-block;background:#f0f0f0;color:#555;padding:.15rem .5rem;border-radius:4px;font-size:.75rem;font-family:monospace}
+
+/* CONSENT PANEL */
+.consent-panel{background:white;border-radius:16px;padding:2rem;margin:2rem 0;box-shadow:0 2px 16px rgba(0,0,0,.07);border:1px solid #e8f5ee}
+.consent-panel h3{font-family:"Playfair Display",serif;color:var(--green);margin-bottom:1.2rem;font-size:1.2rem}
+.consent-row{display:flex;align-items:center;justify-content:space-between;padding:.9rem 0;border-bottom:1px solid #f5f5f5;gap:1rem}
+.consent-row:last-child{border-bottom:none}
+.consent-info h5{font-weight:600;color:#1f3d2b;font-size:.92rem;margin-bottom:.2rem}
+.consent-info p{font-size:.82rem;color:#777;margin:0}
+.toggle-wrap{flex-shrink:0}
+.toggle{position:relative;width:48px;height:26px;cursor:pointer}
+.toggle input{opacity:0;width:0;height:0}
+.toggle-slider{position:absolute;inset:0;background:#ccc;border-radius:26px;transition:.3s}
+.toggle-slider::before{content:'';position:absolute;width:20px;height:20px;left:3px;bottom:3px;background:white;border-radius:50%;transition:.3s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.toggle input:checked + .toggle-slider{background:var(--green-mid)}
+.toggle input:checked + .toggle-slider::before{transform:translateX(22px)}
+.toggle input:disabled + .toggle-slider{opacity:.6;cursor:not-allowed}
+.consent-actions{display:flex;gap:.8rem;margin-top:1.5rem;flex-wrap:wrap}
+.consent-btn{padding:.7rem 1.4rem;border-radius:8px;font-weight:600;font-size:.88rem;cursor:pointer;border:none;transition:all .2s}
+.consent-btn.accept-all{background:var(--green-mid);color:white}
+.consent-btn.accept-all:hover{background:#256b41}
+.consent-btn.reject-all{background:#f0f0f0;color:#555}
+.consent-btn.reject-all:hover{background:#e0e0e0}
+.consent-btn.save{background:white;color:var(--green-mid);border:2px solid var(--green-mid)}
+.consent-btn.save:hover{background:#f0f9f2}
+
+.policy-content{max-width:820px;margin:0 auto;padding:4rem 2rem}
+.policy-toc{background:white;border-radius:16px;padding:1.8rem 2rem;margin-bottom:3rem;box-shadow:0 2px 16px rgba(0,0,0,.05);border-left:4px solid var(--green-mid)}
+.policy-toc h4{font-family:"Playfair Display",serif;color:var(--green);margin-bottom:1rem;font-size:1.1rem}
+.policy-toc ol{padding-left:1.2rem}
+.policy-toc li{margin-bottom:.4rem}
+.policy-toc a{color:var(--green-mid);text-decoration:none;font-size:.9rem;font-weight:500}
+.policy-toc a:hover{text-decoration:underline}
+.policy-section{margin-bottom:3rem;scroll-margin-top:100px}
+.policy-section h2{font-family:"Playfair Display",serif;font-size:1.6rem;color:var(--green);margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:2px solid #e8f5ee;display:flex;align-items:center;gap:.7rem}
+.policy-section h2 i{font-size:1.1rem;color:var(--green-mid)}
+.policy-section p{color:#444;margin-bottom:1rem;font-size:.97rem}
+.policy-section ul{padding-left:1.5rem;margin-bottom:1rem}
+.policy-section li{color:#444;margin-bottom:.5rem;font-size:.97rem}
+.info-box{background:#f0f9f2;border:1px solid #c8e8d4;border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0;display:flex;gap:1rem;align-items:flex-start}
+.info-box i{color:var(--green-mid);font-size:1.1rem;margin-top:.15rem;flex-shrink:0}
+.info-box p{margin:0;font-size:.92rem;color:#2d4a38}
+.contact-card{background:linear-gradient(135deg,var(--dark),#1a3d2b);color:white;border-radius:18px;padding:2.5rem;text-align:center;margin-top:3rem}
+.contact-card h3{font-family:"Playfair Display",serif;font-size:1.5rem;margin-bottom:.8rem}
+.contact-card p{color:#b8d4c0;margin-bottom:1.5rem;font-size:.95rem}
+.contact-card a{display:inline-block;background:var(--green-mid);color:white;padding:.8rem 2rem;border-radius:10px;text-decoration:none;font-weight:600;transition:background .2s}
+.contact-card a:hover{background:#256b41}
+
+/* FOOTER */
+.footer-exact{background:var(--dark);color:#fff;padding:3.5rem 2rem 2rem}
+.footer-container{max-width:1200px;margin:0 auto}
+.footer-brand{text-align:center;margin-bottom:2.5rem}
+.footer-brand h2{font-family:"Playfair Display",serif;font-size:2rem;margin-bottom:.8rem}
+.footer-tagline{font-size:1rem;color:#ccc;max-width:700px;margin:0 auto 1.5rem}
+.footer-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:2rem;margin-bottom:2.5rem}
+.footer-column h3{font-family:"Playfair Display",serif;font-size:1.1rem;margin-bottom:1rem}
+.footer-column ul{list-style:none}
+.footer-column ul li{margin-bottom:.5rem;color:#888;font-size:.88rem}
+.footer-column a{color:#b0b0b0;text-decoration:none;font-size:.88rem;transition:color .3s}
+.footer-column a:hover{color:#fff}
+.footer-bottom{text-align:center;padding-top:2rem;border-top:1px solid #2a4a3a}
+.copyright{color:#666;margin-bottom:1rem;font-size:.82rem}
+.policy-links{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap}
+.policy-links a{color:#b0b0b0;text-decoration:none;font-size:.85rem;transition:color .3s}
+.policy-links a:hover{color:#fff}
+.mobile-bottom-nav{display:none}
+@media(max-width:768px){
+  .header-main{padding:1rem 1.5rem}.header-nav{display:none}
+  .policy-hero h1{font-size:2rem}.policy-content{padding:2.5rem 1.2rem}
+  .cookie-types{grid-template-columns:1fr 1fr}
+  .consent-row{flex-direction:column;align-items:flex-start}
+  .mobile-bottom-nav{display:flex;position:fixed;bottom:0;left:0;width:100%;background:var(--green);justify-content:space-around;padding:.8rem 0;z-index:997;border-top:1px solid rgba(255,255,255,.1)}
+  .mobile-nav-icon{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:#ccc;font-size:.75rem;flex:1;padding:.4rem}
+  .mobile-nav-icon i{font-size:1.1rem;margin-bottom:.2rem}
+  .mobile-nav-icon:hover{color:#7edc88}
+}
+</style>
+</head>
+<body>
+
+<header class="header-main">
+  <a href="home.html" class="header-left">
+    <img src="https://cdn-icons-png.flaticon.com/512/3069/3069172.png" alt="BioXplore Logo">
+    <span>BioXplore</span>
+  </a>
+  <nav class="header-nav">
+    <a href="home.html">Home</a>
+    <a href="bioeducation.html">Bio Education</a>
+    <a href="species.html">Species Library</a>
+    <a href="ethics.html">Conservation & Ethics</a>
+    <a href="marketplace.html" class="marketplace-btn">Marketplace</a>
+  </nav>
+</header>
+
+<section class="policy-hero">
+  <div class="policy-hero-badge"><i class="fas fa-cookie-bite"></i> &nbsp;Cookies</div>
+  <h1>Cookie Policy</h1>
+  <p>We use cookies to make BioXplore work properly and to give you the best possible experience.</p>
+  <div class="last-updated">Last updated: February 2025</div>
+</section>
+
+<div class="policy-content">
+
+  <div class="policy-toc">
+    <h4><i class="fas fa-list" style="margin-right:.5rem;color:var(--green-mid)"></i>Table of Contents</h4>
+    <ol>
+      <li><a href="#c1">What Are Cookies?</a></li>
+      <li><a href="#c2">Types of Cookies We Use</a></li>
+      <li><a href="#c3">Cookies We Set</a></li>
+      <li><a href="#c4">Manage Your Preferences</a></li>
+      <li><a href="#c5">Third-Party Cookies</a></li>
+      <li><a href="#c6">Browser Controls</a></li>
+      <li><a href="#c7">Updates to This Policy</a></li>
+    </ol>
+  </div>
+
+  <!-- Section 1 -->
+  <div class="policy-section" id="c1">
+    <h2><i class="fas fa-question-circle"></i> 1. What Are Cookies?</h2>
+    <p>Cookies are small text files placed on your device by a website when you visit it. They are widely used to make websites work efficiently, remember your preferences, and provide information to website owners.</p>
+    <p>Cookies cannot harm your device or access other files stored on it. They are simply data files that help websites deliver a better, more personalised experience.</p>
+    <div class="info-box">
+      <i class="fas fa-info-circle"></i>
+      <p>BioXplore uses cookies strictly to make our platform function correctly and to understand how visitors use the site — never to build advertising profiles or sell your data to third parties.</p>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="policy-section" id="c2">
+    <h2><i class="fas fa-layer-group"></i> 2. Types of Cookies We Use</h2>
+    <div class="cookie-types">
+      <div class="cookie-card essential">
+        <div class="cookie-card-icon"><i class="fas fa-lock"></i></div>
+        <h4>Essential</h4>
+        <p>Required for the site to work. Cannot be disabled without breaking core functionality.</p>
+        <span class="cookie-badge badge-required">Always Active</span>
+      </div>
+      <div class="cookie-card performance">
+        <div class="cookie-card-icon"><i class="fas fa-chart-line"></i></div>
+        <h4>Performance</h4>
+        <p>Help us understand how visitors navigate the site so we can improve it.</p>
+        <span class="cookie-badge badge-optional">Optional</span>
+      </div>
+      <div class="cookie-card preference">
+        <div class="cookie-card-icon"><i class="fas fa-sliders-h"></i></div>
+        <h4>Preference</h4>
+        <p>Remember your settings, language, and display choices between visits.</p>
+        <span class="cookie-badge badge-optional">Optional</span>
+      </div>
+      <div class="cookie-card marketing">
+        <div class="cookie-card-icon"><i class="fas fa-bullhorn"></i></div>
+        <h4>Marketing</h4>
+        <p>Used only with your explicit consent to deliver relevant content and measure campaigns.</p>
+        <span class="cookie-badge badge-optional">Optional</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="policy-section" id="c3">
+    <h2><i class="fas fa-table"></i> 3. Cookies We Set</h2>
+    <table class="cookie-table">
+      <thead>
+        <tr>
+          <th>Cookie Name</th>
+          <th>Category</th>
+          <th>Purpose</th>
+          <th>Duration</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>accessToken</code></td>
+          <td>Essential</td>
+          <td>Stores your authentication JWT token to keep you logged in</td>
+          <td><span class="duration-tag">Session</span></td>
+        </tr>
+        <tr>
+          <td><code>user</code></td>
+          <td>Essential</td>
+          <td>Caches your basic profile data for instant UI display</td>
+          <td><span class="duration-tag">Session</span></td>
+        </tr>
+        <tr>
+          <td><code>cartItems</code></td>
+          <td>Essential</td>
+          <td>Persists your shopping cart between page visits</td>
+          <td><span class="duration-tag">7 days</span></td>
+        </tr>
+        <tr>
+          <td><code>_ga</code></td>
+          <td>Performance</td>
+          <td>Google Analytics — distinguishes unique visitors</td>
+          <td><span class="duration-tag">2 years</span></td>
+        </tr>
+        <tr>
+          <td><code>_gid</code></td>
+          <td>Performance</td>
+          <td>Google Analytics — stores page view information</td>
+          <td><span class="duration-tag">24 hours</span></td>
+        </tr>
+        <tr>
+          <td><code>bx_prefs</code></td>
+          <td>Preference</td>
+          <td>Saves your display preferences (language, theme)</td>
+          <td><span class="duration-tag">1 year</span></td>
+        </tr>
+        <tr>
+          <td><code>cookie_consent</code></td>
+          <td>Essential</td>
+          <td>Records your cookie consent choices</td>
+          <td><span class="duration-tag">1 year</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="policy-section" id="c4">
+    <h2><i class="fas fa-sliders-h"></i> 4. Manage Your Preferences</h2>
+    <p>You can update your cookie preferences at any time using the panel below. Essential cookies cannot be disabled as they are required for the site to function.</p>
+
+    <div class="consent-panel">
+      <h3><i class="fas fa-cookie-bite" style="margin-right:.5rem;color:var(--green-mid)"></i> Your Cookie Preferences</h3>
+
+      <div class="consent-row">
+        <div class="consent-info">
+          <h5>Essential Cookies</h5>
+          <p>Login sessions, shopping cart, site functionality. Cannot be disabled.</p>
+        </div>
+        <div class="toggle-wrap">
+          <label class="toggle">
+            <input type="checkbox" checked disabled>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="consent-row">
+        <div class="consent-info">
+          <h5>Performance Cookies</h5>
+          <p>Help us understand traffic patterns and improve the site.</p>
+        </div>
+        <div class="toggle-wrap">
+          <label class="toggle">
+            <input type="checkbox" id="perfToggle">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="consent-row">
+        <div class="consent-info">
+          <h5>Preference Cookies</h5>
+          <p>Remember your display settings and language between visits.</p>
+        </div>
+        <div class="toggle-wrap">
+          <label class="toggle">
+            <input type="checkbox" id="prefToggle">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="consent-row">
+        <div class="consent-info">
+          <h5>Marketing Cookies</h5>
+          <p>Personalise content and measure the effectiveness of campaigns.</p>
+        </div>
+        <div class="toggle-wrap">
+          <label class="toggle">
+            <input type="checkbox" id="mktToggle">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="consent-actions">
+        <button class="consent-btn accept-all" onclick="setAll(true)">Accept All</button>
+        <button class="consent-btn reject-all" onclick="setAll(false)">Reject Optional</button>
+        <button class="consent-btn save" onclick="savePrefs()">Save My Choices</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="policy-section" id="c5">
+    <h2><i class="fas fa-external-link-alt"></i> 5. Third-Party Cookies</h2>
+    <p>Some cookies are set by third-party services that appear on our pages. We use the following third-party services:</p>
+    <ul>
+      <li><strong>Google Analytics</strong> — measures site usage and visitor behaviour (anonymised). <a href="https://policies.google.com/privacy" target="_blank" style="color:var(--green-mid);">Google Privacy Policy →</a></li>
+      <li><strong>Stripe / Payment Processors</strong> — fraud prevention cookies set during checkout. These are essential for secure transactions.</li>
+      <li><strong>Font providers</strong> — Google Fonts may set cookies for performance optimisation.</li>
+    </ul>
+    <p>We do not use social media tracking pixels or advertising networks. We do not sell data to advertisers.</p>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="policy-section" id="c6">
+    <h2><i class="fas fa-browser"></i> 6. Browser Controls</h2>
+    <p>In addition to the preference panel above, you can manage or delete cookies directly through your browser. Here's how:</p>
+    <ul>
+      <li><strong>Chrome:</strong> Settings → Privacy and security → Cookies and other site data</li>
+      <li><strong>Firefox:</strong> Settings → Privacy & Security → Cookies and Site Data</li>
+      <li><strong>Safari:</strong> Preferences → Privacy → Manage Website Data</li>
+      <li><strong>Edge:</strong> Settings → Cookies and site permissions → Cookies and site data</li>
+    </ul>
+    <p>Note that disabling essential cookies will prevent login, cart functionality, and checkout from working correctly.</p>
+  </div>
+
+  <!-- Section 7 -->
+  <div class="policy-section" id="c7">
+    <h2><i class="fas fa-sync-alt"></i> 7. Updates to This Policy</h2>
+    <p>We may update this Cookie Policy as our services evolve or as regulations change. When we make significant changes, we will notify you via a banner on the site and update the "last updated" date above.</p>
+    <p>Your continued use of BioXplore after any update constitutes acceptance of the revised policy.</p>
+  </div>
+
+  <div class="contact-card">
+    <h3>Questions about cookies?</h3>
+    <p>If you have any questions about how we use cookies or your privacy, our team is happy to help.</p>
+    <a href="mailto:privacy@bioxplore.com"><i class="fas fa-envelope" style="margin-right:.5rem"></i>Contact Us</a>
+  </div>
+
+</div>
+
+<footer class="footer-exact">
+  <div class="footer-container">
+    <div class="footer-brand">
+      <h2>BioXplore</h2>
+      <p class="footer-tagline">Discover, learn, and preserve rare life forms through ethical sourcing and scientific excellence.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="bioeducation.html">Bio Education</a></li>
+          <li><a href="marketplace.html">Marketplace</a></li>
+          <li><a href="species.html">Species Library</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms-of-service.html">Terms of Service</a></li>
+          <li><a href="shipping-policy.html">Shipping Policy</a></li>
+          <li><a href="returns.html">Returns</a></li>
+          <li><a href="cookie-policy.html">Cookie Policy</a></li>
+          <li><a href="accessibility.html">Accessibility</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Contact</h3>
+        <ul>
+          <li>info@bioxplore.com</li>
+          <li>+1 (555) 123-4567</li>
+          <li>123 Biology Lane, Science City</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="copyright">© 2025 BioXplore. All rights reserved.</p>
+      <div class="policy-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="shipping-policy.html">Shipping Policy</a>
+        <a href="returns.html">Returns</a>
+        <a href="cookie-policy.html">Cookie Policy</a>
+        <a href="accessibility.html">Accessibility</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<nav class="mobile-bottom-nav">
+  <a href="home.html" class="mobile-nav-icon"><i class="fas fa-home"></i><span>Home</span></a>
+  <a href="species.html" class="mobile-nav-icon"><i class="fas fa-leaf"></i><span>Species</span></a>
+  <a href="marketplace.html" class="mobile-nav-icon"><i class="fas fa-store"></i><span>Market</span></a>
+  <a href="bioeducation.html" class="mobile-nav-icon"><i class="fas fa-graduation-cap"></i><span>Learn</span></a>
+</nav>
+
+<script>
+function loadPrefs() {
+  try {
+    const p = JSON.parse(localStorage.getItem('bx_cookie_prefs') || '{}');
+    document.getElementById('perfToggle').checked = !!p.performance;
+    document.getElementById('prefToggle').checked = !!p.preference;
+    document.getElementById('mktToggle').checked  = !!p.marketing;
+  } catch(e) {}
+}
+function setAll(val) {
+  document.getElementById('perfToggle').checked = val;
+  document.getElementById('prefToggle').checked = val;
+  document.getElementById('mktToggle').checked  = val;
+  savePrefs(val ? 'All cookies accepted.' : 'Optional cookies rejected.');
+}
+function savePrefs(msg) {
+  const prefs = {
+    essential:   true,
+    performance: document.getElementById('perfToggle').checked,
+    preference:  document.getElementById('prefToggle').checked,
+    marketing:   document.getElementById('mktToggle').checked,
+  };
+  localStorage.setItem('bx_cookie_prefs', JSON.stringify(prefs));
+  const toast = document.createElement('div');
+  toast.textContent = msg || 'Preferences saved ✓';
+  toast.style.cssText = 'position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#2e7d4f;color:white;padding:.8rem 1.8rem;border-radius:10px;font-weight:600;z-index:9999;font-size:.9rem;box-shadow:0 4px 20px rgba(0,0,0,.2);';
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 2500);
+}
+document.addEventListener('DOMContentLoaded', loadPrefs);
+</script>
+</body>
+</html>

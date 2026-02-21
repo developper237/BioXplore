@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bio Education | BioXplore - Learn About Rare Life Forms</title>
+<meta name="description" content="Comprehensive educational resources about rare species, biology, conservation, and ecological systems. Interactive learning materials for all levels.">
+<meta name="keywords" content="biology education, science learning, conservation education, species education, biology courses, interactive learning">
+<meta name="author" content="BioXplore">
+<link rel="canonical" href="https://bioxplore.com/education">
+<meta property="og:title" content="Bio Education | BioXplore">
+<meta property="og:description" content="Learn about rare life forms through comprehensive educational resources and interactive materials.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+<meta property="og:url" content="https://bioxplore.com/education">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{--green:#1f3d2b;--neutral:#f4f4f2;--accent:#6fbf73;--green-light:#7edc88}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Inter",sans-serif;background:var(--neutral);color:#222;line-height:1.6;padding-bottom:70px}
+
+/* =================== HEADER =================== */
+.header-main{background:#f3faf6;padding:1.4rem 3rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:998;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.header-left{display:flex;align-items:center;gap:.8rem}
+.header-left img{width:44px}
+.header-left span{font-family:"Playfair Display",serif;font-size:1.9rem;color:var(--green);font-weight:600}
+.header-nav{display:flex;align-items:center;gap:2.2rem}
+.header-nav a{text-decoration:none;color:#2d3a3f;font-size:.95rem;font-weight:500;transition:all .2s ease}
+.header-nav a:hover{color:#2e7d4f;transform:translateY(-1px)}
+.header-nav a.active{color:#2e7d4f;font-weight:600;position:relative}
+.header-nav a.active::after{content:'';position:absolute;bottom:-5px;left:0;width:100%;height:2px;background:#2e7d4f;border-radius:2px}
+.marketplace-btn{background:#2e6f43;color:#fff!important;padding:.75rem 1.6rem;border-radius:12px;font-size:.95rem;font-weight:600;text-decoration:none}
+.marketplace-btn:hover{background:#245a36!important;transform:none!important}
+
+/* =================== HAMBURGER =================== */
+.hamburger{display:flex;flex-direction:column;gap:6px;cursor:pointer;z-index:1002;background:none;border:none;padding:.5rem}
+.hamburger span{width:26px;height:3px;background:var(--green);border-radius:3px;transition:.3s}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(7px,7px);background:#fff}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(6px,-6px);background:#fff}
+
+/* =================== MOBILE MENU =================== */
+.mobile-menu-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(15,31,23,.98);z-index:1001;display:none;backdrop-filter:blur(5px)}
+.mobile-menu-overlay.active{display:block;animation:fadeInMenu .3s ease}
+@keyframes fadeInMenu{from{opacity:0}to{opacity:1}}
+.mobile-nav-container{position:absolute;top:0;left:0;width:100%;height:100%;padding:2rem;display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+.mobile-menu-header{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 0;border-bottom:1px solid rgba(255,255,255,.1);margin-top:1rem;flex-shrink:0}
+.mobile-logo{display:flex;align-items:center;gap:.8rem}
+.mobile-logo img{width:36px;filter:brightness(0) invert(1)}
+.mobile-logo span{font-family:"Playfair Display",serif;font-size:1.6rem;color:#fff}
+.close-menu{background:rgba(255,255,255,.1);border:none;color:#fff;font-size:1.8rem;cursor:pointer;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%}
+.mobile-nav-menu{flex:0 1 auto;display:flex;flex-direction:column;padding:2rem 0;gap:.5rem}
+.mobile-nav-item{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 0;text-decoration:none;color:#fff;font-size:1.2rem;border-bottom:1px solid rgba(255,255,255,.1);transition:all .3s ease}
+.mobile-nav-item:hover{color:var(--green-light);padding-left:1rem}
+.mobile-nav-item.active{color:var(--green-light);font-weight:600}
+.mobile-user-section{margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.1);flex-shrink:0}
+.mobile-user-info{display:flex;align-items:center;gap:1rem;padding-bottom:1.5rem}
+.mobile-user-avatar{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,#2e7d4f,#5fbf6a);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.3rem}
+.mobile-user-details h4{color:#fff;font-size:1.1rem}
+.mobile-user-details p{color:#ccc;font-size:.9rem}
+.mobile-auth-buttons{display:flex;gap:1rem}
+.mobile-auth-btn{flex:1;padding:.9rem;text-align:center;border-radius:10px;text-decoration:none;font-weight:500;font-size:1rem}
+.mobile-btn-login{background:transparent;color:#fff;border:2px solid #4a9e5f}
+.mobile-btn-signup{background:#4a9e5f;color:#fff;border:2px solid #4a9e5f}
+
+/* =================== BOTTOM NAV =================== */
+.mobile-bottom-nav{position:fixed;bottom:0;left:0;width:100%;background:var(--green);display:flex;justify-content:space-around;padding:.8rem 0;z-index:997;border-top:1px solid rgba(255,255,255,.1)}
+.mobile-nav-icon{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:#ccc;font-size:.8rem;transition:color .3s ease;flex:1;padding:.5rem}
+.mobile-nav-icon i{font-size:1.2rem;margin-bottom:.3rem}
+.mobile-nav-icon.active,.mobile-nav-icon:hover{color:var(--green-light)}
+
+/* =================== HERO =================== */
+.education-hero{position:relative;min-height:70vh;background:linear-gradient(rgba(15,31,23,.92),rgba(15,31,23,.85)),url("https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80") center/cover no-repeat;padding:6rem 2rem;color:#fff;display:flex;align-items:center;text-align:center}
+.education-hero-content{max-width:900px;margin:0 auto;position:relative;z-index:2}
+.badge{display:inline-block;background:#5fbf6a;color:#0e2b1e;padding:.5rem 1.2rem;border-radius:50px;font-size:.75rem;font-weight:600;margin-bottom:1.5rem;text-transform:uppercase;letter-spacing:1px}
+.education-hero h1{font-family:"Playfair Display",serif;font-size:3.8rem;line-height:1.15;margin-bottom:1.5rem}
+.education-hero h1 span{color:var(--green-light)}
+.education-hero>div>p{max-width:700px;margin:0 auto 2.5rem;font-size:1.2rem;color:#e0e0e0}
+.education-cta-buttons{display:flex;gap:1rem;justify-content:center;margin-top:2.5rem;flex-wrap:wrap}
+.cta-btn-primary{background:#2e7d4f;color:#fff;border:none;padding:1rem 2rem;border-radius:12px;cursor:pointer;font-size:1rem;font-weight:600;transition:all .3s;display:flex;align-items:center;gap:.5rem}
+.cta-btn-primary:hover{background:#256b41;transform:translateY(-2px)}
+.cta-btn-secondary{background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.3);color:#fff;padding:1rem 2rem;border-radius:12px;cursor:pointer;font-size:1rem;font-weight:600;transition:all .3s;display:flex;align-items:center;gap:.5rem;backdrop-filter:blur(10px)}
+.cta-btn-secondary:hover{background:rgba(255,255,255,.2);transform:translateY(-2px)}
+
+/* =================== CATEGORIES =================== */
+.categories-section{padding:5rem 2rem;background:#fff}
+.categories-container{max-width:1200px;margin:0 auto;text-align:center}
+.categories-section h2{font-family:"Playfair Display",serif;font-size:2.8rem;margin-bottom:1rem;color:var(--green)}
+.categories-section>div>p{max-width:700px;margin:0 auto 3.5rem;color:#5f737a;font-size:1.05rem}
+.categories-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem}
+.category-card{background:#f9fbf8;border-radius:18px;padding:2.5rem 2rem;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.05);transition:all .3s ease;border:2px solid transparent}
+.category-card:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(0,0,0,.12);border-color:#e0f0e5}
+.category-icon{width:70px;height:70px;background:linear-gradient(135deg,#2f8f46,#5fbf6a);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;color:white;font-size:1.8rem}
+.category-card h3{font-family:"Playfair Display",serif;font-size:1.5rem;margin-bottom:1rem;color:var(--green)}
+.category-card>p{color:#5f737a;font-size:.95rem;margin-bottom:1.6rem}
+.category-card .badge{background:#e6f4ec;color:#2e7d4f;margin-bottom:1.2rem}
+
+/* =================== FEATURED COURSES =================== */
+.featured-courses-section{padding:5rem 2rem;background:linear-gradient(135deg,#f3faf6 0%,#e8f4ec 100%)}
+.featured-courses-container{max-width:1200px;margin:0 auto}
+.featured-courses-section h2{font-family:"Playfair Display",serif;font-size:2.8rem;text-align:center;margin-bottom:1rem;color:var(--green)}
+.featured-courses-section>div>p{text-align:center;max-width:700px;margin:0 auto 3.5rem;color:#5f737a;font-size:1.05rem}
+.courses-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:2rem}
+.course-card{background:white;border-radius:16px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.08);transition:all .3s}
+.course-card:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(0,0,0,.12)}
+.course-image{height:200px;overflow:hidden}
+.course-image img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.course-card:hover .course-image img{transform:scale(1.05)}
+.course-content{padding:1.8rem}
+.course-meta{display:flex;justify-content:space-between;margin-bottom:.8rem}
+.course-level{background:#e6f4ec;color:#2e7d4f;padding:.3rem .8rem;border-radius:50px;font-size:.8rem;font-weight:600}
+.course-duration{color:#5f737a;font-size:.8rem;display:flex;align-items:center;gap:.3rem}
+.course-title{font-family:"Playfair Display",serif;font-size:1.5rem;margin-bottom:.8rem;color:var(--green)}
+.course-description{color:#6b7f86;margin-bottom:1.5rem;font-size:.95rem;line-height:1.6}
+.course-features{display:flex;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.course-feature{display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:#5f737a}
+.course-feature i{color:#4a9e5f}
+.course-btn{width:100%;background:#2e7d4f;color:white;border:none;padding:.9rem;border-radius:10px;font-weight:600;cursor:pointer;transition:all .3s;font-size:.95rem;display:flex;align-items:center;justify-content:center;gap:.5rem}
+.course-btn:hover{background:#256b41;transform:translateY(-2px)}
+
+/* =================== LEARNING PATHS =================== */
+.learning-paths-section{padding:5rem 2rem;background:#fff}
+.learning-paths-container{max-width:1200px;margin:0 auto}
+.learning-paths-section h2{font-family:"Playfair Display",serif;font-size:2.8rem;text-align:center;margin-bottom:1rem;color:var(--green)}
+.learning-paths-section>div>p{text-align:center;max-width:700px;margin:0 auto 3.5rem;color:#5f737a;font-size:1.05rem}
+.paths-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2rem}
+.path-card{background:#f9fbf8;border-radius:18px;padding:2.5rem;position:relative;border-left:5px solid #2e7d4f;transition:all .3s}
+.path-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,.1)}
+.path-number{position:absolute;top:-15px;left:-15px;width:40px;height:40px;background:#2e7d4f;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1.2rem}
+.path-card h3{font-family:"Playfair Display",serif;font-size:1.5rem;margin-bottom:1rem;color:var(--green)}
+.path-card>p{color:#5f737a;font-size:.95rem;margin-bottom:1.5rem}
+.path-steps{list-style:none;margin-bottom:1.5rem}
+.path-step{display:flex;align-items:flex-start;gap:.8rem;margin-bottom:.8rem}
+.path-step i{color:#4a9e5f;margin-top:.2rem}
+.path-step span{color:#5f737a;font-size:.95rem}
+.path-btn{background:#2e7d4f;color:white;border:none;padding:.8rem 1.5rem;border-radius:8px;font-weight:600;cursor:pointer;transition:all .3s;display:inline-flex;align-items:center;gap:.5rem}
+.path-btn:hover{background:#256b41;transform:translateY(-2px)}
+
+/* =================== EDUCATOR FEATURES =================== */
+.educator-features-section{padding:5rem 2rem;background:linear-gradient(135deg,#1e2f33,#2a3f44);color:#fff;text-align:center}
+.educator-features-container{max-width:1200px;margin:0 auto}
+.educator-features-section h2{font-family:"Playfair Display",serif;font-size:2.8rem;margin-bottom:1rem}
+.educator-features-section>div>p{max-width:700px;margin:0 auto 4rem;color:#d6e3e0;font-size:1.05rem}
+.edu-features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2.5rem}
+.edu-feature-item{display:flex;flex-direction:column;align-items:center;gap:1.2rem;text-align:center}
+.edu-feature-icon{width:80px;height:80px;border-radius:50%;background:rgba(74,158,95,.2);display:flex;align-items:center;justify-content:center;font-size:2rem;color:#4a9e5f}
+.edu-feature-item h3{font-size:1.4rem;margin-bottom:.5rem;color:#fff}
+.edu-feature-item p{color:#cfe5dc;font-size:.95rem;margin:0}
+
+/* =================== CTA SECTION =================== */
+.cta-section{padding:6rem 2rem;background:linear-gradient(135deg,#0f1f17 0%,#1a3626 100%);color:#fff;text-align:center}
+.cta-container{max-width:1000px;margin:0 auto}
+.cta-section h2{font-family:"Playfair Display",serif;font-size:3rem;margin-bottom:1.5rem}
+.cta-section>div>p{font-size:1.2rem;color:#ccc;line-height:1.7;max-width:800px;margin:0 auto 3rem}
+.cta-buttons{display:flex;justify-content:center;gap:1.5rem;margin-bottom:4rem;flex-wrap:wrap}
+.cta-btn-large{background:#2e7d4f;color:#fff;border:none;padding:1.2rem 2.5rem;border-radius:12px;cursor:pointer;font-size:1.1rem;font-weight:600;transition:all .3s;display:flex;align-items:center;gap:.5rem}
+.cta-btn-large:hover{background:#256b41;transform:translateY(-2px)}
+.cta-btn-outline{background:transparent;color:#fff;border:2px solid #4a9e5f;padding:1.2rem 2.5rem;border-radius:12px;cursor:pointer;font-size:1.1rem;font-weight:600;transition:all .3s;display:flex;align-items:center;gap:.5rem}
+.cta-btn-outline:hover{background:rgba(74,158,95,.1);transform:translateY(-2px)}
+.cta-features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:900px;margin:0 auto;padding-top:3rem;border-top:1px solid rgba(255,255,255,.1)}
+.cta-feature-item{display:flex;flex-direction:column;align-items:center;text-align:center}
+.cta-feature-icon{width:60px;height:60px;border-radius:50%;background:rgba(74,158,95,.2);display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;font-size:1.5rem;color:#4a9e5f}
+.cta-feature-item h4{font-size:1.1rem;margin-bottom:.5rem;color:#fff}
+.cta-feature-item p{font-size:.9rem;color:#b0b0b0;margin:0}
+
+/* =================== FOOTER =================== */
+.footer-exact{background:#0f1f17;color:#fff;padding:3.5rem 2rem 2rem}
+.footer-container{max-width:1200px;margin:0 auto}
+.footer-brand{text-align:center;margin-bottom:2.5rem}
+.footer-brand h2{font-family:"Playfair Display",serif;font-size:2rem;margin-bottom:1rem}
+.footer-tagline{font-size:1.1rem;color:#ccc;line-height:1.6;max-width:800px;margin:0 auto 2rem}
+.social-icons{display:flex;justify-content:center;gap:1.5rem;margin:2rem 0}
+.social-icon{width:44px;height:44px;border:2px solid #4a9e5f;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#4a9e5f;font-size:1.2rem;transition:all .3s;text-decoration:none}
+.social-icon:hover{background:#4a9e5f;color:#0f1f17;transform:translateY(-3px)}
+.divider{height:1px;background:#2a4a3a;margin:2.5rem 0;border:none}
+.quick-links-table{width:100%;margin-bottom:2.5rem;border-collapse:collapse}
+.quick-links-table th{text-align:left;font-family:"Playfair Display",serif;font-size:1.4rem;padding-bottom:1.5rem;color:#fff;font-weight:600}
+.quick-links-table td{padding:.5rem 0;color:#b0b0b0;font-size:1rem;vertical-align:top}
+.quick-links-table td a{color:#b0b0b0;text-decoration:none;transition:color .2s}
+.quick-links-table td a:hover{color:#fff}
+.contact-info p{margin:.3rem 0;line-height:1.5}
+.footer-bottom{text-align:center;padding-top:2rem;border-top:1px solid #2a4a3a}
+.copyright{font-size:.95rem;color:#ccc;margin-bottom:1rem}
+.policy-links{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap}
+.policy-links a{color:#b0b0b0;text-decoration:none;font-size:.9rem;transition:color .3s}
+.policy-links a:hover{color:#fff}
+@media(max-width:768px){
+  .quick-links-table{display:block;overflow-x:auto}
+  .quick-links-table thead,.quick-links-table tbody,.quick-links-table th,.quick-links-table td,.quick-links-table tr{display:block}
+  .quick-links-table tr{margin-bottom:2rem}
+  .quick-links-table th{padding-bottom:.5rem;text-align:center}
+}
+
+/* =================== SKIP TO CONTENT =================== */
+.skip-to-content{position:absolute;top:-40px;left:0;background:#2e7d4f;color:white;padding:8px 16px;z-index:1010;text-decoration:none;border-radius:0 0 4px 0;font-weight:600;transition:top .3s}
+.skip-to-content:focus{top:0}
+
+/* =================== ANIMATIONS =================== */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.category-card,.course-card,.path-card,.edu-feature-item{animation:fadeInUp .6s ease forwards}
+.path-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,.1)}
+@media(max-width:1024px){.header-nav{gap:1.5rem}}
+@media(max-width:768px){
+  .header-nav,.user-account-section{display:none}
+  .header-main{padding:1rem 1.5rem}
+  .education-hero{padding:4rem 1.5rem;min-height:60vh}
+  .education-hero h1{font-size:2.4rem}
+  .education-cta-buttons{flex-direction:column;align-items:center}
+  .cta-btn-primary,.cta-btn-secondary{width:100%;justify-content:center}
+  .categories-grid,.courses-grid,.paths-grid{grid-template-columns:1fr}
+  .cta-features-grid{grid-template-columns:1fr;gap:2rem}
+  .cta-buttons{flex-direction:column;align-items:center}
+  .cta-btn-large,.cta-btn-outline{width:100%;justify-content:center}
+}
+@media(max-width:600px){
+  .education-hero h1{font-size:2rem}
+  .categories-section,.featured-courses-section,.learning-paths-section,.educator-features-section,.cta-section{padding:3.5rem 1.5rem}
+  .course-features{flex-direction:column;gap:.5rem}
+  .cta-features-grid{grid-template-columns:1fr}
+}
+/* Sur grands écrans, masquer la bottom nav */
+@media(min-width: 769px) {
+  .mobile-bottom-nav { display: none; }
+}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+<!-- HEADER -->
+<header class="header-main">
+  <div class="header-left">
+    <img src="https://cdn-icons-png.flaticon.com/512/3069/3069172.png" alt="BioXplore Logo">
+    <span>BioXplore</span>
+  </div>
+  <nav class="header-nav">
+    <a href="home.html">Home</a>
+    <a href="bioeducation.html" class="active">Bio Education</a>
+    <a href="species.html">Species Library</a>
+    <a href="ethics.html">Conservation & Ethics</a>
+    <a href="marketplace.html" class="marketplace-btn">Marketplace</a>
+  </nav>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu-overlay" id="mobileMenuOverlay">
+  <div class="mobile-nav-container">
+    <div class="mobile-menu-header">
+      <div class="mobile-logo">
+        <img src="https://cdn-icons-png.flaticon.com/512/3069/3069172.png" alt="BioXplore Logo">
+        <span>BioXplore</span>
+      </div>
+      <button class="close-menu" id="closeMenu"><i class="fas fa-times"></i></button>
+    </div>
+    <nav class="mobile-nav-menu">
+      <a href="home.html" class="mobile-nav-item"><span><i class="fas fa-home"></i> Home</span><i class="fas fa-chevron-right"></i></a>
+      <a href="bioeducation.html" class="mobile-nav-item active"><span><i class="fas fa-graduation-cap"></i> Bio Education</span><i class="fas fa-chevron-right"></i></a>
+      <a href="species.html" class="mobile-nav-item"><span><i class="fas fa-leaf"></i> Species Library</span><i class="fas fa-chevron-right"></i></a>
+      <a href="ethics.html" class="mobile-nav-item"><span><i class="fas fa-handshake"></i> Conservation & Ethics</span><i class="fas fa-chevron-right"></i></a>
+      <a href="marketplace.html" class="mobile-nav-item"><span><i class="fas fa-store"></i> Marketplace</span><i class="fas fa-chevron-right"></i></a>
+    </nav>
+    <div class="mobile-user-section">
+      <div class="mobile-user-info">
+        <div class="mobile-user-avatar"><i class="fas fa-user"></i></div>
+        <div class="mobile-user-details"><h4 data-auth="name">—</h4><p data-auth="role">Member</p></div>
+      </div>
+      <div class="mobile-auth-buttons">
+        <a href="profile.html" class="mobile-auth-btn mobile-btn-login">My Profile</a>
+        <a href="login.html" class="mobile-auth-btn mobile-btn-signup">Log Out</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<nav class="mobile-bottom-nav">
+  <a href="home.html" class="mobile-nav-icon"><i class="fas fa-home"></i><span>Home</span></a>
+  <a href="species.html" class="mobile-nav-icon"><i class="fas fa-leaf"></i><span>Species</span></a>
+  <a href="marketplace.html" class="mobile-nav-icon"><i class="fas fa-store"></i><span>Market</span></a>
+  <a href="bioeducation.html" class="mobile-nav-icon active"><i class="fas fa-graduation-cap"></i><span>Learn</span></a>
+  <a href="#" class="mobile-nav-icon" id="mobileMenuBtn"><i class="fas fa-bars"></i><span>Menu</span></a>
+</nav>
+
+<!-- HERO -->
+<main id="main-content">
+<section class="education-hero">
+  <div class="education-hero-content">
+    <span class="badge">COMPREHENSIVE LEARNING</span>
+    <h1>Bio <span>Education</span> Hub</h1>
+    <p>Discover comprehensive learning resources about rare life forms, conservation biology, ecological systems, and scientific research. Designed for students, educators, and enthusiasts at all levels.</p>
+    <div class="education-cta-buttons">
+      <button class="cta-btn-primary"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Start Learning Free</button>
+      <button class="cta-btn-secondary"><i class="fas fa-chalkboard-teacher" aria-hidden="true"></i> Explore Educator Resources</button>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="categories-section">
+  <div class="categories-container">
+    <h2>Explore Learning Categories</h2>
+    <p>Browse our comprehensive educational materials organized into specialized categories for focused learning.</p>
+    <div class="categories-grid">
+      <div class="category-card">
+        <div class="category-icon"><i class="fas fa-leaf" aria-hidden="true"></i></div>
+        <span class="badge">Beginner to Advanced</span>
+        <h3>Botany & Plant Sciences</h3>
+        <p>Study rare plant species, their adaptations, ecological roles, and conservation needs through interactive modules.</p>
+      </div>
+      <div class="category-card">
+        <div class="category-icon"><i class="fas fa-bug" aria-hidden="true"></i></div>
+        <span class="badge">Interactive Learning</span>
+        <h3>Entomology & Rare Insects</h3>
+        <p>Explore fascinating insect biodiversity, behavior, and conservation through virtual labs and field simulations.</p>
+      </div>
+      <div class="category-card">
+        <div class="category-icon"><i class="fas fa-microscope" aria-hidden="true"></i></div>
+        <span class="badge">Research Focused</span>
+        <h3>Microbiology & Microscopy</h3>
+        <p>Dive into microscopic life forms, their ecological significance, and research techniques with virtual microscopy.</p>
+      </div>
+      <div class="category-card">
+        <div class="category-icon"><i class="fas fa-hand-holding-heart" aria-hidden="true"></i></div>
+        <span class="badge">Ethics & Practice</span>
+        <h3>Conservation Biology</h3>
+        <p>Learn about conservation strategies, ethical practices, and biodiversity protection through real-world case studies.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED COURSES -->
+<section class="featured-courses-section" id="featured-courses">
+  <div class="featured-courses-container">
+    <h2>Featured Courses</h2>
+    <p>Hand-picked courses designed by experts to provide comprehensive understanding of rare species and ecosystems.</p>
+    <div class="courses-grid">
+      <article class="course-card">
+        <div class="course-image"><img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Rainforest ecosystem" loading="lazy"></div>
+        <div class="course-content">
+          <div class="course-meta">
+            <span class="course-level">Beginner</span>
+            <span class="course-duration"><i class="fas fa-clock"></i> 8 hours</span>
+          </div>
+          <h3 class="course-title">Rainforest Biodiversity</h3>
+          <p class="course-description">Explore the incredible diversity of rainforest species, their interconnections, and conservation challenges.</p>
+          <div class="course-features">
+            <div class="course-feature"><i class="fas fa-video"></i><span>12 Video Lessons</span></div>
+            <div class="course-feature"><i class="fas fa-file-alt"></i><span>5 Quizzes</span></div>
+            <div class="course-feature"><i class="fas fa-certificate"></i><span>Certificate</span></div>
+          </div>
+          <button class="course-btn">Enroll Now <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </article>
+      <article class="course-card">
+        <div class="course-image"><img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Microscopic organisms" loading="lazy"></div>
+        <div class="course-content">
+          <div class="course-meta">
+            <span class="course-level">Intermediate</span>
+            <span class="course-duration"><i class="fas fa-clock"></i> 12 hours</span>
+          </div>
+          <h3 class="course-title">Microscopic Life Forms</h3>
+          <p class="course-description">Discover the hidden world of microorganisms and their crucial roles in ecosystems and human life.</p>
+          <div class="course-features">
+            <div class="course-feature"><i class="fas fa-video"></i><span>18 Video Lessons</span></div>
+            <div class="course-feature"><i class="fas fa-flask"></i><span>Virtual Labs</span></div>
+          </div>
+          <button class="course-btn">Enroll Now <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </article>
+      <article class="course-card">
+        <div class="course-image"><img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Conservation ethics" loading="lazy"></div>
+        <div class="course-content">
+          <div class="course-meta">
+            <span class="course-level">Advanced</span>
+            <span class="course-duration"><i class="fas fa-clock"></i> 15 hours</span>
+          </div>
+          <h3 class="course-title">Conservation Ethics</h3>
+          <p class="course-description">Examine the ethical considerations in conservation biology and sustainable species management.</p>
+          <div class="course-features">
+            <div class="course-feature"><i class="fas fa-video"></i><span>20 Video Lessons</span></div>
+            <div class="course-feature"><i class="fas fa-users"></i><span>Group Discussions</span></div>
+          </div>
+          <button class="course-btn">Enroll Now <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- LEARNING PATHS -->
+<section class="learning-paths-section">
+  <div class="learning-paths-container">
+    <h2>Structured Learning Paths</h2>
+    <p>Follow curated learning paths designed to build your knowledge systematically from beginner to expert level.</p>
+    <div class="paths-grid">
+      <div class="path-card">
+        <div class="path-number">1</div>
+        <h3>Beginner Path: Introduction to Biology</h3>
+        <p>Start your journey with fundamental biological concepts, basic taxonomy, and introductory ecology.</p>
+        <ul class="path-steps">
+          <li class="path-step"><i class="fas fa-check-circle"></i><span>Basic biological principles</span></li>
+          <li class="path-step"><i class="fas fa-check-circle"></i><span>Introduction to taxonomy</span></li>
+          <li class="path-step"><i class="fas fa-check-circle"></i><span>Ecosystem fundamentals</span></li>
+          <li class="path-step"><i class="fas fa-check-circle"></i><span>Species identification basics</span></li>
+        </ul>
+        <button class="path-btn">Start Path <i class="fas fa-play"></i></button>
+      </div>
+      <div class="path-card">
+        <div class="path-number">2</div>
+        <h3>Intermediate Path: Specialized Studies</h3>
+        <p>Dive deeper into specific biological disciplines with advanced concepts and practical applications.</p>
+        <ul class="path-steps">
+          <li class="path-step"><i class="fas fa-check-circle"></i><span>Advanced taxonomy & phylogeny</span></li>
+          <li class="path-step"><i class="fas fa-check-circle"></i><span>Conservation biology principles</span></li>
+          <li class="path-step"><i class="fas fa-check-circle"></i><span>Research methodology</span></li>
+          <li class="path-step"><i class="fas fa-check-circle"></i><span>Field study techniques</span></li>
+        </ul>
+        <button class="path-btn">Start Path <i class="fas fa-play"></i></button>
+      </div>
+      <div class="path-card">
+        <div class="path-number">3</div>
+        <h3>Advanced Path: Research & Application</h3>
+        <p>Master research techniques, data analysis, and contribute to real conservation projects.</p>
+        <ul class="path-steps">
+          <li class="path-step"><i class="fas fa-check-circle"></i><span>Advanced research design</span></li>
+          <li class="path-step"><i class="fas fa-check-circle"></i><span>Data analysis & interpretation</span></li>
+          <li class="path-step"><i class="fas fa-check-circle"></i><span>Conservation project management</span></li>
+          <li class="path-step"><i class="fas fa-check-circle"></i><span>Scientific publication preparation</span></li>
+        </ul>
+        <button class="path-btn">Start Path <i class="fas fa-play"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATOR FEATURES -->
+<section class="educator-features-section">
+  <div class="educator-features-container">
+    <h2>Designed for Educators</h2>
+    <p>Comprehensive resources and tools to enhance classroom teaching and engage students with real-world biology.</p>
+    <div class="edu-features-grid">
+      <div class="edu-feature-item">
+        <div class="edu-feature-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+        <h3>Lesson Plans</h3>
+        <p>Ready-to-use lesson plans aligned with educational standards for all grade levels.</p>
+      </div>
+      <div class="edu-feature-item">
+        <div class="edu-feature-icon"><i class="fas fa-vial"></i></div>
+        <h3>Virtual Labs</h3>
+        <p>Interactive laboratory simulations for safe, accessible hands-on learning experiences.</p>
+      </div>
+      <div class="edu-feature-item">
+        <div class="edu-feature-icon"><i class="fas fa-chart-bar"></i></div>
+        <h3>Assessment Tools</h3>
+        <p>Comprehensive assessment resources including quizzes, tests, and project rubrics.</p>
+      </div>
+      <div class="edu-feature-item">
+        <div class="edu-feature-icon"><i class="fas fa-hands-helping"></i></div>
+        <h3>Professional Development</h3>
+        <p>Workshops and training to enhance teaching skills and stay updated with latest research.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-container">
+    <h2>Start Your Learning Journey Today</h2>
+    <p>Join thousands of students, educators, and enthusiasts who are expanding their knowledge of rare life forms and conservation biology.</p>
+    <div class="cta-buttons">
+      <button class="cta-btn-large"><i class="fas fa-user-graduate"></i> Create Free Account</button>
+      <button class="cta-btn-outline"><i class="fas fa-school"></i> Educator Portal</button>
+    </div>
+    <div class="cta-features-grid">
+      <div class="cta-feature-item">
+        <div class="cta-feature-icon"><i class="fas fa-certificate"></i></div>
+        <h4>Certified Courses</h4>
+        <p>Earn recognized certificates upon completion</p>
+      </div>
+      <div class="cta-feature-item">
+        <div class="cta-feature-icon"><i class="fas fa-user-friends"></i></div>
+        <h4>Community Learning</h4>
+        <p>Connect with peers and experts worldwide</p>
+      </div>
+      <div class="cta-feature-item">
+        <div class="cta-feature-icon"><i class="fas fa-laptop-code"></i></div>
+        <h4>Interactive Content</h4>
+        <p>Engaging multimedia and interactive modules</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer-exact">
+  <div class="footer-container">
+    <div class="footer-brand">
+      <h2>BioXplore</h2>
+      <p class="footer-tagline">Discover, learn, and preserve rare life forms through ethical sourcing and scientific excellence.</p>
+      <div class="social-icons">
+        <a href=" https://www.facebook.com/share/1HhhGYC2Kc/?mibextid=wwXIfr" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href=" https://www.instagram.com/bioxp_lore/ " class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="  https://x.com/bioxplore8xdp?s=11" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+    <hr class="divider">
+    <table class="quick-links-table">
+      <thead>
+        <tr>
+          <th>Quick Links</th>
+          <th>Resources</th>
+          <th>Get In Touch</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="home.html">Home</a></td>
+          <td><a href="ethics.html">Conservation and Ethics</a></td>
+          <td class="contact-info"><p>education@bioxplore.com</p></td>
+        </tr>
+        <tr>
+          <td><a href="species.html">Species Library</a></td>
+          <td><a href="about.html">About BioXplore</a></td>
+          <td class="contact-info"><p>+1 (555) 987-6543</p></td>
+        </tr>
+        <tr>
+          <td><a href="bioeducation.html">Bio Education</a></td>
+          <td><a href="contact.html">Contact</a></td>
+          <td class="contact-info"><p>456 Education Drive<br>Science City, SC 12345</p></td>
+        </tr>
+        <tr>
+          <td><a href="marketplace.html">Marketplace</a></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="footer-bottom">
+      <p class="copyright">© 2025 BioXplore. All rights reserved.</p>
+      <div class="policy-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="cookie-policy.html">Cookie Policy</a>
+        <a href="accessibility.html">Accessibility</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// =================== NAVIGATION ===================
+const hamburger=document.getElementById('hamburger');
+const mobileMenuOverlay=document.getElementById('mobileMenuOverlay');
+const closeMenu=document.getElementById('closeMenu');
+const mobileMenuBtn=document.getElementById('mobileMenuBtn');
+
+function openMenu(){mobileMenuOverlay.classList.add('active');hamburger.classList.add('active');document.body.style.overflow='hidden'}
+function closeMenuFunc(){mobileMenuOverlay.classList.remove('active');hamburger.classList.remove('active');document.body.style.overflow=''}
+
+hamburger.addEventListener('click',e=>{e.stopPropagation();mobileMenuOverlay.classList.contains('active')?closeMenuFunc():openMenu()});
+closeMenu.addEventListener('click',closeMenuFunc);
+mobileMenuBtn.addEventListener('click',e=>{e.preventDefault();openMenu()});
+mobileMenuOverlay.addEventListener('click',e=>{if(e.target===mobileMenuOverlay)closeMenuFunc()});
+document.querySelectorAll('.mobile-nav-item').forEach(item=>{item.addEventListener('click',()=>setTimeout(closeMenuFunc,300))});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenuFunc()});
+document.querySelectorAll('.mobile-nav-icon').forEach(icon=>{icon.addEventListener('click',()=>{if(icon.id==='mobileMenuBtn')return;document.querySelectorAll('.mobile-nav-icon').forEach(i=>i.classList.remove('active'));icon.classList.add('active')})});
+
+// Skip to content
+document.querySelector('.skip-to-content')?.addEventListener('click',e=>{e.preventDefault();document.getElementById('main-content').focus()});
+
+// =================== ANIMATIONS ===================
+const animStyle=document.createElement('style');
+animStyle.textContent='@keyframes slideIn{from{transform:translateX(400px);opacity:0}to{transform:translateX(0);opacity:1}}@keyframes slideOut{from{transform:translateX(0);opacity:1}to{transform:translateX(400px);opacity:0}}@keyframes popIn{from{transform:translate(-50%,-50%) scale(0.8);opacity:0}to{transform:translate(-50%,-50%) scale(1);opacity:1}}';
+document.head.appendChild(animStyle);
+
+// =================== NOTIFICATION HELPER ===================
+function showNotification(icon,title,message,color){
+  color=color||'#2e7d4f';
+  const n=document.createElement('div');
+  n.style.cssText='position:fixed;top:100px;right:20px;background:'+color+';color:white;padding:1.5rem 2rem;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.2);z-index:10000;animation:slideIn 0.3s ease;max-width:380px;';
+  n.innerHTML='<div style="display:flex;align-items:start;gap:1rem;"><i class="fas fa-'+icon+'" style="font-size:1.5rem;margin-top:0.2rem;"></i><div><div style="font-weight:700;font-size:1.1rem;margin-bottom:0.4rem;">'+title+'</div><div style="opacity:0.95;font-size:0.95rem;">'+message+'</div></div></div>';
+  document.body.appendChild(n);
+  setTimeout(()=>{n.style.animation='slideOut 0.3s ease';setTimeout(()=>n.remove(),300)},5000);
+}
+
+// =================== ENROLL NOW ===================
+document.querySelectorAll('.course-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const name=btn.closest('.course-card').querySelector('.course-title').textContent;
+    showNotification('check-circle','Successfully Enrolled!','You\'ve been enrolled in <strong>'+name+'</strong>. Check your email for access details.');
+  });
+});
+
+// =================== LEARNING PATHS ===================
+document.querySelectorAll('.path-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const title=btn.closest('.path-card').querySelector('h3').textContent.split(':')[0];
+    showNotification('play-circle','Path Started!','You\'ve started <strong>'+title+'</strong>. Good luck on your learning journey!','#1f3d2b');
+  });
+});
+
+// =================== START LEARNING → scroll to courses ===================
+document.querySelector('.cta-btn-primary').addEventListener('click',()=>{
+  const target=document.getElementById('featured-courses');
+  target.scrollIntoView({behavior:'smooth',block:'start'});
+  setTimeout(()=>{
+    target.style.transition='background .6s ease';
+    target.style.background='#d4edda';
+    setTimeout(()=>{target.style.background=''},1000);
+  },600);
+});
+
+// =================== EXPLORE EDUCATOR RESOURCES → modal ===================
+document.querySelector('.cta-btn-secondary').addEventListener('click',()=>{
+  const backdrop=document.createElement('div');
+  backdrop.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:9999;backdrop-filter:blur(5px);';
+  const modal=document.createElement('div');
+  modal.style.cssText='position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:white;padding:2.5rem;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,0.3);z-index:10000;max-width:500px;width:90%;animation:popIn 0.3s ease;';
+  const closeModal=()=>{backdrop.remove();modal.remove()};
+  modal.innerHTML='<div style="text-align:center;"><div style="width:70px;height:70px;background:linear-gradient(135deg,#2e7d4f,#5fbf6a);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:2rem;color:white;"><i class="fas fa-chalkboard-teacher"></i></div><h3 style="font-family:Playfair Display,serif;font-size:1.8rem;color:#1f3d2b;margin-bottom:1rem;">Educator Resources<br>Coming Soon!</h3><p style="color:#5f737a;line-height:1.6;margin-bottom:2rem;">We\'re building comprehensive resources including lesson plans, assessment tools, and classroom materials. Contact us for early access.</p><div style="display:flex;gap:1rem;"><button id="contactBtn" style="flex:1;padding:0.9rem;background:#2e7d4f;color:white;border:none;border-radius:10px;font-weight:600;cursor:pointer;font-size:1rem;"><i class="fas fa-envelope"></i> Contact Us</button><button id="closeBtn" style="flex:1;padding:0.9rem;background:#f0f0f0;color:#555;border:none;border-radius:10px;font-weight:600;cursor:pointer;font-size:1rem;">Close</button></div></div>';
+  backdrop.addEventListener('click',closeModal);
+  document.body.appendChild(backdrop);
+  document.body.appendChild(modal);
+  modal.querySelector('#closeBtn').addEventListener('click',closeModal);
+  modal.querySelector('#contactBtn').addEventListener('click',()=>{window.location.href='mailto:educators@bioxplore.com'});
+});
+
+// =================== CTA SECTION BUTTONS ===================
+document.querySelector('.cta-btn-large').addEventListener('click',()=>{
+  showNotification('user-graduate','Account Creation','Redirecting to registration... Welcome to BioXplore!');
+});
+document.querySelector('.cta-btn-outline').addEventListener('click',()=>{
+  showNotification('school','Educator Portal','Your access request has been received. We\'ll contact you shortly!','#1f3d2b');
+});
+</script>
+<script src="auth-nav.js"></script>
+</body>
+</html>

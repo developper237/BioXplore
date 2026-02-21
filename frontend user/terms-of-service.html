@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service | BioXplore</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{--green:#1f3d2b;--green-mid:#2e7d4f;--green-light:#7edc88;--neutral:#f4f4f2;--dark:#0f1f17}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Inter",sans-serif;background:var(--neutral);color:#222;line-height:1.7;padding-bottom:70px}
+.header-main{background:#f3faf6;padding:1.4rem 3rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:998;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.header-left{display:flex;align-items:center;gap:.8rem;text-decoration:none}
+.header-left img{width:44px}
+.header-left span{font-family:"Playfair Display",serif;font-size:1.9rem;color:var(--green);font-weight:600}
+.header-nav{display:flex;align-items:center;gap:2rem}
+.header-nav a{text-decoration:none;color:#2d3a3f;font-size:.95rem;font-weight:500;transition:color .2s}
+.header-nav a:hover{color:var(--green-mid)}
+.marketplace-btn{background:#2e6f43;color:#fff!important;padding:.75rem 1.6rem;border-radius:12px;font-weight:600}
+.policy-hero{background:linear-gradient(135deg,#0f1f17 0%,#1a3d2b 50%,#2e4a3f 100%);padding:5rem 2rem 4rem;text-align:center;color:white;position:relative;overflow:hidden}
+.policy-hero::before{content:'';position:absolute;inset:0;opacity:.035;background-image:radial-gradient(circle,#fff 1px,transparent 1px);background-size:28px 28px}
+.policy-hero-badge{display:inline-block;background:rgba(111,191,115,.15);border:1px solid rgba(111,191,115,.35);color:#7edc88;padding:.4rem 1.2rem;border-radius:50px;font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.5rem}
+.policy-hero h1{font-family:"Playfair Display",serif;font-size:3rem;margin-bottom:1rem;line-height:1.2}
+.policy-hero p{font-size:1.05rem;color:#b8d4c0;max-width:560px;margin:0 auto 1.2rem}
+.policy-hero .last-updated{font-size:.82rem;color:rgba(126,220,136,.7)}
+.policy-content{max-width:820px;margin:0 auto;padding:4rem 2rem}
+.policy-toc{background:white;border-radius:16px;padding:1.8rem 2rem;margin-bottom:3rem;box-shadow:0 2px 16px rgba(0,0,0,.05);border-left:4px solid var(--green-mid)}
+.policy-toc h4{font-family:"Playfair Display",serif;color:var(--green);margin-bottom:1rem;font-size:1.1rem}
+.policy-toc ol{padding-left:1.2rem}
+.policy-toc li{margin-bottom:.4rem}
+.policy-toc a{color:var(--green-mid);text-decoration:none;font-size:.9rem;font-weight:500}
+.policy-toc a:hover{text-decoration:underline}
+.policy-section{margin-bottom:3rem;scroll-margin-top:100px}
+.policy-section h2{font-family:"Playfair Display",serif;font-size:1.6rem;color:var(--green);margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:2px solid #e8f5ee;display:flex;align-items:center;gap:.7rem}
+.policy-section h2 i{font-size:1.1rem;color:var(--green-mid)}
+.policy-section h3{font-size:1rem;color:#1f3d2b;margin:1.5rem 0 .6rem;font-weight:600}
+.policy-section p{color:#444;margin-bottom:1rem;font-size:.97rem}
+.policy-section ul{padding-left:1.5rem;margin-bottom:1rem}
+.policy-section li{color:#444;margin-bottom:.5rem;font-size:.97rem}
+.info-box{background:#f0f9f2;border:1px solid #c8e8d4;border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0;display:flex;gap:1rem;align-items:flex-start}
+.info-box i{color:var(--green-mid);font-size:1.1rem;margin-top:.15rem;flex-shrink:0}
+.info-box p{margin:0;font-size:.92rem;color:#2d4a38}
+.warning-box{background:#fff8e1;border:1px solid #ffe082;border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0;display:flex;gap:1rem;align-items:flex-start}
+.warning-box i{color:#e6a817;font-size:1.1rem;margin-top:.15rem;flex-shrink:0}
+.warning-box p{margin:0;font-size:.92rem;color:#5a4000}
+.contact-card{background:linear-gradient(135deg,var(--dark),#1a3d2b);color:white;border-radius:18px;padding:2.5rem;text-align:center;margin-top:3rem}
+.contact-card h3{font-family:"Playfair Display",serif;font-size:1.5rem;margin-bottom:.8rem}
+.contact-card p{color:#b8d4c0;margin-bottom:1.5rem;font-size:.95rem}
+.contact-card a{display:inline-block;background:var(--green-mid);color:white;padding:.8rem 2rem;border-radius:10px;text-decoration:none;font-weight:600;transition:background .2s}
+.contact-card a:hover{background:#256b41}
+.footer-exact{background:var(--dark);color:#fff;padding:3.5rem 2rem 2rem}
+.footer-container{max-width:1200px;margin:0 auto}
+.footer-brand{text-align:center;margin-bottom:2.5rem}
+.footer-brand h2{font-family:"Playfair Display",serif;font-size:2rem;margin-bottom:.8rem}
+.footer-tagline{font-size:1rem;color:#ccc;max-width:700px;margin:0 auto 1.5rem}
+.footer-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:2rem;margin-bottom:2.5rem}
+.footer-column h3{font-family:"Playfair Display",serif;font-size:1.1rem;margin-bottom:1rem}
+.footer-column ul{list-style:none}
+.footer-column ul li{margin-bottom:.5rem;color:#888;font-size:.88rem}
+.footer-column a{color:#b0b0b0;text-decoration:none;font-size:.88rem;transition:color .3s}
+.footer-column a:hover{color:#fff}
+.footer-bottom{text-align:center;padding-top:2rem;border-top:1px solid #2a4a3a}
+.copyright{color:#666;margin-bottom:1rem;font-size:.82rem}
+.policy-links{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap}
+.policy-links a{color:#b0b0b0;text-decoration:none;font-size:.85rem;transition:color .3s}
+.policy-links a:hover{color:#fff}
+.mobile-bottom-nav{display:none}
+@media(max-width:768px){
+  .header-main{padding:1rem 1.5rem}
+  .header-nav{display:none}
+  .policy-hero h1{font-size:2rem}
+  .policy-content{padding:2.5rem 1.2rem}
+  .mobile-bottom-nav{display:flex;position:fixed;bottom:0;left:0;width:100%;background:var(--green);justify-content:space-around;padding:.8rem 0;z-index:997;border-top:1px solid rgba(255,255,255,.1)}
+  .mobile-nav-icon{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:#ccc;font-size:.75rem;flex:1;padding:.4rem}
+  .mobile-nav-icon i{font-size:1.1rem;margin-bottom:.2rem}
+  .mobile-nav-icon:hover{color:#7edc88}
+}
+</style>
+</head>
+<body>
+
+<header class="header-main">
+  <a href="home.html" class="header-left">
+    <img src="https://cdn-icons-png.flaticon.com/512/3069/3069172.png" alt="BioXplore Logo">
+    <span>BioXplore</span>
+  </a>
+  <nav class="header-nav">
+    <a href="home.html">Home</a>
+    <a href="bioeducation.html">Bio Education</a>
+    <a href="species.html">Species Library</a>
+    <a href="ethics.html">Conservation & Ethics</a>
+    <a href="marketplace.html" class="marketplace-btn">Marketplace</a>
+  </nav>
+</header>
+
+<section class="policy-hero">
+  <div class="policy-hero-badge"><i class="fas fa-file-contract"></i> &nbsp;Legal</div>
+  <h1>Terms of Service</h1>
+  <p>Please read these terms carefully before using the BioXplore platform and marketplace.</p>
+  <div class="last-updated">Last updated: February 2025</div>
+</section>
+
+<div class="policy-content">
+
+  <div class="policy-toc">
+    <h4><i class="fas fa-list" style="margin-right:.5rem;color:var(--green-mid)"></i>Table of Contents</h4>
+    <ol>
+      <li><a href="#t1">Acceptance of Terms</a></li>
+      <li><a href="#t2">Eligibility</a></li>
+      <li><a href="#t3">Your Account</a></li>
+      <li><a href="#t4">Use of the Platform</a></li>
+      <li><a href="#t5">Marketplace & Purchases</a></li>
+      <li><a href="#t6">Ethical & Legal Compliance</a></li>
+      <li><a href="#t7">Intellectual Property</a></li>
+      <li><a href="#t8">Disclaimers & Limitation of Liability</a></li>
+      <li><a href="#t9">Termination</a></li>
+      <li><a href="#t10">Governing Law</a></li>
+    </ol>
+  </div>
+
+  <div class="info-box">
+    <i class="fas fa-info-circle"></i>
+    <p>By accessing or using BioXplore, you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, you may not use our platform.</p>
+  </div>
+
+  <div class="policy-section" id="t1">
+    <h2><i class="fas fa-handshake"></i> 1. Acceptance of Terms</h2>
+    <p>These Terms of Service ("Terms") constitute a legally binding agreement between you ("User", "you") and BioXplore ("we", "us", "our") governing your use of the BioXplore website, marketplace, educational resources, and any associated services (collectively, the "Platform").</p>
+    <p>By creating an account, browsing the site, or making a purchase, you confirm that you have read, understood, and agree to these Terms, as well as our Privacy Policy, Shipping Policy, and Returns Policy.</p>
+  </div>
+
+  <div class="policy-section" id="t2">
+    <h2><i class="fas fa-user-check"></i> 2. Eligibility</h2>
+    <p>You must be at least 18 years of age to use BioXplore. By using the Platform, you represent that:</p>
+    <ul>
+      <li>You are at least 18 years old, or have parental/guardian consent</li>
+      <li>You have the legal capacity to enter into binding contracts</li>
+      <li>You are not prohibited from using our services under applicable law</li>
+      <li>Your use of BioXplore will comply with all local, national, and international laws</li>
+    </ul>
+  </div>
+
+  <div class="policy-section" id="t3">
+    <h2><i class="fas fa-user-cog"></i> 3. Your Account</h2>
+    <h3>Account creation</h3>
+    <p>To access certain features, you must register for an account. You agree to provide accurate, current, and complete information and to keep it updated.</p>
+    <h3>Account security</h3>
+    <p>You are responsible for maintaining the confidentiality of your password and for all activities that occur under your account. Notify us immediately if you suspect unauthorized access.</p>
+    <h3>Account termination</h3>
+    <p>We reserve the right to suspend or delete accounts that violate these Terms, engage in fraudulent activity, or remain inactive for extended periods.</p>
+  </div>
+
+  <div class="policy-section" id="t4">
+    <h2><i class="fas fa-laptop"></i> 4. Use of the Platform</h2>
+    <p>You agree to use BioXplore only for lawful purposes and in ways that do not infringe the rights of others. You must not:</p>
+    <ul>
+      <li>Attempt to gain unauthorised access to any part of the Platform or its systems</li>
+      <li>Transmit malicious code, viruses, or other harmful software</li>
+      <li>Scrape, harvest, or extract data without explicit written permission</li>
+      <li>Post false, misleading, or deceptive content</li>
+      <li>Harass, abuse, or harm other users or BioXplore staff</li>
+      <li>Use the Platform for any commercial purpose without our prior written consent</li>
+    </ul>
+    <div class="warning-box">
+      <i class="fas fa-exclamation-triangle"></i>
+      <p>Violations may result in immediate account suspension, legal action, or both. We actively monitor for abuse and reserve all rights to enforce these terms.</p>
+    </div>
+  </div>
+
+  <div class="policy-section" id="t5">
+    <h2><i class="fas fa-shopping-cart"></i> 5. Marketplace & Purchases</h2>
+    <h3>Product listings</h3>
+    <p>All products listed on BioXplore are described as accurately as possible. We reserve the right to modify or discontinue any product without notice.</p>
+    <h3>Pricing</h3>
+    <p>Prices are displayed in USD and are subject to change. We will confirm the final price before processing your payment. We are not responsible for pricing errors, though we will make commercially reasonable efforts to honour confirmed orders.</p>
+    <h3>Payment</h3>
+    <p>Payment is processed via WhatsApp-coordinated transfer or third-party payment processor. By placing an order, you authorise us to charge the stated amount. All sales are subject to availability.</p>
+    <h3>Order cancellation</h3>
+    <p>You may cancel an order before it has been dispatched. Once shipped, please refer to our <a href="returns.html" style="color:var(--green-mid);font-weight:600;">Returns Policy</a>.</p>
+  </div>
+
+  <div class="policy-section" id="t6">
+    <h2><i class="fas fa-leaf"></i> 6. Ethical & Legal Compliance</h2>
+    <p>BioXplore is committed to the ethical and legal trade of rare life forms. You agree that:</p>
+    <ul>
+      <li>You will not attempt to purchase species protected under CITES Appendix I without proper documentation</li>
+      <li>You will comply with all import/export laws applicable in your country</li>
+      <li>You will not use purchased organisms for illegal breeding, sale, or resale without appropriate licences</li>
+      <li>You accept sole responsibility for compliance with local wildlife and exotic pet laws</li>
+    </ul>
+    <div class="info-box">
+      <i class="fas fa-globe"></i>
+      <p>BioXplore provides CITES documentation for all applicable species. If you are unsure about regulations in your region, please contact us before purchasing.</p>
+    </div>
+  </div>
+
+  <div class="policy-section" id="t7">
+    <h2><i class="fas fa-copyright"></i> 7. Intellectual Property</h2>
+    <p>All content on BioXplore — including text, images, logos, species data, educational materials, and code — is the intellectual property of BioXplore or its licensors and is protected by copyright and trademark law.</p>
+    <p>You may not reproduce, distribute, modify, or create derivative works from any BioXplore content without express written permission, except for personal, non-commercial use.</p>
+  </div>
+
+  <div class="policy-section" id="t8">
+    <h2><i class="fas fa-balance-scale"></i> 8. Disclaimers & Limitation of Liability</h2>
+    <p>The Platform is provided "as is" and "as available" without warranties of any kind. To the maximum extent permitted by law, BioXplore disclaims all warranties, express or implied, including merchantability and fitness for a particular purpose.</p>
+    <p>BioXplore shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of — or inability to use — the Platform, even if we have been advised of the possibility of such damages.</p>
+    <p>Our total liability to you for any claim shall not exceed the amount you paid to us in the 12 months preceding the claim.</p>
+  </div>
+
+  <div class="policy-section" id="t9">
+    <h2><i class="fas fa-ban"></i> 9. Termination</h2>
+    <p>We may terminate or suspend your access to the Platform at our sole discretion, without notice, for conduct that we believe violates these Terms or is harmful to other users, us, third parties, or the integrity of the Platform.</p>
+    <p>You may terminate your account at any time by contacting us. Upon termination, your right to use the Platform ceases immediately.</p>
+  </div>
+
+  <div class="policy-section" id="t10">
+    <h2><i class="fas fa-gavel"></i> 10. Governing Law</h2>
+    <p>These Terms are governed by and construed in accordance with the laws of the State of [Your State], without regard to conflict of law principles. Any disputes shall be resolved in the courts of [Your Jurisdiction].</p>
+    <p>If any provision of these Terms is found to be unenforceable, the remaining provisions will remain in full force and effect.</p>
+  </div>
+
+  <div class="contact-card">
+    <h3>Questions about our Terms?</h3>
+    <p>If you have questions or concerns about these Terms of Service, our legal team is here to help.</p>
+    <a href="mailto:legal@bioxplore.com"><i class="fas fa-envelope" style="margin-right:.5rem"></i>Contact Legal Team</a>
+  </div>
+
+</div>
+
+<footer class="footer-exact">
+  <div class="footer-container">
+    <div class="footer-brand">
+      <h2>BioXplore</h2>
+      <p class="footer-tagline">Discover, learn, and preserve rare life forms through ethical sourcing and scientific excellence.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="bioeducation.html">Bio Education</a></li>
+          <li><a href="marketplace.html">Marketplace</a></li>
+          <li><a href="species.html">Species Library</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms-of-service.html">Terms of Service</a></li>
+          <li><a href="shipping-policy.html">Shipping Policy</a></li>
+          <li><a href="returns.html">Returns</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Contact</h3>
+        <ul>
+          <li>info@bioxplore.com</li>
+          <li>+1 (555) 123-4567</li>
+          <li>123 Biology Lane, Science City</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="copyright">© 2025 BioXplore. All rights reserved.</p>
+      <div class="policy-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="shipping-policy.html">Shipping Policy</a>
+        <a href="returns.html">Returns</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<nav class="mobile-bottom-nav">
+  <a href="home.html" class="mobile-nav-icon"><i class="fas fa-home"></i><span>Home</span></a>
+  <a href="species.html" class="mobile-nav-icon"><i class="fas fa-leaf"></i><span>Species</span></a>
+  <a href="marketplace.html" class="mobile-nav-icon"><i class="fas fa-store"></i><span>Market</span></a>
+  <a href="bioeducation.html" class="mobile-nav-icon"><i class="fas fa-graduation-cap"></i><span>Learn</span></a>
+</nav>
+</body>
+</html>

@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us | BioXplore</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{--green:#1f3d2b;--green-mid:#2e7d4f;--green-light:#7edc88;--neutral:#f4f4f2;--dark:#0f1f17;--text:#2d3a3f;--muted:#6b7f86}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:"Inter",sans-serif;background:var(--neutral);color:var(--text);line-height:1.7;padding-bottom:70px}
+
+/* ── HEADER ── */
+.header-main{background:#f3faf6;padding:1.4rem 3rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:998;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.header-left{display:flex;align-items:center;gap:.8rem;text-decoration:none}
+.header-left img{width:44px}
+.header-left span{font-family:"Playfair Display",serif;font-size:1.9rem;color:var(--green);font-weight:600}
+.header-nav{display:flex;align-items:center;gap:2rem}
+.header-nav a{text-decoration:none;color:var(--text);font-size:.95rem;font-weight:500;transition:color .2s}
+.header-nav a:hover,.header-nav a.active{color:var(--green-mid)}
+.header-nav a.active{font-weight:600;position:relative}
+.header-nav a.active::after{content:'';position:absolute;bottom:-5px;left:0;width:100%;height:2px;background:var(--green-mid);border-radius:2px}
+.marketplace-btn{background:#2e6f43;color:#fff!important;padding:.75rem 1.6rem;border-radius:12px;font-weight:600}
+.marketplace-btn:hover{background:#245a36!important}
+
+/* ── HERO ── */
+.about-hero{position:relative;min-height:70vh;background:url("https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;display:flex;align-items:center;overflow:hidden}
+.about-hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,30,20,.92) 0%,rgba(15,50,35,.75) 60%,rgba(20,70,50,.45) 100%)}
+.about-hero-content{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:4rem 3rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;width:100%}
+.hero-badge{display:inline-block;background:rgba(111,191,115,.15);border:1px solid rgba(111,191,115,.4);color:var(--green-light);padding:.4rem 1.2rem;border-radius:50px;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.5rem}
+.about-hero-content h1{font-family:"Playfair Display",serif;font-size:3.4rem;line-height:1.15;color:#fff;margin-bottom:1.5rem}
+.about-hero-content h1 span{color:var(--green-light)}
+.about-hero-content p{color:#b8d4c0;font-size:1.05rem;line-height:1.75;margin-bottom:2rem;max-width:520px}
+.hero-cta-row{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{background:var(--green-mid);color:#fff;border:none;padding:.9rem 1.8rem;border-radius:10px;cursor:pointer;font-size:1rem;font-weight:600;text-decoration:none;display:inline-block;transition:all .3s}
+.btn-primary:hover{background:#256b41;transform:translateY(-2px)}
+.btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.35);padding:.9rem 1.8rem;border-radius:10px;cursor:pointer;font-size:1rem;font-weight:600;text-decoration:none;display:inline-block;transition:all .3s}
+.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.hero-stats-side{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.hero-stat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:1.6rem;backdrop-filter:blur(8px);transition:transform .3s}
+.hero-stat:hover{transform:translateY(-4px)}
+.hero-stat h3{font-family:"Playfair Display",serif;font-size:2rem;color:var(--green-light);margin-bottom:.3rem}
+.hero-stat span{font-size:.85rem;color:#a0c0b0}
+
+/* ── SECTIONS SHARED ── */
+.section{padding:6rem 2rem}
+.section-inner{max-width:1200px;margin:0 auto}
+.section-label{display:inline-block;background:#e8f5ee;color:var(--green-mid);padding:.35rem 1rem;border-radius:50px;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.2rem}
+.section-title{font-family:"Playfair Display",serif;font-size:2.6rem;color:var(--green);line-height:1.2;margin-bottom:1rem}
+.section-sub{color:var(--muted);font-size:1.02rem;max-width:640px;line-height:1.75}
+
+/* ── STORY ── */
+.story-section{background:#fff}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.story-image-wrap{position:relative}
+.story-image-wrap img{width:100%;height:480px;object-fit:cover;border-radius:20px}
+.story-badge-float{position:absolute;bottom:-1.5rem;right:-1.5rem;background:var(--green);color:#fff;border-radius:16px;padding:1.4rem 1.8rem;box-shadow:0 10px 30px rgba(0,0,0,.2);text-align:center}
+.story-badge-float strong{display:block;font-family:"Playfair Display",serif;font-size:1.8rem;color:var(--green-light)}
+.story-badge-float span{font-size:.8rem;opacity:.85}
+.story-text p{color:#444;font-size:1rem;line-height:1.8;margin-bottom:1.2rem}
+.story-text p:first-of-type{font-size:1.1rem;color:var(--text);font-weight:500}
+
+/* ── VALUES ── */
+.values-section{background:var(--neutral)}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3.5rem}
+.value-card{background:#fff;border-radius:20px;padding:2.2rem;box-shadow:0 4px 20px rgba(0,0,0,.05);transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden}
+.value-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px}
+.value-card:nth-child(1)::before{background:linear-gradient(90deg,#2e7d4f,#5fbf6a)}
+.value-card:nth-child(2)::before{background:linear-gradient(90deg,#3b82f6,#60a5fa)}
+.value-card:nth-child(3)::before{background:linear-gradient(90deg,#f59e0b,#fbbf24)}
+.value-card:nth-child(4)::before{background:linear-gradient(90deg,#8b5cf6,#a78bfa)}
+.value-card:nth-child(5)::before{background:linear-gradient(90deg,#ec4899,#f472b6)}
+.value-card:nth-child(6)::before{background:linear-gradient(90deg,#10b981,#34d399)}
+.value-card:hover{transform:translateY(-6px);box-shadow:0 14px 40px rgba(0,0,0,.1)}
+.value-icon{width:54px;height:54px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:1.4rem;font-size:1.3rem;color:#fff}
+.value-card:nth-child(1) .value-icon{background:linear-gradient(135deg,#2e7d4f,#5fbf6a)}
+.value-card:nth-child(2) .value-icon{background:linear-gradient(135deg,#3b82f6,#60a5fa)}
+.value-card:nth-child(3) .value-icon{background:linear-gradient(135deg,#f59e0b,#fbbf24)}
+.value-card:nth-child(4) .value-icon{background:linear-gradient(135deg,#8b5cf6,#a78bfa)}
+.value-card:nth-child(5) .value-icon{background:linear-gradient(135deg,#ec4899,#f472b6)}
+.value-card:nth-child(6) .value-icon{background:linear-gradient(135deg,#10b981,#34d399)}
+.value-card h3{font-family:"Playfair Display",serif;font-size:1.25rem;color:var(--green);margin-bottom:.7rem}
+.value-card p{font-size:.92rem;color:#555;line-height:1.65}
+
+/* ── TEAM ── */
+.team-section{background:#fff}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2.2rem;margin-top:3.5rem}
+.team-card{text-align:center;background:var(--neutral);border-radius:20px;padding:2.5rem 1.8rem;transition:transform .3s,box-shadow .3s}
+.team-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,.09)}
+.team-avatar{width:100px;height:100px;border-radius:50%;margin:0 auto 1.2rem;display:flex;align-items:center;justify-content:center;font-size:2rem;color:#fff;border:4px solid #fff;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+.avatar-1{background:linear-gradient(135deg,#2e7d4f,#5fbf6a)}
+.avatar-2{background:linear-gradient(135deg,#3b82f6,#60a5fa)}
+.avatar-3{background:linear-gradient(135deg,#8b5cf6,#a78bfa)}
+.avatar-4{background:linear-gradient(135deg,#f59e0b,#fbbf24)}
+.team-card h3{font-family:"Playfair Display",serif;font-size:1.15rem;color:var(--green);margin-bottom:.25rem}
+.team-card .role{font-size:.82rem;font-weight:600;color:var(--green-mid);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.8rem}
+.team-card p{font-size:.88rem;color:#666;line-height:1.6}
+
+/* ── PARTNERS ── */
+.partners-section{background:var(--dark);padding:5rem 2rem}
+.partners-inner{max-width:1100px;margin:0 auto;text-align:center}
+.partners-inner h2{font-family:"Playfair Display",serif;font-size:2rem;color:#fff;margin-bottom:.8rem}
+.partners-inner p{color:#8a9e90;margin-bottom:3rem;font-size:.95rem}
+.partners-row{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:1.5rem}
+.partner-pill{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:.9rem 1.8rem;color:#c0d8c8;font-size:.88rem;font-weight:600;display:flex;align-items:center;gap:.6rem;transition:all .3s}
+.partner-pill:hover{background:rgba(126,220,136,.1);border-color:rgba(126,220,136,.3);color:#7edc88}
+.partner-pill i{opacity:.7}
+
+/* ── IMPACT ── */
+.impact-section{background:linear-gradient(135deg,var(--green) 0%,#2a5e40 50%,#1a4a30 100%);padding:6rem 2rem;color:#fff}
+.impact-inner{max-width:1100px;margin:0 auto}
+.impact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;margin-top:3rem;text-align:center}
+.impact-stat{border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:2.2rem 1rem;background:rgba(255,255,255,.04);transition:background .3s}
+.impact-stat:hover{background:rgba(255,255,255,.08)}
+.impact-stat .num{font-family:"Playfair Display",serif;font-size:2.8rem;color:var(--green-light);line-height:1;margin-bottom:.4rem}
+.impact-stat .label{font-size:.85rem;color:#9dc8b0;line-height:1.4}
+
+/* ── TIMELINE ── */
+.timeline-section{background:#fff;padding:6rem 2rem}
+.timeline-inner{max-width:860px;margin:0 auto}
+.timeline{margin-top:3rem;position:relative}
+.timeline::before{content:'';position:absolute;left:20px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--green-mid),rgba(46,125,79,.1));border-radius:2px}
+.timeline-item{display:flex;gap:2.5rem;margin-bottom:2.5rem;position:relative}
+.timeline-dot{width:42px;height:42px;border-radius:50%;background:var(--green-mid);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.8rem;font-weight:700;flex-shrink:0;border:3px solid var(--neutral);box-shadow:0 0 0 3px var(--green-mid);z-index:1}
+.timeline-body{background:var(--neutral);border-radius:14px;padding:1.5rem 1.8rem;flex:1;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.timeline-body .year{display:inline-block;background:#e8f5ee;color:var(--green-mid);font-size:.75rem;font-weight:700;padding:.2rem .7rem;border-radius:20px;margin-bottom:.6rem;letter-spacing:.04em}
+.timeline-body h4{font-family:"Playfair Display",serif;font-size:1.1rem;color:var(--green);margin-bottom:.4rem}
+.timeline-body p{font-size:.9rem;color:#555;margin:0;line-height:1.6}
+
+/* ── CTA ── */
+.cta-section{background:var(--neutral);padding:6rem 2rem;text-align:center}
+.cta-inner{max-width:700px;margin:0 auto}
+.cta-inner h2{font-family:"Playfair Display",serif;font-size:2.6rem;color:var(--green);margin-bottom:1rem}
+.cta-inner p{color:var(--muted);font-size:1.05rem;margin-bottom:2.5rem}
+.cta-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-green{background:var(--green-mid);color:#fff;padding:1rem 2rem;border-radius:12px;text-decoration:none;font-weight:600;font-size:1rem;transition:all .3s;display:inline-block}
+.btn-green:hover{background:#256b41;transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--green-mid);padding:1rem 2rem;border-radius:12px;text-decoration:none;font-weight:600;font-size:1rem;border:2px solid var(--green-mid);transition:all .3s;display:inline-block}
+.btn-ghost:hover{background:#f0f9f2}
+
+/* ── FOOTER ── */
+.footer-exact{background:var(--dark);color:#fff;padding:3.5rem 2rem 2rem}
+.footer-container{max-width:1200px;margin:0 auto}
+.footer-brand{text-align:center;margin-bottom:2.5rem}
+.footer-brand h2{font-family:"Playfair Display",serif;font-size:2rem;margin-bottom:.8rem}
+.footer-tagline{font-size:1rem;color:#ccc;max-width:700px;margin:0 auto 1.5rem}
+.footer-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:2rem;margin-bottom:2.5rem}
+.footer-column h3{font-family:"Playfair Display",serif;font-size:1.1rem;margin-bottom:1rem}
+.footer-column ul{list-style:none}
+.footer-column ul li{margin-bottom:.5rem;color:#888;font-size:.88rem}
+.footer-column a{color:#b0b0b0;text-decoration:none;font-size:.88rem;transition:color .3s}
+.footer-column a:hover{color:#fff}
+.footer-bottom{text-align:center;padding-top:2rem;border-top:1px solid #2a4a3a}
+.copyright{color:#666;margin-bottom:1rem;font-size:.82rem}
+.policy-links{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap}
+.policy-links a{color:#b0b0b0;text-decoration:none;font-size:.85rem;transition:color .3s}
+.policy-links a:hover{color:#fff}
+
+/* ── MOBILE ── */
+.mobile-bottom-nav{display:none}
+@media(max-width:1024px){.values-grid{grid-template-columns:repeat(2,1fr)}.impact-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){
+  .header-main{padding:1rem 1.5rem}.header-nav{display:none}
+  .about-hero-content{grid-template-columns:1fr;gap:2.5rem;padding:3rem 1.5rem}
+  .about-hero-content h1{font-size:2.2rem}
+  .hero-stats-side{grid-template-columns:1fr 1fr}
+  .story-grid{grid-template-columns:1fr}
+  .story-badge-float{position:static;margin-top:1rem;display:inline-block;border-radius:12px}
+  .story-image-wrap img{height:280px}
+  .values-grid{grid-template-columns:1fr}
+  .impact-grid{grid-template-columns:1fr 1fr}
+  .section-title{font-size:2rem}
+  .section{padding:4rem 1.2rem}
+  .mobile-bottom-nav{display:flex;position:fixed;bottom:0;left:0;width:100%;background:var(--green);justify-content:space-around;padding:.8rem 0;z-index:997;border-top:1px solid rgba(255,255,255,.1)}
+  .mobile-nav-icon{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:#ccc;font-size:.75rem;flex:1;padding:.4rem}
+  .mobile-nav-icon i{font-size:1.1rem;margin-bottom:.2rem}
+  .mobile-nav-icon:hover{color:#7edc88}
+}
+@media(max-width:480px){.impact-grid{grid-template-columns:1fr}.hero-stats-side{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<header class="header-main">
+  <a href="home.html" class="header-left">
+    <img src="https://cdn-icons-png.flaticon.com/512/3069/3069172.png" alt="BioXplore Logo">
+    <span>BioXplore</span>
+  </a>
+  <nav class="header-nav">
+    <a href="home.html">Home</a>
+    <a href="bioeducation.html">Bio Education</a>
+    <a href="species.html">Species Library</a>
+    <a href="ethics.html">Conservation & Ethics</a>
+    <a href="marketplace.html" class="marketplace-btn">Marketplace</a>
+  </nav>
+</header>
+
+<!-- ══ HERO ══ -->
+<section class="about-hero">
+  <div class="about-hero-overlay"></div>
+  <div class="about-hero-content">
+    <div>
+      <div class="hero-badge">Our Story</div>
+      <h1>Science Meets<br><span>Conservation</span></h1>
+      <p>BioXplore was founded on a simple belief: that access to rare biological knowledge should not come at the cost of the planet. We bridge rigorous science with ethical stewardship.</p>
+      <div class="hero-cta-row">
+        <a href="marketplace.html" class="btn-primary">Explore Marketplace</a>
+        <a href="contact.html" class="btn-outline">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-stats-side">
+      <div class="hero-stat"><h3>500+</h3><span>Rare Species Listed</span></div>
+      <div class="hero-stat"><h3>1,000+</h3><span>Researchers Served</span></div>
+      <div class="hero-stat"><h3>50+</h3><span>Conservation Partners</span></div>
+      <div class="hero-stat"><h3>100%</h3><span>Ethical Sourcing</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STORY ══ -->
+<section class="section story-section">
+  <div class="section-inner">
+    <div class="story-grid">
+      <div class="story-image-wrap">
+        <img src="https://images.unsplash.com/photo-1530026186672-2cd00ffc50fe?auto=format&fit=crop&w=900&q=80" alt="Researcher studying rare specimens in a lab">
+        <div class="story-badge-float">
+          <strong>2019</strong>
+          <span>Founded</span>
+        </div>
+      </div>
+      <div class="story-text">
+        <div class="section-label">Our Story</div>
+        <h2 class="section-title">Born from a Love of Life in All Its Forms</h2>
+        <p>BioXplore began in 2019 when a group of biologists, conservationists, and educators grew frustrated with two problems they kept running into: rare specimens were either inaccessible to researchers, or they were being traded through channels with no regard for the welfare of species or ecosystems.</p>
+        <p>We built BioXplore to be different — a platform where every specimen, culture, or educational kit is sourced with full legal and ethical compliance, where documentation is transparent, and where a portion of every sale funds active conservation work.</p>
+        <p>Today, BioXplore serves researchers, educators, and passionate collectors across more than 25 countries, with a catalogue of over 500 rare species and a growing network of partner conservation organisations.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ VALUES ══ -->
+<section class="section values-section">
+  <div class="section-inner">
+    <div class="section-label">What We Stand For</div>
+    <h2 class="section-title">Our Core Values</h2>
+    <p class="section-sub">Six principles guide every decision we make — from which specimens we list to how we package and ship them.</p>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon"><i class="fas fa-shield-alt"></i></div>
+        <h3>Ethical Sourcing</h3>
+        <p>Every specimen is sourced in full compliance with CITES regulations and local wildlife laws. We trace every item back to its origin and refuse to list anything we cannot verify.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon"><i class="fas fa-flask"></i></div>
+        <h3>Scientific Rigour</h3>
+        <p>Taxonomy, habitat data, and conservation status are verified by our in-house biologists. We do not tolerate misidentification — accuracy is a matter of scientific integrity.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon"><i class="fas fa-graduation-cap"></i></div>
+        <h3>Education First</h3>
+        <p>We believe knowledge is the most powerful tool for conservation. Every listing includes detailed educational materials, and a portion of proceeds funds school outreach programmes.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon"><i class="fas fa-globe"></i></div>
+        <h3>Global Access</h3>
+        <p>Rare biological knowledge should not be locked behind institutional walls. We serve independent researchers, educators, and enthusiasts with the same rigour we apply to universities.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon"><i class="fas fa-handshake"></i></div>
+        <h3>Partnership</h3>
+        <p>We do not work in isolation. Our network of 50+ conservation partners ensures that our activity supports — rather than undermines — the ecosystems we care about.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon"><i class="fas fa-leaf"></i></div>
+        <h3>Sustainability</h3>
+        <p>From biodegradable packaging to carbon-offset shipping, we work to minimise our environmental footprint at every step of the supply chain.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TEAM ══ -->
+<section class="section team-section">
+  <div class="section-inner">
+    <div class="section-label">The People</div>
+    <h2 class="section-title">Meet the Team</h2>
+    <p class="section-sub">Scientists, educators, and conservationists united by a shared passion for the living world.</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar avatar-1"><i class="fas fa-user"></i></div>
+        <h3>Dr. Amara Osei</h3>
+        <div class="role">Co-Founder & CEO</div>
+        <p>Entomologist with 15 years of field research across sub-Saharan Africa. PhD, University of Ghana. Former IUCN Species Survival Commission member.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar avatar-2"><i class="fas fa-user"></i></div>
+        <h3>Dr. Lena Hartmann</h3>
+        <div class="role">Chief Science Officer</div>
+        <p>Botanist specialising in endangered orchid species. PhD, University of Berlin. Led conservation projects in Indonesia, Madagascar, and Colombia.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar avatar-3"><i class="fas fa-user"></i></div>
+        <h3>Marcus Rivera</h3>
+        <div class="role">Head of Partnerships</div>
+        <p>Former WWF programme coordinator with expertise in CITES compliance and international wildlife trade law. Based in Geneva.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar avatar-4"><i class="fas fa-user"></i></div>
+        <h3>Yuki Tanaka</h3>
+        <div class="role">Head of Education</div>
+        <p>Science communicator and curriculum designer. Creator of BioXplore's educational resource library, used by over 200 schools worldwide.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TIMELINE ══ -->
+<section class="timeline-section">
+  <div class="timeline-inner">
+    <div class="section-label">Our Journey</div>
+    <h2 class="section-title">How We Got Here</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot">1</div>
+        <div class="timeline-body">
+          <span class="year">2019</span>
+          <h4>BioXplore Founded</h4>
+          <p>Four biologists launch BioXplore from a shared office in Accra with 47 species listings and a determination to prove ethical trade is possible at scale.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">2</div>
+        <div class="timeline-body">
+          <span class="year">2020</span>
+          <h4>First Conservation Partnership</h4>
+          <p>We sign our first formal conservation partnership with a rainforest reserve in Cameroon, funding habitat protection through a percentage of every sale.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">3</div>
+        <div class="timeline-body">
+          <span class="year">2021</span>
+          <h4>Species Library Launched</h4>
+          <p>Our free, publicly accessible Species Library goes live with educational content for 200+ species — the first of its kind combining scientific rigour with public accessibility.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">4</div>
+        <div class="timeline-body">
+          <span class="year">2022</span>
+          <h4>500 Species Milestone</h4>
+          <p>The BioXplore catalogue reaches 500 listed species. We launch our school outreach programme, donating educational kits to 50 underfunded institutions.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">5</div>
+        <div class="timeline-body">
+          <span class="year">2024</span>
+          <h4>$500K Conservation Funded</h4>
+          <p>Cumulative conservation funding through BioXplore sales crosses the half-million dollar mark across 25 partner projects in 14 countries.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">6</div>
+        <div class="timeline-body">
+          <span class="year">2025</span>
+          <h4>Platform 2.0 & Global Expansion</h4>
+          <p>We launch the redesigned BioXplore platform with a full marketplace, live order tracking, and expanded international shipping to 40+ countries.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ IMPACT ══ -->
+<section class="impact-section">
+  <div class="impact-inner">
+    <div style="text-align:center">
+      <div class="section-label" style="background:rgba(126,220,136,.15);color:var(--green-light)">Our Impact</div>
+      <h2 class="section-title" style="color:#fff;margin-top:.5rem">Conservation by the Numbers</h2>
+      <p class="section-sub" style="color:#8aaa98;margin:0 auto">Six years of work, quantified.</p>
+    </div>
+    <div class="impact-grid">
+      <div class="impact-stat"><div class="num">500+</div><div class="label">Species listed with full documentation</div></div>
+      <div class="impact-stat"><div class="num">$500K+</div><div class="label">Directed to conservation projects</div></div>
+      <div class="impact-stat"><div class="num">25</div><div class="label">Countries with active conservation partners</div></div>
+      <div class="impact-stat"><div class="num">1,000+</div><div class="label">Researchers, educators & collectors served</div></div>
+      <div class="impact-stat"><div class="num">200+</div><div class="label">Schools using our educational materials</div></div>
+      <div class="impact-stat"><div class="num">50+</div><div class="label">Partner conservation organisations</div></div>
+      <div class="impact-stat"><div class="num">100%</div><div class="label">CITES-compliant supply chain</div></div>
+      <div class="impact-stat"><div class="num">40+</div><div class="label">Countries reached by our marketplace</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PARTNERS ══ -->
+<section class="partners-section">
+  <div class="partners-inner">
+    <h2>Our Partners</h2>
+    <p>Working alongside leading conservation bodies, research institutions, and ethical suppliers worldwide.</p>
+    <div class="partners-row">
+      <div class="partner-pill"><i class="fas fa-globe"></i> IUCN Species Survival Commission</div>
+      <div class="partner-pill"><i class="fas fa-leaf"></i> WWF Africa Programme</div>
+      <div class="partner-pill"><i class="fas fa-university"></i> University of Ghana – Biology Dept.</div>
+      <div class="partner-pill"><i class="fas fa-tree"></i> Cameroon Rainforest Reserve</div>
+      <div class="partner-pill"><i class="fas fa-flask"></i> Berlin Botanical Institute</div>
+      <div class="partner-pill"><i class="fas fa-seedling"></i> Madagascar Biodiversity Center</div>
+      <div class="partner-pill"><i class="fas fa-globe-americas"></i> Colombian Cloud Forest Trust</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="section-label">Join Us</div>
+    <h2>Ready to Explore?</h2>
+    <p>Whether you are a researcher, educator, or curious collector — BioXplore has something for you. Discover our catalogue or reach out to learn more about partnerships.</p>
+    <div class="cta-buttons">
+      <a href="marketplace.html" class="btn-green"><i class="fas fa-store" style="margin-right:.5rem"></i>Browse Marketplace</a>
+      <a href="contact.html" class="btn-ghost"><i class="fas fa-envelope" style="margin-right:.5rem"></i>Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer-exact">
+  <div class="footer-container">
+    <div class="footer-brand">
+      <h2>BioXplore</h2>
+      <p class="footer-tagline">Discover, learn, and preserve rare life forms through ethical sourcing and scientific excellence.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="bioeducation.html">Bio Education</a></li>
+          <li><a href="marketplace.html">Marketplace</a></li>
+          <li><a href="species.html">Species Library</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="ethics.html">Conservation & Ethics</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms-of-service.html">Terms of Service</a></li>
+          <li><a href="shipping-policy.html">Shipping Policy</a></li>
+          <li><a href="returns.html">Returns</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Contact</h3>
+        <ul>
+          <li>info@bioxplore.com</li>
+          <li>+1 (555) 123-4567</li>
+          <li>123 Biology Lane, Science City</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="copyright">© 2025 BioXplore. All rights reserved.</p>
+      <div class="policy-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="shipping-policy.html">Shipping Policy</a>
+        <a href="returns.html">Returns</a>
+        <a href="cookie-policy.html">Cookie Policy</a>
+        <a href="accessibility.html">Accessibility</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<nav class="mobile-bottom-nav">
+  <a href="home.html" class="mobile-nav-icon"><i class="fas fa-home"></i><span>Home</span></a>
+  <a href="species.html" class="mobile-nav-icon"><i class="fas fa-leaf"></i><span>Species</span></a>
+  <a href="marketplace.html" class="mobile-nav-icon"><i class="fas fa-store"></i><span>Market</span></a>
+  <a href="bioeducation.html" class="mobile-nav-icon"><i class="fas fa-graduation-cap"></i><span>Learn</span></a>
+</nav>
+</body>
+</html>

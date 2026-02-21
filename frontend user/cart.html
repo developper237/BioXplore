@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shopping Cart | BioXplore</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root {
+  --green: #1f3d2b;
+  --neutral: #f4f4f2;
+  --accent: #6fbf73;
+  --green-light: #7edc88;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: var(--neutral);
+  color: #222;
+  line-height: 1.6;
+  padding-bottom: 70px;
+}
+
+/* =================== HEADER =================== */
+.header-main {
+  background: #f3faf6;
+  padding: 1.4rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 998;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.header-left img {
+  width: 44px;
+}
+
+.header-left span {
+  font-family: "Playfair Display", serif;
+  font-size: 1.9rem;
+  color: var(--green);
+  font-weight: 600;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  z-index: 1002;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+}
+
+.hamburger span {
+  width: 26px;
+  height: 3px;
+  background: var(--green);
+  border-radius: 3px;
+  transition: 0.3s;
+}
+
+/* =================== CART PAGE =================== */
+.cart-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+.cart-header {
+  margin-bottom: 2rem;
+}
+
+.cart-header h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.6rem;
+  color: var(--green);
+  margin-bottom: 0.5rem;
+}
+
+.cart-count {
+  color: #6b7f86;
+  font-size: 1.05rem;
+}
+
+.cart-content {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 2rem;
+}
+
+/* Empty cart */
+.empty-cart {
+  grid-column: 1 / -1;
+  background: white;
+  border-radius: 18px;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.empty-cart-icon {
+  width: 100px;
+  height: 100px;
+  background: #f3faf6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 2rem;
+  font-size: 3rem;
+  color: #2e7d4f;
+}
+
+.empty-cart h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--green);
+}
+
+.empty-cart p {
+  color: #6b7f86;
+  margin-bottom: 2rem;
+}
+
+/* Cart items */
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.cart-item {
+  background: white;
+  border-radius: 18px;
+  padding: 1.5rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.item-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 12px;
+  background: #f3faf6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: #2e7d4f;
+  flex-shrink: 0;
+}
+
+.item-details {
+  flex: 1;
+}
+
+.item-name {
+  font-family: "Playfair Display", serif;
+  font-size: 1.3rem;
+  color: var(--green);
+  margin-bottom: 0.3rem;
+}
+
+.item-category {
+  color: #6b7f86;
+  font-size: 0.85rem;
+  margin-bottom: 0.8rem;
+}
+
+.item-price {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2e7d4f;
+}
+
+.item-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: #f3faf6;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+}
+
+.qty-btn {
+  background: white;
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #2e7d4f;
+  transition: all 0.3s;
+}
+
+.qty-btn:hover {
+  background: #2e7d4f;
+  color: white;
+}
+
+.qty-value {
+  min-width: 30px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  color: #d32f2f;
+  cursor: pointer;
+  padding: 0.5rem;
+  font-size: 1.1rem;
+  transition: all 0.3s;
+}
+
+.remove-btn:hover {
+  transform: scale(1.2);
+}
+
+/* Cart summary */
+.cart-summary {
+  background: white;
+  border-radius: 18px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 100px;
+  height: fit-content;
+}
+
+.cart-summary h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  color: var(--green);
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.summary-label {
+  color: #6b7f86;
+}
+
+.summary-value {
+  font-weight: 600;
+  color: #2d3a3f;
+}
+
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem 0 1rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--green);
+}
+
+.checkout-btn {
+  width: 100%;
+  background: #2e7d4f;
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.checkout-btn:hover {
+  background: #256b41;
+  transform: translateY(-2px);
+}
+
+.continue-shopping {
+  width: 100%;
+  background: #f0f0f0;
+  color: var(--green);
+  border: none;
+  padding: 0.9rem;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 1rem;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+}
+
+.continue-shopping:hover {
+  background: #e0e0e0;
+}
+
+/* =================== RESPONSIVE =================== */
+@media (max-width: 900px) {
+  .cart-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .cart-summary {
+    position: static;
+  }
+}
+
+@media (max-width: 600px) {
+  .header-main {
+    padding: 1rem 1.5rem;
+  }
+  
+  .cart-container {
+    padding: 2rem 1.5rem;
+  }
+  
+  .cart-item {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .item-actions {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =================== HEADER =================== -->
+<header class="header-main">
+  <div class="header-left">
+    <img src="https://cdn-icons-png.flaticon.com/512/3069/3069172.png" alt="BioXplore Logo">
+    <span>BioXplore</span>
+  </div>
+
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- =================== CART CONTENT =================== -->
+<div class="cart-container">
+  <div class="cart-header">
+    <h1>Shopping Cart</h1>
+    <p class="cart-count" id="cartCount">0 items</p>
+  </div>
+
+  <div class="cart-content" id="cartContent">
+    <!-- Cart items will be inserted here by JavaScript -->
+  </div>
+</div>
+
+<!-- =================== JAVASCRIPT =================== -->
+<script>
+const API_URL         = 'http://localhost:5000';
+const ADMIN_WHATSAPP  = '237657425226'; // numéro admin sans + ni espaces
+
+function getToken() { return localStorage.getItem('accessToken'); }
+function getUser()  {
+  try { return JSON.parse(localStorage.getItem('user') || '{}'); }
+  catch(e) { return {}; }
+}
+
+// Get cart from localStorage
+function getCart() {
+  const cart = localStorage.getItem('cartItems');
+  return cart ? JSON.parse(cart) : [];
+}
+
+// Save cart to localStorage
+function saveCart(cart) {
+  localStorage.setItem('cartItems', JSON.stringify(cart));
+  updateCartDisplay();
+  updateCartBadge();
+}
+
+// Update cart badge in header (if exists)
+function updateCartBadge() {
+  const cart = getCart();
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const badge = document.querySelector('.cart-count');
+  if (badge) {
+    badge.textContent = `${totalItems} item${totalItems !== 1 ? 's' : ''}`;
+  }
+  
+  // Update header cart badge if exists
+  const headerBadge = document.querySelector('.cart-count');
+  if (headerBadge) {
+    headerBadge.textContent = totalItems;
+  }
+}
+
+// Update quantity
+function updateQuantity(productId, change) {
+  let cart = getCart();
+  const item = cart.find(i => i.id === productId);
+  
+  if (item) {
+    item.quantity += change;
+    
+    if (item.quantity <= 0) {
+      cart = cart.filter(i => i.id !== productId);
+    }
+    
+    saveCart(cart);
+  }
+}
+
+// Remove item
+function removeItem(productId) {
+  let cart = getCart();
+  cart = cart.filter(i => i.id !== productId);
+  saveCart(cart);
+}
+
+// Calculate totals
+function calculateTotals(cart) {
+  const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const shipping = subtotal > 0 ? (subtotal > 100 ? 0 : 15) : 0;
+  const total = subtotal + shipping;
+  
+  return { subtotal, shipping, total };
+}
+
+// Display cart
+function updateCartDisplay() {
+  const cart = getCart();
+  const container = document.getElementById('cartContent');
+  
+  if (cart.length === 0) {
+    container.innerHTML = `
+      <div class="empty-cart">
+        <div class="empty-cart-icon">
+          <i class="fas fa-shopping-cart"></i>
+        </div>
+        <h2>Your cart is empty</h2>
+        <p>Start exploring our collection of rare specimens and educational materials.</p>
+        <a href="marketplace.html" class="checkout-btn" style="max-width: 300px; margin: 0 auto;">
+          <i class="fas fa-store"></i> Browse Marketplace
+        </a>
+      </div>
+    `;
+    return;
+  }
+  
+  const { subtotal, shipping, total } = calculateTotals(cart);
+  
+  const itemsHTML = cart.map(item => `
+    <div class="cart-item">
+      <div class="item-image">
+        ${item.image
+          ? `<img src="${item.image}" alt="${item.name}" style="width:100%;height:100%;object-fit:cover;border-radius:12px;">`
+          : `<i class="${item.icon || 'fas fa-box'}"></i>`}
+      </div>
+      <div class="item-details">
+        <div class="item-name">${item.name}</div>
+        <div class="item-category">${item.category || 'Product'}</div>
+        <div class="item-price">$${item.price.toFixed(2)}</div>
+      </div>
+      <div class="item-actions">
+        <div class="quantity-controls">
+          <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+          <span class="qty-value">${item.quantity}</span>
+          <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+        </div>
+        <button class="remove-btn" onclick="removeItem(${item.id})" title="Remove item">
+          <i class="fas fa-trash-alt"></i>
+        </button>
+      </div>
+    </div>
+  `).join('');
+  
+  container.innerHTML = `
+    <div class="cart-items">
+      ${itemsHTML}
+    </div>
+    
+    <div class="cart-summary">
+      <h2>Order Summary</h2>
+      <div class="summary-row">
+        <span class="summary-label">Subtotal</span>
+        <span class="summary-value">$${subtotal.toFixed(2)}</span>
+      </div>
+      <div class="summary-row">
+        <span class="summary-label">Shipping</span>
+        <span class="summary-value">${shipping === 0 ? 'FREE' : '$' + shipping.toFixed(2)}</span>
+      </div>
+      ${shipping === 0 && subtotal > 0 ? '<p style="color: #2e7d4f; font-size: 0.85rem; margin-top: 0.5rem;">🎉 Free shipping on orders over $100!</p>' : ''}
+      <div class="summary-total">
+        <span>Total</span>
+        <span>$${total.toFixed(2)}</span>
+      </div>
+      <button class="checkout-btn" onclick="checkout()">
+        <i class="fab fa-whatsapp"></i> Proceed to Checkout
+      </button>
+      <a href="marketplace.html" class="continue-shopping">
+        <i class="fas fa-arrow-left"></i> Continue Shopping
+      </a>
+    </div>
+  `;
+}
+
+// ══════════════════════════════════════════
+//  CHECKOUT — WhatsApp flow
+// ══════════════════════════════════════════
+async function checkout() {
+  // 1. Vérifier que le user est connecté
+  const token = getToken();
+  const user  = getUser();
+
+  if (!token || !user || !user.email) {
+    showCheckoutModal('auth');
+    return;
+  }
+
+  const cart = getCart();
+  if (cart.length === 0) return;
+
+  // 2. Vérifier que l'adresse de livraison est renseignée
+  if (!user.phone) {
+    const ok = confirm('⚠️Your phone number is not listed on your profile. Do you want to continue anyway? (Recommended: add it to your profile)');
+    if (!ok) { window.location.href = 'profile.html'; return; }
+  }
+
+  // 3. Appel API pour créer la commande
+  const btn = document.querySelector('.checkout-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Traitement…';
+
+  try {
+    const res = await fetch(`${API_URL}/api/checkout`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ items: cart })
+    });
+
+    const data = await res.json();
+
+    if (!data.success) {
+      throw new Error(data.message || 'Error while creating the order');
+    }
+
+    const { orderRef, message } = data.data;
+
+    // 4. Vider le panier
+    localStorage.removeItem('cartItems');
+
+    // 5. Ouvrir WhatsApp avec le message pré-rempli
+    const waUrl = `https://wa.me/${ADMIN_WHATSAPP}?text=${encodeURIComponent(message)}`;
+    window.open(waUrl, '_blank');
+
+    // 6. Afficher confirmation
+    showCheckoutModal('success', orderRef);
+
+  } catch (err) {
+    console.error('Checkout error:', err);
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-lock"></i> Proceed to Checkout';
+    showCheckoutModal('error', err.message);
+  }
+}
+
+// Modal de confirmation / erreur
+function showCheckoutModal(type, info = '') {
+  // Supprimer modal existant
+  document.getElementById('checkoutModal')?.remove();
+
+  let html = '';
+
+  if (type === 'auth') {
+    html = `
+      <div style="text-align:center;padding:1rem 0;">
+        <div style="font-size:3rem;margin-bottom:1rem;">🔐</div>
+        <h2 style="font-family:'Playfair Display',serif;color:#1f3d2b;margin-bottom:.8rem;">Login required</h2>
+        <p style="color:#6b7f86;margin-bottom:1.5rem;">You must be logged in to place an order.</p>
+        <div style="display:flex;gap:1rem;justify-content:center;">
+          <a href="login.html" style="padding:.8rem 1.5rem;background:#2e7d4f;color:white;border-radius:10px;text-decoration:none;font-weight:600;">
+            <i class="fas fa-sign-in-alt"></i> Login
+          </a>
+          <a href="signup.html" style="padding:.8rem 1.5rem;background:#f3faf6;color:#2e7d4f;border-radius:10px;text-decoration:none;font-weight:600;">
+            <i class="fas fa-user-plus"></i> sign up
+          </a>
+        </div>
+      </div>`;
+  } else if (type === 'success') {
+    html = `
+      <div style="text-align:center;padding:1rem 0;">
+        <div style="font-size:3rem;margin-bottom:1rem;">✅</div>
+        <h2 style="font-family:'Playfair Display',serif;color:#1f3d2b;margin-bottom:.8rem;">order created !</h2>
+        <p style="color:#6b7f86;margin-bottom:.5rem;">Reference : <strong style="color:#2e7d4f;">#${info}</strong></p>
+        <p style="color:#6b7f86;margin-bottom:1.5rem;">
+         WhatsApp has opened with your order. Send the message to the admin to receive the payment instructions.
+        </p>
+        <div style="background:#f3faf6;border-radius:10px;padding:1rem;font-size:.9rem;color:#444;margin-bottom:1.5rem;text-align:left;">
+          <strong>Next steps :</strong><br>
+          1️⃣ Send the WhatsApp message<br>
+          2️⃣ Receive payment instructions<br>
+          3️⃣ Pay and send proof of payment<br>
+          4️⃣ Admin confirms and prepares your delivery
+        </div>
+        <a href="profile.html" style="padding:.8rem 1.5rem;background:#2e7d4f;color:white;border-radius:10px;text-decoration:none;font-weight:600;">
+          <i class="fas fa-box"></i> Track my order
+        </a>
+      </div>`;
+  } else if (type === 'error') {
+    html = `
+      <div style="text-align:center;padding:1rem 0;">
+        <div style="font-size:3rem;margin-bottom:1rem;">❌</div>
+        <h2 style="font-family:'Playfair Display',serif;color:#c0392b;margin-bottom:.8rem;">an error occurred</h2>
+        <p style="color:#6b7f86;margin-bottom:1.5rem;">${info}</p>
+        <button onclick="document.getElementById('checkoutModal').remove()"
+          style="padding:.8rem 1.5rem;background:#2e7d4f;color:white;border-radius:10px;border:none;cursor:pointer;font-weight:600;">
+          Réessayer
+        </button>
+      </div>`;
+  }
+
+  const modal = document.createElement('div');
+  modal.id = 'checkoutModal';
+  modal.style.cssText = `
+    position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;
+    display:flex;align-items:center;justify-content:center;padding:1rem;`;
+  modal.innerHTML = `
+    <div style="background:white;border-radius:20px;padding:2.5rem;max-width:480px;width:100%;
+      box-shadow:0 20px 60px rgba(0,0,0,.2);position:relative;">
+      <button onclick="this.closest('#checkoutModal').remove()"
+        style="position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.4rem;
+        cursor:pointer;color:#999;line-height:1;">×</button>
+      ${html}
+    </div>`;
+  document.body.appendChild(modal);
+  modal.addEventListener('click', e => { if (e.target === modal) modal.remove(); });
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', () => {
+  updateCartDisplay();
+  updateCartBadge();
+});
+</script>
+
+</body>
+</html>
