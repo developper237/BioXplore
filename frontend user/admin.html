@@ -1081,8 +1081,9 @@ function openCreateModal() {
 
 // ===== EDIT =====
 function openEditModal(id) {
-  const p = allProducts.find(x => x.id === id);
-  if (!p) return;
+  // Comparaison non-stricte pour gérer number vs string (Supabase peut retourner les deux)
+  const p = allProducts.find(x => String(x.id) === String(id));
+  if (!p) { showToast('Produit introuvable (id=' + id + ')', 'error'); return; }
 
   resetForm();
   document.getElementById('modalTitle').textContent = 'Edit Product';
@@ -1101,9 +1102,13 @@ function openEditModal(id) {
   document.getElementById('fAltText').value   = p.alt_text   || '';
   document.getElementById('fDescription').value = p.description || '';
 
-  // Features
-  const features = p.features || [];
-  features.forEach(f => addFeatureRow(f.i, f.t));
+  // Features — Supabase peut retourner un array, une string JSON, ou null
+  let features = p.features || [];
+  if (typeof features === 'string') {
+    try { features = JSON.parse(features); } catch(e) { features = []; }
+  }
+  if (!Array.isArray(features)) features = [];
+  features.forEach(f => addFeatureRow(f.i || f.icon || '', f.t || f.text || ''));
   previewImage();
 
   openModal('productModal');
